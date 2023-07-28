@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "balm-ui": "^10.22.3",
     "bootstrap": "^5.3.1",
     "vue": "^3.3.4"
   },
