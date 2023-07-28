@@ -12,28 +12,6 @@ The project has just started. There is nothing in there but if you can help us o
 
 PS: This project is inspired from the fantastic [DevUtils](https://devutils.com/) app which is available _only for macOS_ as a _paid tool_.
 
-## File Structure
-
-```
-root/
-|-- node_modules/
-|-- public/
-|   |-- vite.svg
-|-- src/
-|   |-- assets/
-|   |-- components/
-|   |-- App.vue
-|   |-- main.js
-|   |-- style.css
-|-- .gitignore
-|-- index.html
-|-- License
-|-- package-lock.json
-|-- package.json
-|-- README.md
-|-- vite.config.js
-```
-
 ## Before You Begin
 
 Before you can use this project, please ensure that you have the following software and tools installed on your system:
