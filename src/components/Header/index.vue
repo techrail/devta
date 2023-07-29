@@ -34,7 +34,7 @@ const modules = store.getters.getModules();
     </ui-drawer-header>
     <ui-drawer-content>
         <ui-nav>
-            <ui-nav-item active :href="currSlug !== element ? '/'+element : '#'" icon="time" :class="{ 'nav-item': true, 'active': element === currSlug }" v-for="element in Object.keys(modules)">
+            <ui-nav-item active :href="currSlug !== element ? '#/'+element : '#'" icon="time" :class="{ 'nav-item': true, 'active': element === currSlug }" v-for="element in Object.keys(modules)">
                 <ui-icon style="padding-right: 10px" v-if="modules[element].icon">{{ modules[element].icon}}</ui-icon>
                 {{ modules[element].name }}
             </ui-nav-item>

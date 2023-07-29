@@ -4,7 +4,10 @@ import Index from "@pages/Index/index.vue";
 import Module from "@pages/Module/index.vue";
 import BalmUI from "balm-ui";
 import { createStore } from "vuex";
-import { createRouter, createWebHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHashHistory as createWebHistory,
+} from "vue-router";
 import modules from "./modules.mjs";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
