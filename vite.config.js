@@ -11,6 +11,7 @@ export default defineConfig({
       "balm-ui-plus": "balm-ui/dist/balm-ui-plus.esm.js",
       "balm-ui-css": "balm-ui/dist/balm-ui.css",
       "@": path.resolve(__dirname, "src/components/"),
+      "@pages": path.resolve(__dirname, "src/pages/"),
     },
   },
 });

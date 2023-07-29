@@ -1,0 +1,33 @@
+.block {
+    height: 90%;
+    width: 90%;
+}
+
+.block .input.fullWidth {
+    height: 100%;
+    width: 100%;
+}
+
+.block .input {
+    width: 100% !important;
+}
+
+.block .label {
+    color: #000 !important;
+}
+
+.block .input .copy-icon {
+    pointer-events: auto !important;
+}
+
+@media screen and (max-width: 800px) {
+    .block .input.fullWidth {
+        height: 300px;
+    }
+
+    .block {
+        height: fit-content;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+}
