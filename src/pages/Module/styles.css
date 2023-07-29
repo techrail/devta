@@ -1,0 +1,24 @@
+.main {
+    display: flex;
+    height: 100vh;
+}
+
+.main .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+}
+
+@media screen and (max-width: 800px) {
+    .main .content {
+        margin-top: 65px;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
+        display: block;
+        width: 95vw;
+    }
+}

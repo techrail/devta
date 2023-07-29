@@ -9,7 +9,12 @@
 
 .nav-parent {
     backdrop-filter: blur(10px);
-    background-color: rgba(22, 22, 22, 0.75);
+    background-color: #201212bf;
     width: 300px;
     height: 100vh;
+}
+
+.app-bar {
+    background-color: #fff !important;
+    color: #000 !important;
 }
