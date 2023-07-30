@@ -3,12 +3,11 @@ import "./style.css";
 import Index from "@pages/Index/index.vue";
 import Module from "@pages/Module/index.vue";
 import BalmUI from "balm-ui";
-import { createStore } from "vuex";
+import { createPinia } from "pinia";
 import {
   createRouter,
   createWebHashHistory as createWebHistory,
 } from "vue-router";
-import modules from "./modules.mjs";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import "balm-ui-css";
@@ -29,19 +28,7 @@ const router = createRouter({
   routes,
 });
 
-const store = createStore({
-  state: {
-    modules,
-  },
-  getters: {
-    getModule: (state) => (slug) => {
-      return state.modules[slug];
-    },
-    getModules: (state) => () => {
-      return state.modules;
-    },
-  },
-});
+const pinia = createPinia();
 
 const app = createApp({});
 
@@ -54,6 +41,6 @@ app.use(BalmUI, {
 
 app.use(router);
 
-app.use(store, "global");
+app.use(pinia);
 
 app.mount("#app");
