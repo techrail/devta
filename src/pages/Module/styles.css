@@ -1,6 +1,6 @@
 .main {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .main .content {
@@ -8,8 +8,8 @@
     grid-template-columns: 1fr 1fr;
     height: 100%;
     width: 100%;
-    align-items: center;
     justify-items: center;
+    padding-top: 25px;
 }
 
 @media screen and (max-width: 800px) {

@@ -12,6 +12,8 @@ export default defineConfig({
       "balm-ui-css": "balm-ui/dist/balm-ui.css",
       "@": path.resolve(__dirname, "src/components/"),
       "@pages": path.resolve(__dirname, "src/pages/"),
+      "@stores": path.resolve(__dirname, "src/stores/"),
+      "@src": path.resolve(__dirname, "src/"),
     },
   },
 });

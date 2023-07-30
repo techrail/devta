@@ -6,16 +6,17 @@
   "scripts": {
     "dev": "node src/modules/generateModule.mjs & vite",
     "build": "node src/modules/generateModule.mjs & vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generateModule": "node src/modules/generateModule.mjs"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "balm-ui": "^10.22.3",
     "bootstrap": "^5.3.1",
     "crypto-js": "^4.1.1",
+    "pinia": "^2.1.6",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.4",
-    "vuex": "^4.0.2"
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
