@@ -1,0 +1,53 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+
+.block {
+    height: 90vh;
+}
+
+.block1 {
+    padding-right: 10px;
+}
+
+.block2 {
+    padding-left: 10px;
+}
+
+.input.fullWidth {
+    height: 100%;
+    width: 100%;
+}
+
+.copy-icon {
+    pointer-events: auto;
+}
+
+.element {
+    margin: 15px 0;
+}
+
+@media screen and (max-width: 800px) {
+    .grid {
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
+        display: block;
+        width: 95vw;
+    }
+
+    .block .input.fullWidth {
+        height: 300px;
+    }
+
+    .block {
+        height: fit-content;
+        margin-bottom: 15px;
+        width: 100%;
+        min-height: auto;
+    }
+}
