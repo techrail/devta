@@ -13,6 +13,12 @@ const routes = {
     dir: "Base64Image", // page dir inside pages
     icon: "image",
   },
+  reflect: {
+    // slug
+    name: "Reflects Text", // name
+    dir: "Reflect", // page dir inside pages
+    icon: "image",
+  },
 };
 
 export const useGlobalStore = defineStore("global", {
