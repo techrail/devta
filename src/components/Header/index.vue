@@ -22,7 +22,7 @@ onUnmounted(() => {
 
 const currSlug = route.params.slug;
 
-const modules = store.getModules();
+const routes = store.getRoutes();
 
 </script>
 <template>
@@ -35,12 +35,12 @@ const modules = store.getModules();
         </ui-drawer-header>
         <ui-drawer-content>
             <ui-nav>
-                <ui-nav-item :active="currSlug === element" :href="currSlug !== element ? '#/' + element : '#'" icon="time"
-                    :class="{ 'nav-item': true, 'active': element === currSlug }" v-for="element in Object.keys(modules)">
-                    <ui-icon style="padding-right: 10px" v-if="modules[element].icon">{{ modules[element].icon }}</ui-icon>
-                    <img style="padding-right: 10px; width: 35px;" :src="modules[element].image"
-                        :alt="modules[element].name + '\'s icon'" v-if="modules[element].image" />
-                    {{ modules[element].name }}
+                <ui-nav-item :active="currSlug === element" :href="currSlug !== element ? '/' + element : '#'" icon="time"
+                    :class="{ 'nav-item': true, 'active': element === currSlug }" v-for="element in Object.keys(routes)">
+                    <ui-icon style="padding-right: 10px" v-if="routes[element].icon">{{ routes[element].icon }}</ui-icon>
+                    <img style="padding-right: 10px; width: 35px;" :src="routes[element].image"
+                        :alt="routes[element].name + '\'s icon'" v-if="routes[element].image" />
+                    {{ routes[element].name }}
                 </ui-nav-item>
             </ui-nav>
         </ui-drawer-content>
