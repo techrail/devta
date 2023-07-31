@@ -44,7 +44,7 @@
         width: 95vw;
     }
 
-    .block .input.fullWidth {
+    .block .fullWidth {
         flex: auto;
         height: 300px;
     }
