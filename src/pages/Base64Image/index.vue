@@ -67,7 +67,7 @@ function download() {
                     accept="image/*">
                     <ui-button icon="file_upload">Load</ui-button>
                 </ui-file>
-                <ui-button icon="file_download" @click="download">Save</ui-button>
+                <ui-button icon="file_download" v-if="output !== undefined" @click="download">Save</ui-button>
             </div>
             <ui-file inputId="fileInput" outlined @change="handleFileChange" class="fullWidth" accept="image/*">
                 <img :src="output" v-if="output !== undefined" alt="Image Output" class="fullWidth" />
