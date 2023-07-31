@@ -46,7 +46,7 @@
 
     .block .fullWidth {
         flex: auto;
-        height: 300px;
+        min-height: 300px;
     }
 
     .block {
