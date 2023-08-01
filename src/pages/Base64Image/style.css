@@ -55,4 +55,10 @@
         width: 100%;
         min-height: auto;
     }
+
+    .block1,
+    .block2 {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }

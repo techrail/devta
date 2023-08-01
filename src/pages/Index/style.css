@@ -1,0 +1,122 @@
+.home {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100vh;
+}
+
+.logo svg path {
+    stroke-width: 2px;
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: animateLogo 2s linear forwards, fillPath 0.5s 2s linear forwards;
+    stroke-dashoffset: 1000;
+}
+
+.logo {
+    width: fit-content;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 50px;
+    max-width: 95vw;
+}
+
+.logo svg {
+    width: 100%;
+}
+
+.motto {
+    position: relative;
+    left: 50%;
+    text-align: center;
+    margin-top: 15px;
+    opacity: 0;
+    pointer-events: none;
+    animation: show 0.25s 2s linear forwards;
+}
+
+.tools {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 5px;
+    width: 97.5vw;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    opacity: 0;
+    pointer-events: none;
+    animation: show 0.5s 2s linear forwards;
+    overflow: visible;
+}
+
+.tools .tool {
+    padding: 10px;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #000;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.tools .tool .icon,
+.tools .tool .image {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.tools .tool .image {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.tools .tool .icon {
+    font-size: 100px;
+}
+
+.tools .tool h4 {
+    text-align: center;
+    text-transform: capitalize;
+    margin-top: 5px;
+}
+
+@keyframes animateLogo {
+    from {
+        stroke-dashoffset: 500;
+    }
+
+    to {
+        stroke-dashoffset: 1000;
+    }
+}
+
+@keyframes fillPath {
+    from {
+        fill: transparent;
+    }
+
+    to {
+        fill: #000;
+    }
+}
+
+@keyframes show {
+    from {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateX(-50%) translateY(100px);
+    }
+
+    to {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(-50%) translateY(0);
+    }
+}

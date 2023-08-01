@@ -42,7 +42,6 @@ app.use(BalmUI, {
 });
 
 app.use(router);
-
 app.use(pinia);
 
 app.mount("#app");
