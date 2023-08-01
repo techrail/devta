@@ -35,6 +35,11 @@
     flex-grow: 1;
 }
 
+.btn {
+    display: flex;
+    align-items: center;
+}
+
 @media screen and (max-width: 800px) {
     .grid {
         position: relative;

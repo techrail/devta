@@ -16,8 +16,8 @@ function handleChange(newVal) {
     }, 1000);
 }
 
-function handleFileChange(files) {
-    const file = files[0];
+function handleFileChange(e) {
+    const file = e.target.files[0];
     const reader = new FileReader();
 
     reader.onloadend = function () {
@@ -25,8 +25,7 @@ function handleFileChange(files) {
         value.value = reader.result;
         output.value = reader.result;
     }
-
-    reader.readAsDataURL(file.sourceFile);
+    reader.readAsDataURL(file);
 }
 
 async function copyContent() {
@@ -48,6 +47,10 @@ function download() {
     a.remove();
 
 }
+
+function openFileSelector(e) {
+    e.target.parentElement.parentElement.querySelector("input[type=file]").click();
+}
 </script>
 
 <template>
@@ -55,24 +58,23 @@ function download() {
         <div class="block block1">
             <div class="options">
                 <label for="input">Input:</label>
-                <ui-button icon="content_copy" @click="copyContent">Copy</ui-button>
+                <button class="btn" @click="copyContent" v-if="value">
+                    <i class="icon material-icons">content_copy</i>Copy</button>
             </div>
-            <ui-textfield inputId="input" outlined input-type="textarea" v-model="value" fullwidth class="input fullWidth"
-                placeholder="Enter base64 image content..." @update:model-value="handleChange"></ui-textfield>
+            <textarea id="input" class="form-control input fullWidth" v-model="value" placeholder="Enter text to hash..."
+                @keyup="handleChange"></textarea>
         </div>
         <div class="block block2">
             <div class="options">
                 <label for="fileInput">Output:</label>
-                <ui-file inputId="fileInput" outlined v-if="output !== undefined" @change="handleFileChange"
-                    accept="image/*">
-                    <ui-button icon="file_upload">Load</ui-button>
-                </ui-file>
-                <ui-button icon="file_download" v-if="output !== undefined" @click="download">Save</ui-button>
+                <button class="btn" @click="openFileSelector" v-if="output !== undefined">
+                    <i class="icon material-icons">file_upload</i>Load</button>
+                <button class="btn" @click="download" v-if="output !== undefined">
+                    <i class="icon material-icons">file_download</i>Save</button>
             </div>
-            <ui-file inputId="fileInput" outlined @change="handleFileChange" class="fullWidth" accept="image/*">
-                <img :src="output" v-if="output !== undefined" alt="Image Output" class="fullWidth" />
-                <ui-button icon="file_upload" class="fullWidth" v-else>Upload</ui-button>
-            </ui-file>
+            <input class="form-control" v-show="!output" @change="handleFileChange" type="file" id="formFile"
+                accept="image/*">
+            <img :src="output" v-if="output !== undefined" alt="Image Output" class="fullWidth" />
         </div>
     </div>
 </template>
