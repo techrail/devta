@@ -32,7 +32,6 @@ const validRoute = Boolean(store.getRoute(route.params.slug));
             </div>
         </div>
         <Snackbar v-model="store.snackbar.visible" :message="store.snackbar.msg" />
-        <!-- <ui-snackbar v-model="store.snackbar.visible" :message="store.snackbar.msg" :action-type="1"></ui-snackbar> -->
     </template>
 </template>
 
