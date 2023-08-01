@@ -61,8 +61,8 @@ function openFileSelector(e) {
                 <button class="btn" @click="copyContent" v-if="value">
                     <i class="icon material-icons">content_copy</i>Copy</button>
             </div>
-            <textarea id="input" class="form-control input fullWidth" v-model="value" placeholder="Enter text to hash..."
-                @keyup="handleChange"></textarea>
+            <textarea id="input" class="form-control input fullWidth" v-model="value"
+                placeholder="Enter base64 of an image..." @keyup="handleChange"></textarea>
         </div>
         <div class="block block2">
             <div class="options">
