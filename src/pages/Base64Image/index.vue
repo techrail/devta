@@ -8,8 +8,8 @@ const output = ref(undefined);
 const fileType = ref(undefined);
 const timeout = undefined;
 
-function handleChange(newVal) {
-    value.value = newVal;
+function handleChange(e) {
+    value.value = e.target.value;
     clearTimeout(timeout);
     timeout = setTimeout(() => {
         output.value = value.value;
