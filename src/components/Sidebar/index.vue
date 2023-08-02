@@ -77,8 +77,8 @@ const routes = store.getRoutes();
                 </a>
             </li>
         </ul>
-        <hr>
-        <div class="dropdown">
+        <!-- <hr> -->
+        <!-- <div class="dropdown">
             <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="" class="rounded-circle me-2" width="32" height="32">
@@ -93,7 +93,7 @@ const routes = store.getRoutes();
                 </li>
                 <li><a class="dropdown-item" href="#">Sign out</a></li>
             </ul>
-        </div>
+        </div> -->
     </div>
 
 
