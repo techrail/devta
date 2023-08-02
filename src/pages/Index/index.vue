@@ -1,7 +1,8 @@
 <script setup>
-import Header from "@/Header/index.vue";
+import Sidebar from "@/Sidebar/index.vue";
 </script>
 
 <template>
-    <Header />
+    <Sidebar />
+    <div>Index page asdf</div>
 </template>

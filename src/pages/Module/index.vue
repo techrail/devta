@@ -2,7 +2,7 @@
 import ErrorPage from "@pages/Error/index.vue";
 import { useGlobalStore } from "@stores/index.mjs";
 import { useRoute } from "vue-router";
-import Header from "@/Header/index.vue";
+import Sidebar from "@/Sidebar/index.vue";
 import LoadModule from "./LoadModule.vue";
 import { ref } from "vue";
 
@@ -18,7 +18,7 @@ const validRoute = Boolean(store.getRoute(route.params.slug));
     <ErrorPage v-if="!validRoute" />
     <template v-if="validRoute">
         <div class="main">
-            <Header />
+            <Sidebar />
             <div class="content">
                 <Suspense>
                     <LoadModule :dir="componentInfo['dir']" />

@@ -19,6 +19,12 @@ const routes = {
     dir: "Reflect", // page dir inside pages
     icon: "image",
   },
+  base64: {
+    // slug
+    name: "Base64 converter for Text", // name
+    dir: "Base64Text", // page dir inside pages
+    icon: "image",
+  },
 };
 
 export const useGlobalStore = defineStore("global", {
