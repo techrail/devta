@@ -7,6 +7,7 @@ import BalmUI from "balm-ui";
 import { createPinia } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
 import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import "bootstrap";
 import "balm-ui-css";
 
