@@ -25,6 +25,21 @@ const routes = {
     dir: "Base64Text", // page dir inside pages
     icon: "image",
   },
+  unixToDate: {
+    name: "Unix to Date",
+    dir: "UnixToDate",
+    icon: "image",
+  },
+  dateToUnix: {
+    name: "Date to unix",
+    dir: "DateToUnix",
+    icon: "image",
+  },
+  timeZoneConverter: {
+    name: "Time zone converter",
+    dir: "TimeZoneConverter",
+    icon: "image",
+  },
 };
 
 export const useGlobalStore = defineStore("global", {

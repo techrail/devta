@@ -26,16 +26,6 @@ const routes = store.getRoutes();
 
 </script>
 <template>
-
-
-
-
-
-
-
-
-
-
     <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <span class="fs-4">Devta</span>
@@ -58,21 +48,21 @@ const routes = store.getRoutes();
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link link-body-emphasis">
-                    <svg class="bi pe-none me-2" width="16" height="16">
-                        <use xlink:href="#grid"></use>
-                    </svg>
-                    Products
+                <a href="/unixToDate" class="nav-link link-body-emphasis">
+                    <i class="bi bi-journal-text"></i> Unix to date
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link link-body-emphasis">
-                    <svg class="bi pe-none me-2" width="16" height="16">
-                        <use xlink:href="#people-circle"></use>
-                    </svg>
-                    Customers
+                <a href="/dateToUnix" class="nav-link link-body-emphasis">
+                    <i class="bi bi-journal-text"></i> Date to unix
                 </a>
             </li>
+            <li>
+                <a href="/timeZoneConverter" class="nav-link link-body-emphasis">
+                    <i class="bi bi-journal-text"></i> Timezone converter
+                </a>
+            </li>
+
         </ul>
         <!-- <hr> -->
         <!-- <div class="dropdown">
@@ -140,5 +130,6 @@ const routes = store.getRoutes();
                 </ui-nav-item>
             </ui-nav>
         </ui-drawer-content>
-    </ui-drawer> --></template>
+    </ui-drawer> -->
+</template>
 <style scoped src="./styles.css"></style>
