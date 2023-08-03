@@ -18,17 +18,21 @@ const validRoute = Boolean(store.getRoute(route.params.slug));
     <ErrorPage v-if="!validRoute" />
     <template v-if="validRoute">
         <div class="main">
-            <Sidebar />
-            <div class="content">
-                <Suspense>
-                    <LoadModule :dir="componentInfo['dir']" />
-                    <template #fallback>
-                        <div class="loading">
-                            <ui-spinner active fourColored></ui-spinner>
-                            <p>Loading Module...</p>
-                        </div>
-                    </template>
-                </Suspense>
+            <div class="col-md-3">
+                <Sidebar />
+            </div>
+            <div class="col-sm-12">
+                <!-- <div class="content"> -->
+                    <Suspense>
+                        <LoadModule :dir="componentInfo['dir']" />
+                        <template #fallback>
+                            <div class="loading">
+                                <ui-spinner active fourColored></ui-spinner>
+                                <p>Loading Module...</p>
+                            </div>
+                        </template>
+                    </Suspense>
+                <!-- </div> -->
             </div>
         </div>
         <ui-snackbar v-model="store.snackbar.visible" :message="store.snackbar.msg" :action-type="1"></ui-snackbar>
