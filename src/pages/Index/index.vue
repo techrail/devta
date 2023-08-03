@@ -4,5 +4,5 @@ import Sidebar from "@/Sidebar/index.vue";
 
 <template>
     <Sidebar />
-    <div>Index page asdf</div>
+    <div>Index page asdfsadfsaasd</div>
 </template>

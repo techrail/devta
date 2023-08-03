@@ -43,21 +43,18 @@ const routes = store.getRoutes();
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a href="/hash_generator" class="nav-link active" aria-current="page">
+                <a href="/hash_generator" class="nav-link link-body-emphasis" aria-current="page">
                     <i class="bi bi-hash"></i> Hash Generator
                 </a>
             </li>
             <li>
-                <a href="/reflect" class="nav-link link-body-emphasis">
+                <a href="/reflect" class="nav-link link-body-emphasis active">
                     <i class="bi bi-symmetry-vertical"></i> Reflect
                 </a>
             </li>
             <li>
-                <a href="#" class="nav-link link-body-emphasis">
-                    <svg class="bi pe-none me-2" width="16" height="16">
-                        <use xlink:href="#table"></use>
-                    </svg>
-                    Orders
+                <a href="/base64" class="nav-link link-body-emphasis">
+                    <i class="bi bi-journal-text"></i> Base64
                 </a>
             </li>
             <li>
