@@ -2,7 +2,7 @@
 import { copyToClipboard } from "../utils/UnixDateTimeFunctions"
 const props = defineProps({
     title: String,
-    value: String
+    value: String | Number
 })
 
 
