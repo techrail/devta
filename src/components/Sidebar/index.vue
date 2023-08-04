@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
 import { useGlobalStore } from "@stores/index.mjs";
+import { sideBarList } from "./sidebarLists";
 defineProps(['elements']);
 
 const store = useGlobalStore();
@@ -21,6 +22,7 @@ onUnmounted(() => {
 });
 
 const currSlug = route.params.slug;
+console.log(currSlug)
 
 const routes = store.getRoutes();
 
@@ -33,37 +35,15 @@ const routes = store.getRoutes();
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <a href="/hash_generator" class="nav-link link-body-emphasis" aria-current="page">
-                    <i class="bi bi-hash"></i> Hash Generator
-                </a>
-            </li>
-            <li>
-                <a href="/reflect" class="nav-link link-body-emphasis active">
-                    <i class="bi bi-symmetry-vertical"></i> Reflect
-                </a>
-            </li>
-            <li>
-                <a href="/base64" class="nav-link link-body-emphasis">
-                    <i class="bi bi-journal-text"></i> Base64
-                </a>
-            </li>
-            <li>
-                <a href="/unixToDate" class="nav-link link-body-emphasis">
-                    <i class="bi bi-journal-text"></i> Unix to date
-                </a>
-            </li>
-            <li>
-                <a href="/dateToUnix" class="nav-link link-body-emphasis">
-                    <i class="bi bi-journal-text"></i> Date to unix
-                </a>
-            </li>
-            <li>
-                <a href="/timeZoneConverter" class="nav-link link-body-emphasis">
-                    <i class="bi bi-journal-text"></i> Timezone converter
-                </a>
-            </li>
-
+            <div v-for="(item, index) in sideBarList" :key="index">
+                <li class="nav-item">
+                    <a :href=item.route
+                        :class="currSlug === item.route.slice(1) ? 'nav-link link-body-emphasis active' : 'nav-link link-body-emphasis'"
+                        aria-current="page">
+                        <i :class="item.iconClass"></i> {{ item.name }}
+                    </a>
+                </li>
+            </div>
         </ul>
         <!-- <hr> -->
         <!-- <div class="dropdown">

@@ -11,17 +11,17 @@ export const sideBarList = [
   },
   {
     name: "Unix to date",
-    iconClass: "bi bi-journal-text",
+    iconClass: "bi bi-postage",
     route: "/unixToDate",
   },
   {
     name: "Date to unix",
-    iconClass: "bi bi-journal-text",
+    iconClass: "bi bi-calendar-date",
     route: "/dateToUnix",
   },
   {
     name: "Timezone Converter",
-    iconClass: "bi bi-journal-text",
+    iconClass: "bi bi-calendar-range",
     route: "/timeZoneConverter",
   },
 ];
