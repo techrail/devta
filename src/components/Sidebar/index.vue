@@ -26,10 +26,17 @@ const currSlug = route.params.slug;
 
 const routes = store.getRoutes();
 
+const isCollapsed = ref(true)
+
+const toggleClick = () => {
+    isCollapsed.value = !isCollapsed.value
+}
+
 </script>
 <template>
     <!-- <div class="col-sm-3"> -->
-    <div class="d-flex flex-column justify-content-between flex-shrink-0 p-3 bg-body-tertiary p-0 m-0 vh-100 w-full">
+    <div id="large-devices"
+        class="d-sm-flex d-none flex-column  justify-content-between flex-shrink-0 p-3 bg-body-tertiary p-0 m-0 vh-100 w-full">
         <!-- header -->
         <div>
             <a href=" /" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
@@ -60,6 +67,18 @@ const routes = store.getRoutes();
                 Developer tools that are supposed to help you.
             </small>
         </div>
+
+    </div>
+    <div id="small-devices" class="d-flex d-sm-none">
+        <div class="d-flex justify-content-between w-100 ">
+            <!-- Devta -->
+
+        </div>
+
+
+
+
+
     </div>
     <!-- <hr> -->
     <!-- <div class="dropdown">
