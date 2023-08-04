@@ -6,13 +6,9 @@ import Sidebar from "@/Sidebar/index.vue";
     <div class="d-flex m-0 p-0">
         <Sidebar />
         <div class="container">
-            <h1>Devta</h1>
-            <p class="p-1">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, inventore earum, porro perferendis
-                eius,
-                aut quidem minus quas ratione id doloribus tempore optio recusandae delectus et. Minima doloribus
-                praesentium
-                qui!
+            <h1><strong>Devta⚡️</strong></h1>
+            <p class="p-1 text-muted lead ">
+                Choose an option from the right to start working
             </p>
         </div>
     </div>
