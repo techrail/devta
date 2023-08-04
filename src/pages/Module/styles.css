@@ -22,10 +22,6 @@
   margin-top: 10px;
 }
 
-#sid-bar {
-  width: 25%;
-}
-
 @media screen and (max-width: 800px) {
   .main {
     flex-direction: column;
