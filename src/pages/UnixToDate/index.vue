@@ -23,11 +23,11 @@ const handleClick = (value) => {
     <div class="grid bg-light">
         <div class="block card block1">
             <div class="p-3">
-                <h2>
+                <h4>
                     <strong>
                         Unix to Date converter
                     </strong>
-                </h2>
+                </h4>
                 <input v-model="unix" @input="handleChange" type="text" class="form-control"
                     placeholder="Enter unix timestamp">
 

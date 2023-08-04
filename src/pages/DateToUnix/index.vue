@@ -37,11 +37,11 @@ const handleClick = (value) => {
     <div class="grid bg-light">
         <div class="block card block1">
             <div class="p-3">
-                <h2>
+                <h4>
                     <strong>
                         Date to unix converter
                     </strong>
-                </h2>
+                </h4>
                 <p class="muted">Enter a valid Date format or choose from the datepicker below</p>
                 <div class="p-2">
                     <input v-model="date" type="text" class="form-control mb-2" placeholder="Enter Date">

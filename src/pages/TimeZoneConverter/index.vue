@@ -33,11 +33,11 @@ const handleClick = (value) => {
     <div class="grid bg-light">
         <div class="block card block1">
             <div class="p-3">
-                <h2>
+                <h4>
                     <strong>
                         Time zone converter
                     </strong>
-                </h2>
+                </h4>
                 <div class="d-flex flex-column gap-2">
                     <VueDatePicker v-model="date" />
                     <select class="form-select" name="timezone-select" id="timezone-select" v-model="timezone">
