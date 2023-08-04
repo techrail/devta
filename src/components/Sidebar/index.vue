@@ -29,24 +29,33 @@ const routes = store.getRoutes();
 </script>
 <template>
     <!-- <div class="col-sm-3"> -->
-    <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary p-0 m-0 min-vh-100 w-full">
-        <a href=" /" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-            <span class="fs-4"><strong>⚡️ Devta</strong></span>
-        </a>
-        <hr>
-        <ul class="nav nav-pills flex-column mb-auto">
-            <div v-for="(item, index) in sideBarList" :key="index">
-                <li class="nav-item">
-                    <a :href=item.route
-                        :class="currSlug === item.route.slice(1) ? 'nav-link link-body-emphasis active' : 'nav-link link-body-emphasis'"
-                        aria-current="page">
-                        <i :class="item.iconClass"></i> {{ item.name }}
-                    </a>
-                </li>
-            </div>
-        </ul>
-        <!-- <hr> -->
-        <!-- <div class="dropdown">
+    <div class="d-flex flex-column justify-content-between flex-shrink-0 p-3 bg-body-tertiary p-0 m-0 vh-100 w-full">
+        <div>
+            <a href=" /" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <span class="fs-4"><strong>⚡️ Devta</strong></span>
+            </a>
+            <hr>
+        </div>
+        <div class="overflow-auto flex-grow-1">
+            <ul class="nav nav-pills flex-column mb-auto">
+                <div v-for="(item, index) in sideBarList" :key="index">
+                    <li class="nav-item">
+                        <a :href=item.route
+                            :class="currSlug === item.route.slice(1) ? 'nav-link link-body-emphasis active' : 'nav-link link-body-emphasis'"
+                            aria-current="page">
+                            <i :class="item.iconClass"></i> {{ item.name }}
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+        <div>
+            <hr>
+            Footer
+        </div>
+    </div>
+    <!-- <hr> -->
+    <!-- <div class="dropdown">
             <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
                 data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="" class="rounded-circle me-2" width="32" height="32">
@@ -62,7 +71,7 @@ const routes = store.getRoutes();
                 <li><a class="dropdown-item" href="#">Sign out</a></li>
             </ul>
         </div> -->
-    </div>
+    <!-- </div> -->
     <!-- </div> -->
 
 
