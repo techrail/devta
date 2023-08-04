@@ -56,7 +56,9 @@ const routes = store.getRoutes();
         <!-- footer -->
         <div>
             <hr>
-            Footer
+            <small>
+                Developer tools that are supposed to help you.
+            </small>
         </div>
     </div>
     <!-- <hr> -->
