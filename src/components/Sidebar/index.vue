@@ -29,6 +29,7 @@ const routes = store.getRoutes();
 const isCollapsed = ref(true)
 
 const toggleClick = () => {
+    console.log(isCollapsed.value)
     isCollapsed.value = !isCollapsed.value
 }
 
@@ -69,15 +70,42 @@ const toggleClick = () => {
         </div>
 
     </div>
-    <div id="small-devices" class="d-flex d-sm-none">
-        <div class="d-flex justify-content-between w-100 ">
-            <!-- Devta -->
-
-        </div>
-
-
-
-
+    <div id="small-devices" class="d-flex flex-column d-sm-none">
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="/">⚡️ Devta</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+                    @click="isCollapsed = !isCollapsed">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" :class="{ show: !isCollapsed }" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <div v-for="(item, index) in sideBarList" :key="index">
+                            <li class="nav-item">
+                                <a :href=item.route
+                                    :class="currSlug === item.route.slice(1) ? 'nav-link link-body-emphasis active' : 'nav-link link-body-emphasis'"
+                                    aria-current="page">
+                                    <i :class="item.iconClass"></i> {{ item.name }}
+                                </a>
+                            </li>
+                        </div>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact</a>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
     </div>
     <!-- <hr> -->
