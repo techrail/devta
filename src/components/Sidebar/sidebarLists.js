@@ -1,3 +1,9 @@
+// Menu options for the sidebar.
+// Each element takes three properties.
+// The name will be displayed on the option
+// Icon class denotes the corresponding icon. Head over to https://icons.getbootstrap.com/ and add the classname of the desired icon
+// route denotes the route on which the module will be displayed
+
 export const sideBarList = [
   {
     name: "Hash Generator",

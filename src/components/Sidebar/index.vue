@@ -21,8 +21,8 @@ onUnmounted(() => {
     window.removeEventListener('resize', resize);
 });
 
+// Gets the active route slug
 const currSlug = route.params.slug;
-console.log(currSlug)
 
 const routes = store.getRoutes();
 
@@ -30,12 +30,15 @@ const routes = store.getRoutes();
 <template>
     <!-- <div class="col-sm-3"> -->
     <div class="d-flex flex-column justify-content-between flex-shrink-0 p-3 bg-body-tertiary p-0 m-0 vh-100 w-full">
+        <!-- header -->
         <div>
             <a href=" /" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <span class="fs-4"><strong>⚡️ Devta</strong></span>
             </a>
             <hr>
         </div>
+
+        <!-- body -->
         <div class="overflow-auto flex-grow-1">
             <ul class="nav nav-pills flex-column mb-auto">
                 <div v-for="(item, index) in sideBarList" :key="index">
@@ -49,6 +52,8 @@ const routes = store.getRoutes();
                 </div>
             </ul>
         </div>
+
+        <!-- footer -->
         <div>
             <hr>
             Footer
