@@ -22,13 +22,25 @@
   margin-top: 10px;
 }
 
+#sid-bar {
+  width: 25%;
+}
+
 @media screen and (max-width: 800px) {
-  .main .content {
+  .main {
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+  }
+  #side-bar {
+    width: 100%;
+  }
+  /* .main .content {
     margin-top: 65px;
     position: relative;
     left: 50%;
     transform: translate(-50%);
     display: block;
     width: 95vw;
-  }
+  } */
 }

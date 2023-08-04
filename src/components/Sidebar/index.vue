@@ -48,11 +48,11 @@ const toggleClick = () => {
 
         <!-- body -->
         <div class="overflow-auto flex-grow-1">
-            <ul class="nav nav-pills flex-column mb-auto">
+            <ul class="nav nav-pills flex-column gap-1">
                 <div v-for="(item, index) in sideBarList" :key="index">
                     <li class="nav-item ">
                         <a :href=item.route
-                            :class="currSlug === item.route.slice(1) ? 'text-white nav-link link-body-emphasis active' : 'text-white nav-link link-body-emphasis'"
+                            :class="currSlug === item.route.slice(1) ? 'text-white nav-link active' : 'text-white nav-link '"
                             aria-current="page">
                             <i :class="item.iconClass"></i> {{ item.name }}
                         </a>
@@ -71,7 +71,7 @@ const toggleClick = () => {
 
     </div>
     <div id="small-devices" class="d-flex flex-column d-sm-none">
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="/">⚡️ Devta</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -84,7 +84,7 @@ const toggleClick = () => {
                         <div v-for="(item, index) in sideBarList" :key="index">
                             <li class="nav-item">
                                 <a :href=item.route
-                                    :class="currSlug === item.route.slice(1) ? 'nav-link link-body-emphasis active' : 'nav-link link-body-emphasis'"
+                                    :class="currSlug === item.route.slice(1) ? 'nav-link text-white active' : 'nav-link text-white'"
                                     aria-current="page">
                                     <i :class="item.iconClass"></i> {{ item.name }}
                                 </a>

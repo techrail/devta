@@ -8,7 +8,7 @@ import Sidebar from "@/Sidebar/index.vue";
         <div class="container">
             <h1><strong>Devta⚡️</strong></h1>
             <p class="p-1 text-muted lead ">
-                Choose an option from the right to start working
+                Choose an option from the left to start working
             </p>
         </div>
     </div>

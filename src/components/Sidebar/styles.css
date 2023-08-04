@@ -93,3 +93,8 @@ main {
 hr {
   color: white;
 }
+
+.nav-item:hover {
+  background-color: rgb(108, 117, 125);
+  border-radius: 5px;
+}
