@@ -17,21 +17,21 @@ const validRoute = Boolean(store.getRoute(route.params.slug));
 <template>
     <ErrorPage v-if="!validRoute" />
     <template v-if="validRoute">
-        <div class="main">
-            <div class="col-md-3">
+        <div class="main m-0 p-0 min-vh-100">
+            <div class="col-md-3 w-25">
                 <Sidebar />
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-12 w-75">
                 <!-- <div class="content"> -->
-                    <Suspense>
-                        <LoadModule :dir="componentInfo['dir']" />
-                        <template #fallback>
-                            <div class="loading">
-                                <ui-spinner active fourColored></ui-spinner>
-                                <p>Loading Module...</p>
-                            </div>
-                        </template>
-                    </Suspense>
+                <Suspense>
+                    <LoadModule :dir="componentInfo['dir']" />
+                    <template #fallback>
+                        <div class="loading">
+                            <ui-spinner active fourColored></ui-spinner>
+                            <p>Loading Module...</p>
+                        </div>
+                    </template>
+                </Suspense>
                 <!-- </div> -->
             </div>
         </div>
