@@ -90,20 +90,6 @@ main {
   overflow-y: auto;
 }
 
-/* #large_devices {
-  display: block;
+hr {
+  color: white;
 }
-
-#small-devices {
-  display: none;
-}
-
-@media screen and (max-width: 800px) {
-  #large_devices {
-    display: none;
-  }
-
-  #small-devices {
-    display: block;
-  }
-} */

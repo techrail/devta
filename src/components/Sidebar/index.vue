@@ -37,11 +37,11 @@ const toggleClick = () => {
 <template>
     <!-- <div class="col-sm-3"> -->
     <div id="large-devices"
-        class="d-sm-flex d-none flex-column  justify-content-between flex-shrink-0 p-3 bg-body-tertiary p-0 m-0 vh-100 w-full">
+        class="d-sm-flex d-none flex-column justify-content-between flex-shrink-0 p-3 bg-dark p-0 m-0 vh-100 w-full">
         <!-- header -->
         <div>
             <a href=" /" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <span class="fs-4"><strong>⚡️ Devta</strong></span>
+                <span class="fs-4 text-white"><strong>⚡️ Devta</strong></span>
             </a>
             <hr>
         </div>
@@ -50,9 +50,9 @@ const toggleClick = () => {
         <div class="overflow-auto flex-grow-1">
             <ul class="nav nav-pills flex-column mb-auto">
                 <div v-for="(item, index) in sideBarList" :key="index">
-                    <li class="nav-item">
+                    <li class="nav-item ">
                         <a :href=item.route
-                            :class="currSlug === item.route.slice(1) ? 'nav-link link-body-emphasis active' : 'nav-link link-body-emphasis'"
+                            :class="currSlug === item.route.slice(1) ? 'text-white nav-link link-body-emphasis active' : 'text-white nav-link link-body-emphasis'"
                             aria-current="page">
                             <i :class="item.iconClass"></i> {{ item.name }}
                         </a>
@@ -62,7 +62,7 @@ const toggleClick = () => {
         </div>
 
         <!-- footer -->
-        <div>
+        <div class="text-white">
             <hr>
             <small>
                 Developer tools that are supposed to help you.
@@ -90,18 +90,6 @@ const toggleClick = () => {
                                 </a>
                             </li>
                         </div>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li> -->
                     </ul>
                 </div>
             </div>
