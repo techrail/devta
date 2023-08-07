@@ -1,14 +1,14 @@
 <script setup>
 import { ref } from 'vue';
 import { useGlobalStore } from "@stores/index.mjs";
-import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
-import CopyContainer from '../../components/CopyContainer/CopyContainer.vue';
+import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
 
 const store = useGlobalStore();
 const input = ref('');
 const b64 = ref('');
 
 function handleChange() {
+    console.log(input.value)
     b64.value = btoa(input.value);
     // clearTimeout(timeout);
     // timeout = setTimeout(() => {
@@ -16,14 +16,11 @@ function handleChange() {
     // }, 1000);
 }
 
-const handleClick = (value) => {
-    copyToClipboard(value)
-}
 
-async function copyContent(idx) {
-    await navigator.clipboard.writeText(outputs.value[idx]);
-    store.showSnackbar('Contents copied to clipboard');
-}
+// async function copyContent(idx) {
+//     await navigator.clipboard.writeText(outputs.value[idx]);
+//     store.showSnackbar('Contents copied to clipboard');
+// }
 </script>
 
 
@@ -37,11 +34,8 @@ async function copyContent(idx) {
                     </strong>
                 </h4>
                 <div class="p-2 ">
-                    <!-- <label for="input">Input:</label> -->
-                    <input type="text" autofocus v-model="input" class="form-control"
-                        placeholder="Enter text to convert into base64">
-                    <!-- <ui-textfield inputId="input" outlined input-type="textarea" v-model="input" class="input fullWidth"
-                        placeholder="Enter text to convert to base64"></ui-textfield> -->
+                    <textarea type="text" rows="10" autofocus v-model="input" class="form-control"
+                        placeholder="Enter text to convert into base64" />
                     <button type="button" class="btn btn-primary mt-2" @click="handleChange">Convert to Base64</button>
                 </div>
             </div>
@@ -49,9 +43,7 @@ async function copyContent(idx) {
         <div class="block card overflow-auto block2">
             <div v-if="b64" class="mt-3">
                 <div class="p-2">
-                    <div role="button" @click="handleClick(unix)" class="flex flex-row">
-                        <CopyContainer title="Base64" :value="b64" />
-                    </div>
+                    <MultiLineCopy title="Base64" :value="b64" />
                 </div>
 
             </div>

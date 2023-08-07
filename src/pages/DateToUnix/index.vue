@@ -1,7 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { dateToUnixTimestamp, formatDates } from '../../components/utils/UnixDateTimeFunctions';
-import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import CopyContainer from '../../components/CopyContainer/CopyContainer.vue';
@@ -23,12 +22,7 @@ watch(date, (newDate, oldDate) => {
     }
 })
 
-
 const getFormatteddates = (date) => formatteddates.value = formatDates(date)
-
-const handleClick = (value) => {
-    copyToClipboard(value)
-}
 
 
 </script>
@@ -59,9 +53,7 @@ const handleClick = (value) => {
                     </div>
                 </div>
                 <div v-for="(value, key) in formatteddates" class="p-1 d-flex flex-column gap-1" :key="key">
-                    <div role="button" @click="handleClick(value)" class=" flex flex-row">
-                        <CopyContainer :title=key :value=value />
-                    </div>
+                    <CopyContainer :title=key :value=value />
                 </div>
             </div>
         </div>
