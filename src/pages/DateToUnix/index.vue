@@ -1,11 +1,10 @@
 <script setup>
 import { ref, watch } from 'vue';
-import { dateToUnixTimestamp, formatDates, labelFormatter } from '../../components/utils/UnixDateTimeFunctions';
-import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
+import { dateToUnixTimestamp, formatDates } from '../../components/utils/UnixDateTimeFunctions';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import CopyContainer from '../../components/CopyContainer/CopyContainer.vue';
-
+// import DateTimeConstants from '../../components/DateTimeConstants/DateTimeConstants.vue';
 
 const date = ref()
 const unix = ref()
@@ -23,12 +22,7 @@ watch(date, (newDate, oldDate) => {
     }
 })
 
-
 const getFormatteddates = (date) => formatteddates.value = formatDates(date)
-
-const handleClick = (value) => {
-    copyToClipboard(value)
-}
 
 
 </script>
@@ -42,12 +36,13 @@ const handleClick = (value) => {
                         Date to unix converter
                     </strong>
                 </h4>
-                <p class="muted">Enter a valid Date format or choose from the datepicker below</p>
                 <div class="p-2">
-                    <input v-model="date" type="text" class="form-control mb-2" placeholder="Enter Date">
-                    <div class="text-muted w-100 text-center mt-1 mb-1">or</div>
+                    <p class="muted">Choose a date and time from the datepicker</p>
                     <VueDatePicker v-model="date"></VueDatePicker>
                 </div>
+                <!-- <div class="mt-2 p-2">
+                    <DateTimeConstants />
+                </div> -->
             </div>
         </div>
         <div class="block card block2 overflow-auto">
@@ -58,9 +53,7 @@ const handleClick = (value) => {
                     </div>
                 </div>
                 <div v-for="(value, key) in formatteddates" class="p-1 d-flex flex-column gap-1" :key="key">
-                    <div role="button" @click="handleClick(value)" class=" flex flex-row">
-                        <CopyContainer :title=key :value=value />
-                    </div>
+                    <CopyContainer :title=key :value=value />
                 </div>
             </div>
         </div>

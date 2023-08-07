@@ -14,7 +14,7 @@ const handleClick = () => {
 
 <template>
     <form class="form-floating d-flex gap-1 w-full">
-        <input type="text" class="form-control" readonly id="floatingInputValue" :value="value">
+        <textarea type="text" rows="10" class="form-control" readonly id="floatingInputValue" :value="value" />
         <label for="floatingInputValue">{{ title }}</label>
         <button @click="handleClick" class="btn btn-outline-secondary" type="button" id="copyButton">
             <i class="bi bi-clipboard"></i>

@@ -28,7 +28,7 @@ const handleClick = (value) => {
                         Unix to Date converter
                     </strong>
                 </h4>
-                <input v-model="unix" @input="handleChange" type="text" class="form-control"
+                <input v-model="unix" @input="handleChange" autofocus type="text" class="form-control"
                     placeholder="Enter unix timestamp">
 
                 <div class="mt-2 p-2">
@@ -39,10 +39,7 @@ const handleClick = (value) => {
         <div class="block card block2 overflow-auto">
             <div v-if="unix" class="mt-3">
                 <div v-for="(value, key) in data" class="p-1 d-flex flex-column gap-2" :key="key">
-                    <div role="button" @click="handleClick(value)" class="p-1 flex flex-row">
-                        <CopyContainer :title="key" :value="value" />
-                        <!-- <strong> {{ labelFormatter(key) }} </strong> : {{ value }} -->
-                    </div>
+                    <CopyContainer :title="key" :value="value" />
                 </div>
             </div>
         </div>

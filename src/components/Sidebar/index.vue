@@ -7,11 +7,14 @@ defineProps(['elements']);
 
 const store = useGlobalStore();
 const route = useRoute();
-const isMobile = ref(window.innerWidth < 800);
+const isMobile = ref(window.innerWidth < 900);
 
 function resize() {
     isMobile.value = window.innerWidth < 800;
 }
+
+// alphabetically sort the sidebar options
+const sortedSideBarLists = sideBarList.sort((a, b) => a.name.localeCompare(b.name))
 
 onMounted(() => {
     window.addEventListener('resize', resize);
@@ -36,8 +39,8 @@ const toggleClick = () => {
 </script>
 <template>
     <!-- <div class="col-sm-3"> -->
-    <div id="large-devices" style="width:280px"
-        class="d-sm-flex d-none flex-column justify-content-between flex-shrink-0 p-3 bg-dark p-0 m-0 vh-100 w-full">
+    <div id="large-devices" style="width:280px" v-if="!isMobile"
+        class="d-flex flex-column justify-content-between flex-shrink-0 p-3 bg-dark p-0 m-0 vh-100 w-full">
         <!-- header -->
         <div>
             <a href=" /" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
@@ -49,7 +52,7 @@ const toggleClick = () => {
         <!-- body -->
         <div class="overflow-auto flex-grow-1">
             <ul class="nav nav-pills flex-column gap-1">
-                <div v-for="(item, index) in sideBarList" :key="index">
+                <div v-for="(item, index) in sortedSideBarLists" :key="index">
                     <li class="nav-item ">
                         <a :href=item.route
                             :class="currSlug === item.route.slice(1) ? 'text-white nav-link active' : 'text-white nav-link '"
@@ -70,9 +73,9 @@ const toggleClick = () => {
         </div>
 
     </div>
-    <div id="small-devices" class="d-flex flex-column d-sm-none">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <div class="container">
+    <div id="small-devices" v-if="isMobile" class="d-flex flex-column">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container d-flex">
                 <a class="navbar-brand" href="/">⚡️ Devta</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
@@ -81,7 +84,7 @@ const toggleClick = () => {
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" :class="{ show: !isCollapsed }" id="navbarNav">
                     <ul class="navbar-nav">
-                        <div v-for="(item, index) in sideBarList" :key="index">
+                        <div v-for="(item, index) in sortedSideBarLists" :key="index">
                             <li class="nav-item">
                                 <a :href=item.route
                                     :class="currSlug === item.route.slice(1) ? 'nav-link text-white active' : 'nav-link text-white'"
