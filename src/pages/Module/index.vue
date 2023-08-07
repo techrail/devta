@@ -18,7 +18,7 @@ const validRoute = Boolean(store.getRoute(route.params.slug));
     <ErrorPage v-if="!validRoute" />
     <template v-if="validRoute">
         <div class="main m-0 p-0  min-vh-100">
-            <div id="side-bar" class="m-0 p-0 bg-black ">
+            <div id="side-bar" class="m-0 p-0">
                 <Sidebar />
             </div>
             <div id="content" class="w-100">
