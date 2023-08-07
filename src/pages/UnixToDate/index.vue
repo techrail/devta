@@ -28,7 +28,7 @@ const handleClick = (value) => {
                         Unix to Date converter
                     </strong>
                 </h4>
-                <input v-model="unix" @input="handleChange" type="text" class="form-control"
+                <input v-model="unix" @input="handleChange" autofocus type="text" class="form-control"
                     placeholder="Enter unix timestamp">
 
                 <div class="mt-2 p-2">

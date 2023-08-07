@@ -32,7 +32,8 @@ async function copyContent(idx) {
                 </h4>
                 <div class="p-2 ">
                     <!-- <label for="input">Input:</label> -->
-                    <input type="text" v-model="input" class="form-control" placeholder="Enter text to convert into base64">
+                    <input type="text" autofocus v-model="input" class="form-control"
+                        placeholder="Enter text to convert into base64">
                     <!-- <ui-textfield inputId="input" outlined input-type="textarea" v-model="input" class="input fullWidth"
                         placeholder="Enter text to convert to base64"></ui-textfield> -->
                     <button type="button" class="btn btn-primary mt-2" @click="handleChange">Convert to Base64</button>
