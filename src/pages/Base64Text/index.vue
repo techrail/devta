@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useGlobalStore } from "@stores/index.mjs";
+import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
+import CopyContainer from '../../components/CopyContainer/CopyContainer.vue';
 
 const store = useGlobalStore();
 const input = ref('');
@@ -12,6 +14,10 @@ function handleChange() {
     // timeout = setTimeout(() => {
     //     outputs.value = Object.keys(algos).map(e => algos[e](value.value).toString());
     // }, 1000);
+}
+
+const handleClick = (value) => {
+    copyToClipboard(value)
 }
 
 async function copyContent(idx) {
@@ -41,9 +47,17 @@ async function copyContent(idx) {
             </div>
         </div>
         <div class="block card overflow-auto block2">
-            <div class="warning">
-                {{ b64 }}
+            <div v-if="b64" class="mt-3">
+                <div class="p-2">
+                    <div role="button" @click="handleClick(unix)" class="flex flex-row">
+                        <CopyContainer title="Base64" :value="b64" />
+                    </div>
+                </div>
+
             </div>
+            <!-- <div class="warning">
+                {{ b64 }}
+            </div> -->
         </div>
     </div>
 </template>
