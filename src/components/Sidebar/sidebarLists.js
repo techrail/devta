@@ -30,4 +30,9 @@ export const sideBarList = [
     iconClass: "bi bi-calendar-range",
     route: "/timeZoneConverter",
   },
+  {
+    name: "Markdown Preview",
+    iconClass: "bi bi-filetype-md",
+    route: "/markdownPreview",
+  },
 ];

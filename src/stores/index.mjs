@@ -35,6 +35,11 @@ const routes = {
     dir: "DateToUnix",
     icon: "image",
   },
+  markdownPreview: {
+    name: "Markdown Preview",
+    dir: "MarkdownPreview",
+    icon: "image",
+  },
   timeZoneConverter: {
     name: "Time zone converter",
     dir: "TimeZoneConverter",
