@@ -7,7 +7,7 @@ defineProps(['elements']);
 
 const store = useGlobalStore();
 const route = useRoute();
-const isMobile = ref(window.innerWidth < 800);
+const isMobile = ref(window.innerWidth < 900);
 
 function resize() {
     isMobile.value = window.innerWidth < 800;
@@ -74,8 +74,8 @@ const toggleClick = () => {
 
     </div>
     <div id="small-devices" v-if="isMobile" class="d-flex flex-column">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container d-flex">
                 <a class="navbar-brand" href="/">⚡️ Devta</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
