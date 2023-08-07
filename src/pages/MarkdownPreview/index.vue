@@ -23,7 +23,7 @@ const handleFileChange = async (event) => {
             };
             reader.readAsText(file);
         } else {
-            console.log("Please select a .md file under 1 MB.");
+            window.alert("Please select a .md file under 1 MB.");
         }
     }
 }
