@@ -4,7 +4,6 @@ import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
 import { marked } from 'marked';
 
 const markdown = ref()
-const file = ref()
 
 const handleClick = (value) => {
     copyToClipboard(value)
@@ -54,10 +53,6 @@ const handleFileChange = async (event) => {
                     </button>
 
                 </div>
-                <div class="d-flex flex-row">
-
-                </div>
-
             </div>
         </div>
         <div class="block card block2 overflow-auto">
