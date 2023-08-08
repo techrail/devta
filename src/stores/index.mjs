@@ -45,6 +45,11 @@ const routes = {
     dir: "TimeZoneConverter",
     icon: "image",
   },
+  jsonFormatter: {
+    name: "json-formatter",
+    dir: "JsonFormatter",
+    icon: "image",
+  },
 };
 
 export const useGlobalStore = defineStore("global", {
