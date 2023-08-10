@@ -35,4 +35,9 @@ export const sideBarList = [
     iconClass: "bi bi-filetype-md",
     route: "/markdownPreview",
   },
+  {
+    name: "Json Formatter",
+    iconClass: "bi bi-filetype-json",
+    route: "/jsonFormatter",
+  },
 ];
