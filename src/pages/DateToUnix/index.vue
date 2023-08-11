@@ -40,9 +40,6 @@ const getFormatteddates = (date) => formatteddates.value = formatDates(date)
                     <p class="muted">Choose a date and time from the datepicker</p>
                     <VueDatePicker v-model="date"></VueDatePicker>
                 </div>
-                <!-- <div class="mt-2 p-2">
-                    <DateTimeConstants />
-                </div> -->
             </div>
         </div>
         <div class="block card block2 overflow-auto">

@@ -17,6 +17,7 @@
     "crypto-js": "^4.1.1",
     "marked": "^7.0.0",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "pinia": "^2.1.6",
     "spacetime": "^7.4.5",
     "vue": "^3.3.4",
