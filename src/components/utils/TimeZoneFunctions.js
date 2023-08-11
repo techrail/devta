@@ -1,5 +1,5 @@
-import spacetime from "spacetime";
-import { dateToUnixTimestamp, formatDates } from "./UnixDateTimeFunctions";
+import moment from "moment-timezone";
+// import { moment as mom } from "moment";
 
 export const timezones = [
   "Pacific/Midway", // -11
@@ -38,20 +38,47 @@ export const isoToTimeStamp = (isoStr) => {
   }
 };
 
-export const convertTimezone = (inputDate, inputTimezone, requiredTimezone) => {
+export const convertTimezone = (dateString, currentTz, requiredTz) => {
   try {
-    // Parse the input date and set the input timezone
-    const inputDateTime = spacetime(inputDate, inputTimezone);
+    // Create a Moment object from the input date with the current timezone
+    const originalMoment = moment.tz(dateString, currentTz);
 
-    // Set the required timezone
-    const convertedDateTime = inputDateTime.goto(requiredTimezone);
+    // Convert the Moment object to the required timezone
+    const convertedMoment = originalMoment.clone().tz(requiredTz);
 
-    // Format the converted date to a string
-    const formattedDate = convertedDateTime.format("iso");
-    console.log(formattedDate);
-    const updatedTs = isoToTimeStamp(formattedDate);
-    console.log(formatDates(updatedTs));
+    // Format the converted date as a string
+    const convertedDate = convertedMoment.format("YYYY-MM-DD HH:mm:ss");
+
+    return convertedDate;
   } catch (error) {
-    return `Error: ${error.message}`;
+    console.log(error);
   }
+};
+
+export const convertedFormatDates = (d) => {
+  try {
+    const data = {
+      rfc3339: moment(d).format("YYYY-MM-DDTHH:mm:ssZ") + "Z",
+      dateFullWithTime: moment(d).format("LLL"), // July 30, 2023 6:20 PM
+      dateWithTime: moment(d).format("lll"), // Jul 30, 2023 6:20 PM
+      dayDateTimeFull: moment(d).format("LLLL"), // Sunday, July 30, 2023 6:20 PM
+      dayDateTime: moment(d).format("llll"), // Sun, Jul 30, 2023 6:20 PM
+      timeOnly: moment(d).format("LT"), // 6:20 PM
+      timeWithSecond: moment(d).format("LTS"), // 6:20:44 PM
+      monthDayYearPretty: moment(d).format("L"), // 07/30/2023
+      monthDayYear: moment(d).format("l"), // 7/30/2023
+      dateFull: moment(d).format("LL"), // July 30, 2023
+      date: moment(d).format("ll"),
+    };
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCurrentLocaleTimezone = () => {
+  const options = { timeZoneName: "long" };
+  const timezone = Intl.DateTimeFormat(undefined, options).resolvedOptions()
+    .timeZone;
+  return timezone;
 };

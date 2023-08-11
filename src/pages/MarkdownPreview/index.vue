@@ -9,6 +9,10 @@ const handleClick = (value) => {
     copyToClipboard(value)
 }
 
+const handleClear = () => {
+    markdown.value = ""
+}
+
 const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -44,13 +48,21 @@ const handleFileChange = async (event) => {
                         placeholder="Enter markdown">
                     </textarea>
 
-                    <!-- file input that only accpets markdown files lesser than 1mb -->
-                    <input type="file" @change="handleFileChange" size="1048576" class="form-control mt-1" accept=".md"
-                        name="Upload markdown file" id="check">
-
-                    <button class="btn btn-primary mt-1" type="button" @click="handleClick(markdown)">
-                        Copy markdown
-                    </button>
+                    <div class="d-flex flex-row mt-2 justify-content-between align-items-center gap-2">
+                        <div>
+                            <!-- file input that only accpets markdown files lesser than 1mb -->
+                            <input type="file" @change="handleFileChange" size="1048576" class="form-control mt-1"
+                                accept=".md" name="Upload markdown file" id="check">
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-primary mt-1" type="button" @click="handleClick(markdown)">
+                                <i class="bi bi-clipboard"></i>
+                            </button>
+                            <button class="btn btn-danger mt-1" type="reset" @click="handleClear">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
+                    </div>
 
                 </div>
             </div>
