@@ -52,7 +52,7 @@ const handleSelectChange = () => {
                         <input class="form-check-input" @input="handleCheckbox" v-model="localTimeCheck" type="checkbox"
                             id="flexCheckChecked">
                         <label class="form-check-label" for="flexCheckChecked">
-                            Choose my current timezone
+                            Current timezone
                         </label>
                     </div>
                     <div class="form-floating">
