@@ -5,7 +5,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import { convertedFormatDates, convertTimezone, timezones, getCurrentLocaleTimezone } from '../../components/utils/TimeZoneFunctions';
 import CopyContainer from '../../components/CopyContainer/CopyContainer.vue';
 
-const date = ref();
+const date = ref(null);
 const timezone = ref();
 const reqTimezone = ref()
 const convertedTime = ref()
@@ -32,11 +32,6 @@ const handleSelectChange = () => {
     localTimeCheck.value = timezone.value === localTimezone.value
 }
 
-const checkIfDisabled = () => {
-    console.log(date.value, timezone.value, reqTimezone.value)
-    if (date.value && timezone.value && reqTimezone.value) return true
-    return false
-}
 
 </script>
 
@@ -72,14 +67,11 @@ const checkIfDisabled = () => {
                         <option v-for="zone in timezones" :value="zone" :key="zone">{{ zone }}</option>
                     </select>
 
-                    <button :disabled='date == undefined && timezone == "undefined" && reqTimezone == "undefined"'
+                    <button :disabled="date === null || timezone === undefined || reqTimezone === undefined"
                         @click="convert" class="btn btn-primary">
                         Convert
                     </button>
 
-                    <button class="btn btn-primary" @click="checkIfDisabled">
-                        check
-                    </button>
                 </div>
             </div>
         </div>
