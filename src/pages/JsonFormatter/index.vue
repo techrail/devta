@@ -63,37 +63,54 @@ function reset() {
         <h4>
           <strong> Json Formatter </strong>
         </h4>
-        <div class="p-2">
+        <div class="form-outline">
           <!-- input -->
           <textarea
+            class="form-control"
+            id="textAreaExample2"
             v-model="unformattedJson"
             rows="10"
             cols="60"
             placeholder="enter your json"
           ></textarea>
+          <br />
           <div class="d-flex flex-row justify-content-center gap-5">
             <button class="btn btn-primary" @click="format()">beautify</button>
             <button class="btn btn-primary" @click="copy()">copy</button>
             <button class="btn btn-primary" @click="reset()">reset</button>
-          </div>
-          <br />
-          <div class="d-flex flex-row justify-content-center gap-5">
-            <select class="btn btn-primary" v-model="indent">
-              <option value="2">2 Tab space</option>
-              <option value="3">3 Tab space</option>
-              <option value="4">4 Tab space</option>
-            </select>
             <button class="btn btn-primary" @click="minify()">
               minify/compact
             </button>
+          </div>
+          <br />
+          <div
+            class="d-flex flex-row justify-content-center gap-5 border-primary"
+          >
+            <select
+              class="form-select form-select-sm"
+              aria-label=".form-select-sm example"
+              v-model="indent"
+            >
+              <option selected value="2">2 Tab Space</option>
+              <option value="3">3 Tab Space</option>
+              <option value="4">4 Tab Space</option>
+              <option value="5">5 Tab Space</option>
+            </select>
           </div>
         </div>
       </div>
     </div>
     <div class="block card block2 overflow-auto">
       <!-- output -->
-      <div class="output" style="padding-top: 60px">
-        <textarea :value="formattedVal" rows="70" cols="70" disabled></textarea>
+      <div class="form-outline" style="padding-top: 60px">
+        <textarea
+          :value="formattedVal"
+          class="form-control"
+          id="textAreaExample2"
+          rows="20"
+          cols="70"
+          disabled
+        ></textarea>
       </div>
     </div>
   </div>
