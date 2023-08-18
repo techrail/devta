@@ -50,6 +50,11 @@ const routes = {
     dir: "JsonFormatter",
     icon: "image",
   },
+  jwtDebugger: {
+    name: "JWT Debugger",
+    dir: "JWTDebugger",
+    icon: "image",
+  },
 };
 
 export const useGlobalStore = defineStore("global", {

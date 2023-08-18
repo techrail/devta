@@ -40,4 +40,9 @@ export const sideBarList = [
     iconClass: "bi bi-filetype-json",
     route: "/jsonFormatter",
   },
+  {
+    name: "JWT Debugger",
+    iconClass: "bi bi-bug",
+    route: "/jwtDebugger",
+  },
 ];
