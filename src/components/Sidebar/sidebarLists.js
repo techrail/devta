@@ -40,4 +40,9 @@ export const sideBarList = [
     iconClass: "bi bi-filetype-json",
     route: "/jsonFormatter",
   },
+  {
+    name: "Convert JSON ",
+    iconClass: "bi bi-filetype-json",
+    route: "/JSONToYAML",
+  },
 ];
