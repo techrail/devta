@@ -50,6 +50,11 @@ const routes = {
     dir: "JsonFormatter",
     icon: "image",
   },
+  JSONToYAML: {
+    name: "JSON-To-YAML",
+    dir: "JSONToYAML",
+    icon: "image",
+  },
 };
 
 export const useGlobalStore = defineStore("global", {
