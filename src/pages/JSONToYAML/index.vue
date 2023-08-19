@@ -5,6 +5,21 @@ import jsonToPrettyYaml from "json-to-pretty-yaml";
 const unformattedJson = ref("");
 
 const formattedVal = ref("");
+const selectedvalue = ref("none");
+
+function convert() {
+  console.log(selectedvalue.value);
+  if (selectedvalue.value == "none") {
+    return 
+  }
+  if (selectedvalue.value == "yaml") {
+    console.log("yaml is selected")
+    format();
+  }
+  if (selectedvalue.value== "xml") {
+    console.log(" json converted to xml");
+  }
+}
 
 function format() {
   try {
@@ -49,13 +64,27 @@ function reset() {
           ></textarea>
           <br />
           <div class="d-flex flex-row justify-content-center gap-5">
-            <button class="btn btn-primary" @click="format()">convert</button>
+            <!-- <button class="btn btn-primary" @click="format()">convert</button> -->
             <button class="btn btn-primary" @click="reset()">reset</button>
             <button class="btn btn-primary" @click="copy()">
               <i class="bi bi-clipboard"></i>
             </button>
           </div>
           <br />
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            v-model="selectedvalue"
+           
+          >
+            <option  value="none">Convert to...</option>
+            <option value="yaml" >YAML</option>
+            <option value="xml">XML</option>
+          </select>
+          <div style="margin-top: 10px">
+            <button class="btn btn-primary" @click="convert()">convert</button>
+          </div>
+
           <div
             class="d-flex flex-row justify-content-center gap-5 border-primary"
           ></div>
@@ -70,7 +99,7 @@ function reset() {
           class="form-control"
           id="textAreaExample2"
           rows="20"
-          cols="70"
+          cols="60"
           disabled
         ></textarea>
       </div>

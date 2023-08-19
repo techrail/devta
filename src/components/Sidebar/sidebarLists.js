@@ -41,7 +41,7 @@ export const sideBarList = [
     route: "/jsonFormatter",
   },
   {
-    name: "JSON To YAML",
+    name: "Convert JSON ",
     iconClass: "bi bi-filetype-json",
     route: "/JSONToYAML",
   },

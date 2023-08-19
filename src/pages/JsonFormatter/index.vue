@@ -76,13 +76,15 @@ function reset() {
           <br />
           <div class="d-flex flex-row justify-content-center gap-5">
             <button class="btn btn-primary" @click="format()">beautify</button>
-            
+
             <button class="btn btn-primary" @click="reset()">reset</button>
 
             <button class="btn btn-primary" @click="minify()">
               minify/compact
             </button>
-            <button class="btn btn-primary" @click="copy()"><i class="bi bi-clipboard"></i></button>
+            <button class="btn btn-primary" @click="copy()">
+              <i class="bi bi-clipboard"></i>
+            </button>
           </div>
           <br />
           <div
