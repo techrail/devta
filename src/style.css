@@ -11,3 +11,7 @@ span.mdc-text-field__resizer textarea {
 button.mdc-top-app-bar__navigation-icon {
     color: #000 !important;
 }
+
+textarea {
+    font-family: "monospace";
+}
