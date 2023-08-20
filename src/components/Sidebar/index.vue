@@ -87,7 +87,7 @@ const toggleClick = () => {
                     <ul class="navbar-nav">
                         <div v-for="(item, index) in sortedSideBarLists" :key="index">
                             <li class="nav-item">
-                                <router-link :to=item.route
+                                <router-link :to=item.route @click="isCollapsed = !isCollapsed"
                                     :class="currSlug === item.route.slice(1) ? 'nav-link text-white active' : 'nav-link text-white'"
                                     aria-current="page">
                                     <i :class="item.iconClass"></i> {{ item.name }}

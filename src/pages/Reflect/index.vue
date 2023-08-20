@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-import { useGlobalStore } from "@stores/index.mjs";
+// import { useGlobalStore } from "@stores/index.mjs";
 
-const store = useGlobalStore();
+// const store = useGlobalStore();
 const value = ref('Hello World');
 
 function handleChange(newVal) {
@@ -14,10 +14,10 @@ function handleChange(newVal) {
 }
 
 
-async function copyContent(idx) {
-    await navigator.clipboard.writeText(outputs.value[idx]);
-    store.showSnackbar('Contents copied to clipboard');
-}
+// async function copyContent(idx) {
+//     await navigator.clipboard.writeText(outputs.value[idx]);
+//     store.showSnackbar('Contents copied to clipboard');
+// }
 </script>
 
 
@@ -30,7 +30,7 @@ async function copyContent(idx) {
         </div>
         <div class="block block2">
             <div class="element">
-              {{ value }}
+                {{ value }}
             </div>
         </div>
     </div>
