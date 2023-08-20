@@ -53,14 +53,14 @@ const handleClick = async (text) => {
                     </div> -->
 
                 </div>
-                <div class="d-flex mt-2 gap-2 ">
+                <!-- <div class="d-flex mt-2 gap-2 ">
                     <button type="button" class="btn btn-primary" @click="handleClick(decodedToken)">
                         Copy JSON
                     </button>
                     <button type="button" class="btn btn-primary" @click="handleClick(jwtoken)">
                         Copy token
                     </button>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="block card block2 overflow-auto ">
@@ -75,10 +75,18 @@ const handleClick = async (text) => {
             </div>
             <div v-if="jwtoken">
                 <div class="p-2 overflow-auto">
-                    <textarea v-model="decodedHeader" disabled type="text" class="form-control" rows="4" />
+                    <div class="form-floating">
+                        <textarea class="form-control" v-model="decodedHeader" disabled placeholder="Header"
+                            id="headingFloat" style="height:120px" />
+                        <label for="headingFloat">Decoded Header</label>
+                    </div>
                 </div>
                 <div class="p-2 overflow-auto">
-                    <textarea v-model="decodedPayload" disabled type="text" class="form-control" rows="8" />
+                    <div class="form-floating">
+                        <textarea class="form-control" style="height: 200px;" v-model="decodedPayload" disabled
+                            placeholder="payload" id="payload" />
+                        <label for="payload">Decoded Payload</label>
+                    </div>
                 </div>
             </div>
         </div>
