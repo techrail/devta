@@ -1,14 +1,26 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
+import { beautifyJSON } from '../../components/utils/jsonBeautifier'
+import jwt_decode from "jwt-decode"
 
 
 const jwtoken = ref()
+const decodedToken = ref()
 
-const handleClick = (value) => {
-    copyToClipboard(value)
+watch(jwtoken, (newjwtoken, oldjwtoken) => {
+    if (!newjwtoken | newjwtoken === oldjwtoken) return
+    const decoded = JSON.stringify(jwt_decode(newjwtoken))
+    decodedToken.value = beautifyJSON(decoded)
+})
+
+const handleClick = async (text) => {
+    try {
+        await copyToClipboard(text)
+    } catch (error) {
+        console.log(error)
+    }
 }
-
 
 
 </script>
@@ -40,6 +52,14 @@ const handleClick = (value) => {
                     </div> -->
 
                 </div>
+                <div class="d-flex mt-2 gap-2 ">
+                    <button type="button" class="btn btn-primary" @click="handleClick(decodedToken)">
+                        Copy JSON
+                    </button>
+                    <button type="button" class="btn btn-primary" @click="handleClick(jwtoken)">
+                        Copy token
+                    </button>
+                </div>
             </div>
         </div>
         <div class="block card block2 overflow-auto ">
@@ -52,8 +72,10 @@ const handleClick = (value) => {
                     </small>
                 </div>
             </div>
-            <div v-if="jwtoken" class="mt-3">
-                {{ JSON.parse(Buffer.from(jwtoken.split('.')[1], 'base64').toString()) }}
+            <div v-if="jwtoken">
+                <div class="p-2 overflow-auto">
+                    <textarea v-model="decodedToken" disabled type="text" class="form-control" rows="15" />
+                </div>
             </div>
         </div>
     </div>

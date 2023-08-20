@@ -17,6 +17,7 @@
     "crypto-js": "^4.1.1",
     "js-yaml": "^4.1.0",
     "json-to-pretty-yaml": "^1.2.2",
+    "jwt-decode": "^3.1.2",
     "marked": "^7.0.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
