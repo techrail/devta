@@ -43,9 +43,10 @@ const toggleClick = () => {
         class="d-flex flex-column justify-content-between flex-shrink-0 p-3 bg-dark p-0 m-0 vh-100 w-full">
         <!-- header -->
         <div>
-            <a href=" /" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <router-link to="/"
+                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <span class="fs-4 text-white"><strong>⚡️ Devta</strong></span>
-            </a>
+            </router-link>
             <hr>
         </div>
 
@@ -54,11 +55,11 @@ const toggleClick = () => {
             <ul class="nav nav-pills flex-column gap-1">
                 <div v-for="(item, index) in sortedSideBarLists" :key="index">
                     <li class="nav-item ">
-                        <a :href=item.route
+                        <router-link :to=item.route
                             :class="currSlug === item.route.slice(1) ? 'text-white nav-link active' : 'text-white nav-link '"
                             aria-current="page">
                             <i :class="item.iconClass"></i> {{ item.name }}
-                        </a>
+                        </router-link>
                     </li>
                 </div>
             </ul>
@@ -76,7 +77,7 @@ const toggleClick = () => {
     <div id="small-devices" v-if="isMobile" class="d-flex flex-column">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container d-flex">
-                <a class="navbar-brand" href="/">⚡️ Devta</a>
+                <router-link class="navbar-brand" to="/">⚡️ Devta</router-link>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
                     @click="isCollapsed = !isCollapsed">
@@ -86,11 +87,11 @@ const toggleClick = () => {
                     <ul class="navbar-nav">
                         <div v-for="(item, index) in sortedSideBarLists" :key="index">
                             <li class="nav-item">
-                                <a :href=item.route
+                                <router-link :to=item.route @click="isCollapsed = !isCollapsed"
                                     :class="currSlug === item.route.slice(1) ? 'nav-link text-white active' : 'nav-link text-white'"
                                     aria-current="page">
                                     <i :class="item.iconClass"></i> {{ item.name }}
-                                </a>
+                                </router-link>
                             </li>
                         </div>
                     </ul>

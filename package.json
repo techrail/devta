@@ -9,26 +9,25 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@highlightjs/vue-plugin": "^2.1.0",
     "@popperjs/core": "^2.11.8",
     "@vuepic/vue-datepicker": "^5.4.0",
-    "balm-ui": "^6.6.5",
+    "balm-ui": "^10.22.3",
     "bootstrap": "^5.3.1",
     "bootstrap-icons": "^1.10.5",
     "crypto-js": "^4.1.1",
+    "esbuild": "^0.19.2",
+    "highlight.js": "^11.8.0",
+    "jose": "^4.14.4",
     "js-yaml": "^4.1.0",
-    "js2xml": "^1.0.9",
     "json-to-pretty-yaml": "^1.2.2",
+    "jwt-decode": "^3.1.2",
     "marked": "^7.0.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "pinia": "^2.1.6",
-    "spacetime": "^7.4.5",
-    "stream": "^0.0.2",
-    "stream-browserify": "^3.0.0",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.4",
-    "xml": "^1.0.1",
-    "xml-js": "^1.6.11"
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",

@@ -41,6 +41,11 @@ export const sideBarList = [
     route: "/jsonFormatter",
   },
   {
+    name: "JWT Debugger",
+    iconClass: "bi bi-bug",
+    route: "/jwtDebugger",
+  },
+  {
     name: "Convert JSON ",
     iconClass: "bi bi-filetype-json",
     route: "/JSONToYAML",
