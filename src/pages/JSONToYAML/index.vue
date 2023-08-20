@@ -74,7 +74,6 @@ function reset() {
           >
             <option value="none">Convert to...</option>
             <option value="yaml">YAML</option>
-            <option value="xml">XML</option>
           </select>
           <div style="margin-top: 10px">
             <button class="btn btn-primary" @click="convert()">convert</button>
