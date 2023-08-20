@@ -4,7 +4,6 @@ import { useGlobalStore } from "@stores/index.mjs";
 import { useRoute } from "vue-router";
 import Sidebar from "@/Sidebar/index.vue";
 import LoadModule from "./LoadModule.vue";
-import { ref } from "vue";
 
 const store = useGlobalStore();
 const route = useRoute();
