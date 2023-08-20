@@ -55,6 +55,11 @@ const routes = {
     dir: "JSONToYAML",
     icon: "image",
   },
+  jwtDebugger: {
+    name: "JWT Debugger",
+    dir: "JWTDebugger",
+    icon: "image",
+  },
 };
 
 export const useGlobalStore = defineStore("global", {

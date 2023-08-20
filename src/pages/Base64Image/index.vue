@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { useGlobalStore } from "@stores/index.mjs";
 
-const store = useGlobalStore();
+// const store = useGlobalStore();
 const value = ref('');
 const output = ref(undefined);
 const fileType = ref(undefined);

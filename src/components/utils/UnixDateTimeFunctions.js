@@ -1,7 +1,7 @@
 import moment from "moment/moment";
 import { useGlobalStore } from "@stores/index.mjs";
 
-const store = useGlobalStore();
+// const store = useGlobalStore();
 
 // unix time
 export const getUnixTime = () => Math.floor(Date.now() / 1000);
