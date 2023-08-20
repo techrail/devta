@@ -3,21 +3,17 @@ import { ref } from "vue";
 import jsonToPrettyYaml from "json-to-pretty-yaml";
 
 const unformattedJson = ref("");
-
 const formattedVal = ref("");
 const selectedvalue = ref("none");
 
 function convert() {
   console.log(selectedvalue.value);
   if (selectedvalue.value == "none") {
-    return 
+    return;
   }
   if (selectedvalue.value == "yaml") {
-    console.log("yaml is selected")
+    console.log("yaml is selected");
     format();
-  }
-  if (selectedvalue.value== "xml") {
-    console.log(" json converted to xml");
   }
 }
 
@@ -75,10 +71,9 @@ function reset() {
             class="form-select"
             aria-label="Default select example"
             v-model="selectedvalue"
-           
           >
-            <option  value="none">Convert to...</option>
-            <option value="yaml" >YAML</option>
+            <option value="none">Convert to...</option>
+            <option value="yaml">YAML</option>
             <option value="xml">XML</option>
           </select>
           <div style="margin-top: 10px">
