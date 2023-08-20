@@ -18,7 +18,7 @@ const validRoute = Boolean(store.getRoute(route.params.slug));
     <template v-if="validRoute">
         <div class="main m-0 p-0  min-vh-100">
             <div id="side-bar" class="m-0 p-0">
-                <Sidebar />
+                <!-- <Sidebar /> -->
             </div>
             <div id="content" class="w-100">
                 <!-- <div class=" content"> -->

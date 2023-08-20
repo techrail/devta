@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { useGlobalStore } from "@stores/index.mjs";
+// import { useGlobalStore } from "@stores/index.mjs";
 import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
 
-const store = useGlobalStore();
+// const store = useGlobalStore();
 const input = ref('');
 const b64 = ref('');
 

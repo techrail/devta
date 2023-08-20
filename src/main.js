@@ -19,6 +19,10 @@ import "highlight.js/styles/atom-one-light.css";
 
 hljs.registerLanguage("json", json);
 
+const app = createApp(AppVue);
+const pinia = createPinia();
+app.use(pinia);
+
 const routes = [
   {
     path: "/",
@@ -39,10 +43,6 @@ const router = createRouter({
   routes,
 });
 
-const pinia = createPinia();
-
-const app = createApp(AppVue);
-
 app.use(BalmUI, {
   $theme: {
     primary: "#000000",
@@ -52,6 +52,5 @@ app.use(BalmUI, {
 
 app.use(router);
 app.use(hljsVuePlugin);
-app.use(pinia);
 
 app.mount("#app");
