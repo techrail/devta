@@ -1,17 +1,18 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
-import { beautifyJSON } from '../../components/utils/jsonBeautifier'
-import jwt_decode from "jwt-decode"
+import { getHeader } from '../../components/utils/JwtHelpers';
+import { getPayload } from '../../components/utils/JwtHelpers';
 
 
 const jwtoken = ref()
-const decodedToken = ref()
+const decodedPayload = ref()
+const decodedHeader = ref()
 
 watch(jwtoken, (newjwtoken, oldjwtoken) => {
     if (!newjwtoken | newjwtoken === oldjwtoken) return
-    const decoded = JSON.stringify(jwt_decode(newjwtoken))
-    decodedToken.value = beautifyJSON(decoded)
+    decodedHeader.value = getHeader(newjwtoken)
+    decodedPayload.value = getPayload(newjwtoken)
 })
 
 const handleClick = async (text) => {
@@ -74,7 +75,10 @@ const handleClick = async (text) => {
             </div>
             <div v-if="jwtoken">
                 <div class="p-2 overflow-auto">
-                    <textarea v-model="decodedToken" disabled type="text" class="form-control" rows="15" />
+                    <textarea v-model="decodedHeader" disabled type="text" class="form-control" rows="4" />
+                </div>
+                <div class="p-2 overflow-auto">
+                    <textarea v-model="decodedPayload" disabled type="text" class="form-control" rows="8" />
                 </div>
             </div>
         </div>
