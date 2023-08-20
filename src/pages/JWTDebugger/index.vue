@@ -3,6 +3,7 @@ import { ref, watch } from 'vue';
 import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
 import { getHeader } from '../../components/utils/JwtHelpers';
 import { getPayload } from '../../components/utils/JwtHelpers';
+import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
 
 
 const jwtoken = ref()
@@ -37,9 +38,13 @@ const handleClick = async (text) => {
                 </h4>
 
                 <div class="overflow-auto">
-                    <textarea v-model="jwtoken" autofocus type="text" class="form-control" rows="15"
-                        placeholder="Enter the token">
+                    <div class="form-floating">
+                        <textarea v-model="jwtoken" autofocus type="text" class="form-control" id="tokenInput"
+                            style="height: 400px;" placeholder="Enter the token">
                     </textarea>
+                        <label for="tokenInput">Enter the token</label>
+                    </div>
+
 
                     <!-- <div class="d-flex flex-row mt-2 justify-content-between align-items-center gap-2">
                         <div class="d-flex gap-2">
@@ -75,18 +80,20 @@ const handleClick = async (text) => {
             </div>
             <div v-if="jwtoken">
                 <div class="p-2 overflow-auto">
-                    <div class="form-floating">
+                    <MultiLineCopy title="decoded header" :value="decodedHeader" height="130px" />
+                    <!-- <div class="form-floating">
                         <textarea class="form-control" v-model="decodedHeader" disabled placeholder="Header"
                             id="headingFloat" style="height:120px" />
                         <label for="headingFloat">Decoded Header</label>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="p-2 overflow-auto">
-                    <div class="form-floating">
+                    <MultiLineCopy title="Decoded Payload" height="160px" :value="decodedPayload" />
+                    <!-- <div class="form-floating">
                         <textarea class="form-control" style="height: 200px;" v-model="decodedPayload" disabled
                             placeholder="payload" id="payload" />
                         <label for="payload">Decoded Payload</label>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
