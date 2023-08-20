@@ -45,4 +45,9 @@ export const sideBarList = [
     iconClass: "bi bi-bug",
     route: "/jwtDebugger",
   },
+  {
+    name: "Convert JSON ",
+    iconClass: "bi bi-filetype-json",
+    route: "/JSONToYAML",
+  },
 ];

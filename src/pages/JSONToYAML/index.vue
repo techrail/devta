@@ -1,45 +1,34 @@
 <script setup>
 import { ref } from "vue";
+import jsonToPrettyYaml from "json-to-pretty-yaml";
 
 const unformattedJson = ref("");
 
 const formattedVal = ref("");
-var indent = 2;
+const selectedvalue = ref("none");
 
-function format() {
-  console.log(indent);
-  var spacer = "";
-  for (let i = 0; i < indent; i++) {
-    spacer += " ";
+function convert() {
+  console.log(selectedvalue.value);
+  if (selectedvalue.value == "none") {
+    return 
   }
-
-  try {
-    formattedVal.value = JSON.stringify(
-      JSON.parse(unformattedJson.value),
-      null,
-      spacer
-    );
-    console.log("spacer-value:", spacer);
-    console.log("formattedval-value:", formattedVal.value);
-  } catch (error) {
-    window.alert("Invalid JSON input.");
-    console.error("Error while formatting JSON:", error);
+  if (selectedvalue.value == "yaml") {
+    console.log("yaml is selected")
+    format();
+  }
+  if (selectedvalue.value== "xml") {
+    console.log(" json converted to xml");
   }
 }
 
-function minify() {
+function format() {
   try {
-    formattedVal.value = JSON.stringify(
-      JSON.parse(unformattedJson.value),
-      null,
-      0
+    formattedVal.value = jsonToPrettyYaml.stringify(
+      JSON.parse(unformattedJson.value)
     );
-
-    console.log("coming from minify function");
-  } catch (er) {
-    window.alert(er, "enter a valid json");
-    console.log("coming from minify function");
-    console.log(er);
+  } catch (error) {
+    window.alert("Invalid JSON input.");
+    console.error("Error while formatting JSON:", error);
   }
 }
 
@@ -61,7 +50,7 @@ function reset() {
     <div class="block card block1 overflow-auto">
       <div class="p-3">
         <h4>
-          <strong> Json Formatter </strong>
+          <strong> Json To YAML </strong>
         </h4>
         <div class="form-outline">
           <!-- input -->
@@ -75,32 +64,30 @@ function reset() {
           ></textarea>
           <br />
           <div class="d-flex flex-row justify-content-center gap-5">
-            <button class="btn btn-primary" @click="format()">beautify</button>
-
+            <!-- <button class="btn btn-primary" @click="format()">convert</button> -->
             <button class="btn btn-primary" @click="reset()">reset</button>
-
-            <button class="btn btn-primary" @click="minify()">
-              minify/compact
-            </button>
             <button class="btn btn-primary" @click="copy()">
               <i class="bi bi-clipboard"></i>
             </button>
           </div>
           <br />
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            v-model="selectedvalue"
+           
+          >
+            <option  value="none">Convert to...</option>
+            <option value="yaml" >YAML</option>
+            <option value="xml">XML</option>
+          </select>
+          <div style="margin-top: 10px">
+            <button class="btn btn-primary" @click="convert()">convert</button>
+          </div>
+
           <div
             class="d-flex flex-row justify-content-center gap-5 border-primary"
-          >
-            <select
-              class="form-select form-select-sm"
-              aria-label=".form-select-sm example"
-              v-model="indent"
-            >
-              <option selected value="2">2 Tab Space</option>
-              <option value="3">3 Tab Space</option>
-              <option value="4">4 Tab Space</option>
-              <option value="5">5 Tab Space</option>
-            </select>
-          </div>
+          ></div>
         </div>
       </div>
     </div>
@@ -112,7 +99,7 @@ function reset() {
           class="form-control"
           id="textAreaExample2"
           rows="20"
-          cols="70"
+          cols="60"
           disabled
         ></textarea>
       </div>
