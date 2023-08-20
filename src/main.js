@@ -7,9 +7,11 @@ import BalmUI from "balm-ui";
 import { createPinia } from "pinia";
 import { createRouter, createWebHistory } from "vue-router";
 import "bootstrap/dist/css/bootstrap.min.css";
-import 'bootstrap-icons/font/bootstrap-icons.css'
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap";
 import "balm-ui-css";
+import App from "./App.vue";
+import AppVue from "./App.vue";
 
 const routes = [
   {
@@ -33,7 +35,7 @@ const router = createRouter({
 
 const pinia = createPinia();
 
-const app = createApp({});
+const app = createApp(AppVue);
 
 app.use(BalmUI, {
   $theme: {
