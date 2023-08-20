@@ -10,8 +10,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap";
 import "balm-ui-css";
-import App from "./App.vue";
 import AppVue from "./App.vue";
+
+import hljs from "highlight.js/lib/core";
+import json from "highlight.js/lib/languages/json";
+import hljsVuePlugin from "@highlightjs/vue-plugin";
+import "highlight.js/styles/atom-one-light.css";
+
+hljs.registerLanguage("json", json);
 
 const routes = [
   {
@@ -45,7 +51,7 @@ app.use(BalmUI, {
 });
 
 app.use(router);
-
+app.use(hljsVuePlugin);
 app.use(pinia);
 
 app.mount("#app");

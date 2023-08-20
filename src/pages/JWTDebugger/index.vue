@@ -5,7 +5,6 @@ import { getHeader } from '../../components/utils/JwtHelpers';
 import { getPayload } from '../../components/utils/JwtHelpers';
 import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
 
-
 const jwtoken = ref()
 const decodedPayload = ref()
 const decodedHeader = ref()
@@ -79,21 +78,14 @@ const handleClick = async (text) => {
                 </div>
             </div>
             <div v-if="jwtoken">
+
                 <div class="p-2 overflow-auto">
-                    <MultiLineCopy title="decoded header" :value="decodedHeader" height="130px" />
-                    <!-- <div class="form-floating">
-                        <textarea class="form-control" v-model="decodedHeader" disabled placeholder="Header"
-                            id="headingFloat" style="height:120px" />
-                        <label for="headingFloat">Decoded Header</label>
-                    </div> -->
+                    <h5 class="text-muted">Header</h5>
+                    <highlightjs :code=decodedHeader />
                 </div>
                 <div class="p-2 overflow-auto">
-                    <MultiLineCopy title="Decoded Payload" height="160px" :value="decodedPayload" />
-                    <!-- <div class="form-floating">
-                        <textarea class="form-control" style="height: 200px;" v-model="decodedPayload" disabled
-                            placeholder="payload" id="payload" />
-                        <label for="payload">Decoded Payload</label>
-                    </div> -->
+                    <h5 class="text-muted">Payload</h5>
+                    <highlightjs :code=decodedPayload />
                 </div>
             </div>
         </div>
