@@ -5,7 +5,7 @@ import DateTimeConstants from '../../components/DateTimeConstants/DateTimeConsta
 import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
 import CopyContainer from '../../components/CopyContainer/CopyContainer.vue';
 import { covertCamelCase } from '../../components/utils/jsonBeautifier'
-import PageHeader from '../../components/Pageheader/PageHeader.vue';
+import PageHeader from '../../components/Pageheader/index.vue';
 
 const unix = ref()
 const data = ref()

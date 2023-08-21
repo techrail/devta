@@ -4,11 +4,11 @@ import { buttonData } from './buttonData';
 
 <template>
     <div id="root" v-for="(item, index) in buttonData" :key="index">
-        <button data-toggle="tooltip" data-placement="top" :title="item.tooltipTitle" class="btn btn-outline-dark">
-            <a :href="item.url" target="_blank" rel="noopener noreferrer">
+        <a :href="item.url" target="_blank" rel="noopener noreferrer">
+            <button data-toggle="tooltip" data-placement="top" :title="item.tooltipTitle" class="btn btn-outline-dark">
                 <i :class="item.iconClass"></i>
-            </a>
-        </button>
+            </button>
+        </a>
     </div>
 </template>
 

@@ -8,7 +8,7 @@ import { useRoute } from "vue-router";
 // import DateTimeConstants from '../../components/DateTimeConstants/DateTimeConstants.vue';
 import { covertCamelCase } from '../../components/utils/jsonBeautifier'
 import TopBarButtonsVue from '../../components/TopBarButtons/TopBarButtons.vue';
-import PageHeader from '../../components/Pageheader/PageHeader.vue';
+import PageHeader from '../../components/Pageheader/index.vue';
 
 
 const date = ref()

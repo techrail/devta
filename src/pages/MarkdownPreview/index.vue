@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
 import { marked } from 'marked';
-import PageHeader from '../../components/Pageheader/PageHeader.vue'
+import PageHeader from '../../components/Pageheader/index.vue'
 
 
 const markdown = ref()
