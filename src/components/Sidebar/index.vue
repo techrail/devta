@@ -1,12 +1,14 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
-import { useRoute } from "vue-router";
-import { sideBarList } from "./sidebarLists";
 defineProps(['elements']);
 
-const route = useRoute();
+import { ref, onMounted, onUnmounted, watch } from "vue";
+import { useRoute } from "vue-router";
+import { sideBarList } from "./sidebarLists";
 
+const route = useRoute();
 const isMobile = ref(window.innerWidth < 900);
+const isCollapsed = ref(true)
+const currentPath = ref(route.path)
 
 function resize() {
     isMobile.value = window.innerWidth < 800;
@@ -14,6 +16,12 @@ function resize() {
 
 // alphabetically sort the sidebar options
 const sortedSideBarLists = sideBarList.sort((a, b) => a.name.localeCompare(b.name))
+
+const toggleClick = () => {
+    console.log(isCollapsed.value)
+    isCollapsed.value = !isCollapsed.value
+}
+
 onMounted(() => {
     window.addEventListener('resize', resize);
 });
@@ -22,12 +30,11 @@ onUnmounted(() => {
     window.removeEventListener('resize', resize);
 });
 
-const isCollapsed = ref(true)
 
-const toggleClick = () => {
-    console.log(isCollapsed.value)
-    isCollapsed.value = !isCollapsed.value
-}
+watch(route, () => {
+    currentPath.value = route.path
+})
+
 
 </script>
 <template>
@@ -49,7 +56,7 @@ const toggleClick = () => {
                 <div v-for="(item, index) in sortedSideBarLists" :key="index">
                     <li class="nav-item ">
                         <router-link :to=item.route
-                            :class="currRoute === item.route.slice(1) ? 'text-white nav-link active' : 'text-white nav-link '"
+                            :class="currentPath === item.route ? 'text-white nav-link active' : 'text-white nav-link '"
                             aria-current="page">
                             <i :class="item.iconClass"></i> {{ item.name }}
                         </router-link>
@@ -81,7 +88,7 @@ const toggleClick = () => {
                         <div v-for="(item, index) in sortedSideBarLists" :key="index">
                             <li class="nav-item">
                                 <router-link :to=item.route @click="isCollapsed = !isCollapsed"
-                                    :class="currRoute === item.route.slice(1) ? 'nav-link text-white active' : 'nav-link text-white'"
+                                    :class="currentPath === item.route ? 'nav-link text-white active' : 'nav-link text-white'"
                                     aria-current="page">
                                     <i :class="item.iconClass"></i> {{ item.name }}
                                 </router-link>
