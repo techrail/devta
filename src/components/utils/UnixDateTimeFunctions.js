@@ -72,6 +72,7 @@ export const copyToClipboard = async (text) => {
 
 export const labelFormatter = (format) => {
   const formatMap = {
+    rfc3339: "RFC3339",
     timeOnly: "Time",
     timeWithSecond: "Time with seconds",
     dateFullWithTime: "Date Full With Time",

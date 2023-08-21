@@ -5,11 +5,19 @@ import Sidebar from './components/Sidebar/index.vue'
 
 
 <template>
+
     <main class="d-md-flex flex-md-row  flex-sm-column m-0 p-0 w-100">
         <Sidebar />
         <div class="container  w-100">
             <RouterView />
         </div>
+
+    <main class="d-md-flex flex-md-row flex-sm-column m-0 p-0 w-100">
+        <!-- <div class="container w-100"> -->
+        <Sidebar />
+        <RouterView />
+        <!-- </div> -->
+
     </main>
 </template>
 
