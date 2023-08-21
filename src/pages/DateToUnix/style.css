@@ -7,21 +7,6 @@
   gap: 10px;
 }
 
-.top_header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  /* height: 70px; */
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.heading {
-  font-size: x-large;
-}
-
 .block {
   height: 90vh;
 }
