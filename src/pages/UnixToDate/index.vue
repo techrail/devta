@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { formatDates, labelFormatter } from '../../components/utils/UnixDateTimeFunctions';
+import { formatDates } from '../../components/utils/UnixDateTimeFunctions';
 import DateTimeConstants from '../../components/DateTimeConstants/DateTimeConstants.vue';
 import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
 import CopyContainer from '../../components/CopyContainer/CopyContainer.vue';
