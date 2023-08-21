@@ -1,12 +1,11 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { useRoute } from "vue-router";
-import { useGlobalStore } from "@stores/index.mjs";
 import { sideBarList } from "./sidebarLists";
 defineProps(['elements']);
 
-const store = useGlobalStore();
 const route = useRoute();
+
 const isMobile = ref(window.innerWidth < 900);
 
 function resize() {
@@ -15,7 +14,7 @@ function resize() {
 
 // alphabetically sort the sidebar options
 const sortedSideBarLists = sideBarList.sort((a, b) => a.name.localeCompare(b.name))
-
+ś
 onMounted(() => {
     window.addEventListener('resize', resize);
 });
@@ -23,11 +22,6 @@ onMounted(() => {
 onUnmounted(() => {
     window.removeEventListener('resize', resize);
 });
-
-// Gets the active route slug
-const currSlug = route.params.slug;
-
-const routes = store.getRoutes();
 
 const isCollapsed = ref(true)
 
@@ -56,7 +50,7 @@ const toggleClick = () => {
                 <div v-for="(item, index) in sortedSideBarLists" :key="index">
                     <li class="nav-item ">
                         <router-link :to=item.route
-                            :class="currSlug === item.route.slice(1) ? 'text-white nav-link active' : 'text-white nav-link '"
+                            :class="currRoute === item.route.slice(1) ? 'text-white nav-link active' : 'text-white nav-link '"
                             aria-current="page">
                             <i :class="item.iconClass"></i> {{ item.name }}
                         </router-link>
@@ -88,7 +82,7 @@ const toggleClick = () => {
                         <div v-for="(item, index) in sortedSideBarLists" :key="index">
                             <li class="nav-item">
                                 <router-link :to=item.route @click="isCollapsed = !isCollapsed"
-                                    :class="currSlug === item.route.slice(1) ? 'nav-link text-white active' : 'nav-link text-white'"
+                                    :class="currRoute === item.route.slice(1) ? 'nav-link text-white active' : 'nav-link text-white'"
                                     aria-current="page">
                                     <i :class="item.iconClass"></i> {{ item.name }}
                                 </router-link>

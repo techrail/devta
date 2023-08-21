@@ -38,7 +38,7 @@ const getFormatteddates = (date) => {
 
 <template>
     <main class="bg-light p-0 m-0 w-100">
-        <div class="w-100 mt-4">
+        <div class="w-100 mt-3">
             <div class="top_header">
                 <div class="heading">
                     <!-- <h5> -->
@@ -50,7 +50,7 @@ const getFormatteddates = (date) => {
                 <!-- <div>route links</div> -->
             </div>
         </div>
-        <div class="grid bg-light">
+        <div class="grid mt-1 bg-light">
             <div class="block card block1">
                 <div class="p-3">
                     <div class="p-2">
