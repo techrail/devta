@@ -1,8 +1,9 @@
 <script setup>
 import CryptoJS from 'crypto-js';
 import { ref } from 'vue';
-import { useGlobalStore } from "@stores/index.mjs";
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import PageHeader from '../../components/Pageheader/index.vue';
+
 
 // const store = useGlobalStore();
 const value = ref('Hello World');
@@ -18,7 +19,7 @@ const algos = {
 }
 
 const outputs = ref(Object.keys(algos).map(e => algos[e](value.value).toString()));
-const timeout = undefined;
+let timeout = undefined;
 
 function handleChange(newVal) {
     value.value = newVal;
@@ -37,19 +38,24 @@ async function copyContent(idx) {
 
 
 <template>
-    <div class="grid bg-light">
-        <div class="block card block1">
-            <div class="col-sm-12 col-md-6">
-                <label for="input">Input:</label>
-                <ui-textfield inputId="input" outlined input-type="textarea" v-model="value" fullwidth
-                    class="input fullWidth" placeholder="Enter text to hash..."
-                    @update:model-value="handleChange"></ui-textfield>
-            </div>
+    <main class="bg-light p-0 m-0 w-100">
+        <div class="w-100 mt-3">
+            <PageHeader />
         </div>
 
-        <div class="block card block2 overflow-auto">
-            <div class="element" v-for="(element, index) in Object.keys(algos)">
-                <!-- <ui-textfield input-type="text" outlined disabled fullwidth class="input" v-model="outputs[index]">
+        <div class="grid bg-light">
+            <div class="block card block1">
+                <div class="col-sm-12 col-md-6">
+                    <label for="input">Input:</label>
+                    <ui-textfield inputId="input" outlined input-type="textarea" v-model="value" fullwidth
+                        class="input fullWidth" placeholder="Enter text to hash..."
+                        @update:model-value="handleChange"></ui-textfield>
+                </div>
+            </div>
+
+            <div class="block card block2 overflow-auto">
+                <div class="element" v-for="(element, index) in Object.keys(algos)">
+                    <!-- <ui-textfield input-type="text" outlined disabled fullwidth class="input" v-model="outputs[index]">
                     {{ element }}
                     <template #after>
                         <ui-textfield-icon @click="copyContent(index)" class="copy-icon">content_copy</ui-textfield-icon>
@@ -57,18 +63,16 @@ async function copyContent(idx) {
                 </ui-textfield> -->
 
 
-                <div class="input-group mb-3">
-                    <span class="input-group-text">{{ element }}</span>
-                    <input type="text" class="form-control" :value="outputs[index]" disabled readonly>
-                    <span class="input-group-text" @click="copyContent(index)"><i class="bi bi-clipboard"></i></span>
-                </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">{{ element }}</span>
+                        <input type="text" class="form-control" :value="outputs[index]" disabled readonly>
+                        <span class="input-group-text" @click="copyContent(index)"><i class="bi bi-clipboard"></i></span>
+                    </div>
 
+                </div>
             </div>
         </div>
-    </div>
-
-
-    <!-- </div> -->
+    </main>
 </template>
 
 <style scoped src="./style.css"></style>

@@ -1,13 +1,14 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
-import { useRoute } from "vue-router";
-import { useGlobalStore } from "@stores/index.mjs";
-import { sideBarList } from "./sidebarLists";
 defineProps(['elements']);
 
-const store = useGlobalStore();
+import { ref, onMounted, onUnmounted, watch } from "vue";
+import { useRoute } from "vue-router";
+import { sideBarList } from "./sidebarLists";
+
 const route = useRoute();
 const isMobile = ref(window.innerWidth < 900);
+const isCollapsed = ref(true)
+const currentPath = ref(route.path)
 
 function resize() {
     isMobile.value = window.innerWidth < 800;
@@ -15,6 +16,11 @@ function resize() {
 
 // alphabetically sort the sidebar options
 const sortedSideBarLists = sideBarList.sort((a, b) => a.name.localeCompare(b.name))
+
+const toggleClick = () => {
+    console.log(isCollapsed.value)
+    isCollapsed.value = !isCollapsed.value
+}
 
 onMounted(() => {
     window.addEventListener('resize', resize);
@@ -24,22 +30,16 @@ onUnmounted(() => {
     window.removeEventListener('resize', resize);
 });
 
-// Gets the active route slug
-const currSlug = route.params.slug;
 
-const routes = store.getRoutes();
+watch(route, () => {
+    currentPath.value = route.path
+})
 
-const isCollapsed = ref(true)
-
-const toggleClick = () => {
-    console.log(isCollapsed.value)
-    isCollapsed.value = !isCollapsed.value
-}
 
 </script>
 <template>
     <!-- <div class="col-sm-3"> -->
-    <div id="large-devices" style="width:280px" v-if="!isMobile"
+    <div id="large-devices" style="width:280px;" v-if="!isMobile"
         class="d-flex flex-column justify-content-between flex-shrink-0 p-3 bg-dark p-0 m-0 vh-100 w-full">
         <!-- header -->
         <div>
@@ -56,7 +56,7 @@ const toggleClick = () => {
                 <div v-for="(item, index) in sortedSideBarLists" :key="index">
                     <li class="nav-item ">
                         <router-link :to=item.route
-                            :class="currSlug === item.route.slice(1) ? 'text-white nav-link active' : 'text-white nav-link '"
+                            :class="currentPath === item.route ? 'text-white nav-link active' : 'text-white nav-link '"
                             aria-current="page">
                             <i :class="item.iconClass"></i> {{ item.name }}
                         </router-link>
@@ -88,7 +88,7 @@ const toggleClick = () => {
                         <div v-for="(item, index) in sortedSideBarLists" :key="index">
                             <li class="nav-item">
                                 <router-link :to=item.route @click="isCollapsed = !isCollapsed"
-                                    :class="currSlug === item.route.slice(1) ? 'nav-link text-white active' : 'nav-link text-white'"
+                                    :class="currentPath === item.route ? 'nav-link text-white active' : 'nav-link text-white'"
                                     aria-current="page">
                                     <i :class="item.iconClass"></i> {{ item.name }}
                                 </router-link>

@@ -1,17 +1,72 @@
 /* global styles */
 
 span.mdc-text-field__resizer {
-    pointer-events: none !important;
+  pointer-events: none !important;
 }
 
 span.mdc-text-field__resizer textarea {
-    pointer-events: auto !important;
+  pointer-events: auto !important;
 }
 
 button.mdc-top-app-bar__navigation-icon {
-    color: #000 !important;
+  color: #000 !important;
 }
 
-textarea {
-    font-family: "monospace";
+.mono-font {
+  font-family: monospace;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 90%;
+  width: 100%;
+  padding: 10px;
+  gap: 10px;
+}
+
+.block {
+  height: 87vh;
+}
+
+.block1 {
+  padding-right: 10px;
+}
+
+.block2 {
+  padding-left: 10px;
+}
+
+.input.fullWidth {
+  height: 100%;
+  width: 100%;
+}
+
+.copy-icon {
+  pointer-events: auto;
+}
+
+.element {
+  margin: 15px 0;
+}
+
+@media screen and (max-width: 800px) {
+  .grid {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    display: block;
+    width: 95vw;
+  }
+
+  .block .input.fullWidth {
+    height: 300px;
+  }
+
+  .block {
+    height: fit-content;
+    margin-bottom: 15px;
+    width: 100%;
+    min-height: auto;
+  }
 }
