@@ -39,7 +39,7 @@ const toggleClick = () => {
 </script>
 <template>
     <!-- <div class="col-sm-3"> -->
-    <div id="large-devices" style="width:280px" v-if="!isMobile"
+    <div id="large-devices" style="width:280px;" v-if="!isMobile"
         class="d-flex flex-column justify-content-between flex-shrink-0 p-3 bg-dark p-0 m-0 vh-100 w-full">
         <!-- header -->
         <div>

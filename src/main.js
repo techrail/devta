@@ -36,42 +36,52 @@ const routes = [
   {
     path: "/",
     component: Index,
+    name: "Home",
   },
   {
     path: "/hash_generator",
     component: HashGenerator,
+    name: "Hash generator",
   },
   {
     path: "/base64",
     component: Base64Text,
+    name: "Base64 converter",
   },
   {
     path: "/unixToDate",
     component: UnixToDate,
+    name: "Unix to Date converter",
   },
   {
     path: "/dateToUnix",
     component: DateToUnix,
+    name: "Date to Unix converter",
   },
   {
     path: "/jsonFormatter",
     component: JsonFormatter,
+    name: "JSON formatter",
   },
   {
     path: "/markdownPreview",
     component: MarkdownPreview,
+    name: "Markdown previewer",
   },
   {
     path: "/timeZoneConverter",
     component: TimeZoneConverter,
+    name: "Timezone converter",
   },
   {
     path: "/JSONToYAML",
     component: JSONToYAML,
+    name: "JSON to YAML converter",
   },
   {
     path: "/jwtDebugger",
     component: JWTDebugger,
+    name: "JWT debygger",
   },
 
   // {
