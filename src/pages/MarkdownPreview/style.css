@@ -32,6 +32,10 @@
   margin: 15px 0;
 }
 
+#markdownInput {
+  display: none;
+}
+
 @media screen and (max-width: 800px) {
   .grid {
     position: relative;

@@ -5,7 +5,7 @@ import { buttonData } from './buttonData';
 <template>
     <div id="root" v-for="(item, index) in buttonData" :key="index">
         <a :href="item.url" target="_blank" rel="noopener noreferrer">
-            <button data-toggle="tooltip" data-placement="top" :title="item.tooltipTitle" class="btn btn-outline-dark">
+            <button data-toggle="tooltip" data-placement="top" :title="item.tooltipTitle" class="btn btn-dark">
                 <i :class="item.iconClass"></i>
             </button>
         </a>
@@ -13,18 +13,3 @@ import { buttonData } from './buttonData';
 </template>
 
 
-<style scoped>
-#root {
-    display: flex;
-    flex-direction: row;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-}
-
-button:hover>a {
-    color: white;
-}
-</style>
