@@ -12,7 +12,6 @@
     "@highlightjs/vue-plugin": "^2.1.0",
     "@popperjs/core": "^2.11.8",
     "@vuepic/vue-datepicker": "^5.4.0",
-    "balm-ui": "^10.22.3",
     "bootstrap": "^5.3.1",
     "bootstrap-icons": "^1.10.5",
     "crypto-js": "^4.1.1",

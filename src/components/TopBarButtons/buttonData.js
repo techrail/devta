@@ -7,6 +7,6 @@ export const buttonData = [
   {
     iconClass: "bi bi-building",
     tooltipTitle: "Open organisation",
-    url: "https://youtu.be/dQw4w9WgXcQ",
+    url: "https://github.com/techrail",
   },
 ];
