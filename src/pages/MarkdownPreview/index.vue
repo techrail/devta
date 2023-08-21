@@ -44,7 +44,7 @@ const handleFileChange = async (event) => {
                     </strong>
                 </h4>
                 <div class="markdown-editor">
-                    <textarea v-model="markdown" autofocus type="text" class="form-control" rows="15"
+                    <textarea v-model="markdown" autofocus type="text" class="form-control mono-font" rows="15"
                         placeholder="Enter markdown">
                     </textarea>
 

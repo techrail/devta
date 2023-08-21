@@ -65,14 +65,8 @@ function reset() {
         </h4>
         <div class="form-outline">
           <!-- input -->
-          <textarea
-            class="form-control"
-            id="textAreaExample2"
-            v-model="unformattedJson"
-            rows="10"
-            cols="60"
-            placeholder="enter your json"
-          ></textarea>
+          <textarea class="form-control mono-font" id="textAreaExample2" v-model="unformattedJson" rows="10" cols="60"
+            placeholder="enter your json"></textarea>
           <br />
           <div class="d-flex flex-row justify-content-center gap-5">
             <button class="btn btn-primary" @click="format()">beautify</button>
@@ -87,14 +81,8 @@ function reset() {
             </button>
           </div>
           <br />
-          <div
-            class="d-flex flex-row justify-content-center gap-5 border-primary"
-          >
-            <select
-              class="form-select form-select-sm"
-              aria-label=".form-select-sm example"
-              v-model="indent"
-            >
+          <div class="d-flex flex-row justify-content-center gap-5 border-primary">
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" v-model="indent">
               <option selected value="2">2 Tab Space</option>
               <option value="3">3 Tab Space</option>
               <option value="4">4 Tab Space</option>
@@ -107,14 +95,8 @@ function reset() {
     <div class="block card block2 overflow-auto">
       <!-- output -->
       <div class="form-outline" style="padding-top: 60px">
-        <textarea
-          :value="formattedVal"
-          class="form-control"
-          id="textAreaExample2"
-          rows="20"
-          cols="70"
-          disabled
-        ></textarea>
+        <textarea :value="formattedVal" class="form-control" id="textAreaExample2" rows="20" cols="70"
+          disabled></textarea>
       </div>
     </div>
   </div>

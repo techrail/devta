@@ -38,33 +38,12 @@ const handleClick = async (text) => {
 
                 <div class="overflow-auto">
                     <div class="form-floating">
-                        <textarea v-model="jwtoken" autofocus type="text" class="form-control" id="tokenInput"
+                        <textarea v-model="jwtoken" autofocus type="text" class="form-control mono-font" id="tokenInput"
                             style="height: 400px;" placeholder="Enter the token">
                     </textarea>
                         <label for="tokenInput">Enter the token</label>
                     </div>
-
-
-                    <!-- <div class="d-flex flex-row mt-2 justify-content-between align-items-center gap-2">
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-primary mt-1" type="button" @click="handleClick(markdown)">
-                                Debug
-                            </button>
-                            <button class="btn btn-danger mt-1" type="reset" @click="handleClear">
-                                Clear
-                            </button>
-                        </div>
-                    </div> -->
-
                 </div>
-                <!-- <div class="d-flex mt-2 gap-2 ">
-                    <button type="button" class="btn btn-primary" @click="handleClick(decodedToken)">
-                        Copy JSON
-                    </button>
-                    <button type="button" class="btn btn-primary" @click="handleClick(jwtoken)">
-                        Copy token
-                    </button>
-                </div> -->
             </div>
         </div>
         <div class="block card block2 overflow-auto ">

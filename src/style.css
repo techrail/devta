@@ -1,17 +1,17 @@
 /* global styles */
 
 span.mdc-text-field__resizer {
-    pointer-events: none !important;
+  pointer-events: none !important;
 }
 
 span.mdc-text-field__resizer textarea {
-    pointer-events: auto !important;
+  pointer-events: auto !important;
 }
 
 button.mdc-top-app-bar__navigation-icon {
-    color: #000 !important;
+  color: #000 !important;
 }
 
-textarea {
-    font-family: "monospace";
+.mono-font {
+  font-family: monospace;
 }

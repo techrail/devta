@@ -4,6 +4,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { convertedFormatDates, convertTimezone, timezones, getCurrentLocaleTimezone } from '../../components/utils/TimeZoneFunctions';
 import CopyContainer from '../../components/CopyContainer/CopyContainer.vue';
+import { covertCamelCase } from '../../components/utils/jsonBeautifier'
 
 const date = ref(null);
 const timezone = ref();
@@ -12,12 +13,15 @@ const convertedTime = ref()
 const localTimezone = ref(getCurrentLocaleTimezone())
 const localTimeCheck = ref(false)
 
+
+
 const convert = () => {
     if (!date.value | reqTimezone.value | timezone.value) return
     const updDate = new Date(date.value)
     const val = convertTimezone(updDate, timezone.value, reqTimezone.value)
     const prettyDates = convertedFormatDates(val)
-    convertedTime.value = prettyDates
+
+    convertedTime.value = covertCamelCase(prettyDates)
 }
 
 const handleCheckbox = () => {

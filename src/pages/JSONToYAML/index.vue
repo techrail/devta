@@ -50,14 +50,8 @@ function reset() {
         </h4>
         <div class="form-outline">
           <!-- input -->
-          <textarea
-            class="form-control"
-            id="textAreaExample2"
-            v-model="unformattedJson"
-            rows="10"
-            cols="60"
-            placeholder="enter your json"
-          ></textarea>
+          <textarea class="form-control" id="textAreaExample2 mono-font" v-model="unformattedJson" rows="10" cols="60"
+            placeholder="enter your json"></textarea>
           <br />
           <div class="d-flex flex-row justify-content-center gap-5">
             <!-- <button class="btn btn-primary" @click="format()">convert</button> -->
@@ -67,11 +61,7 @@ function reset() {
             </button>
           </div>
           <br />
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            v-model="selectedvalue"
-          >
+          <select class="form-select" aria-label="Default select example" v-model="selectedvalue">
             <option value="none">Convert to...</option>
             <option value="yaml">YAML</option>
           </select>
@@ -79,23 +69,15 @@ function reset() {
             <button class="btn btn-primary" @click="convert()">convert</button>
           </div>
 
-          <div
-            class="d-flex flex-row justify-content-center gap-5 border-primary"
-          ></div>
+          <div class="d-flex flex-row justify-content-center gap-5 border-primary"></div>
         </div>
       </div>
     </div>
     <div class="block card block2 overflow-auto">
       <!-- output -->
       <div class="form-outline" style="padding-top: 60px">
-        <textarea
-          :value="formattedVal"
-          class="form-control"
-          id="textAreaExample2"
-          rows="20"
-          cols="60"
-          disabled
-        ></textarea>
+        <textarea :value="formattedVal" class="form-control" id="textAreaExample2" rows="20" cols="60"
+          disabled></textarea>
       </div>
     </div>
   </div>

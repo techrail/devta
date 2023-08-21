@@ -34,7 +34,7 @@ function handleChange() {
                     </strong>
                 </h4>
                 <div class="p-2 ">
-                    <textarea type="text" rows="10" autofocus v-model="input" class="form-control"
+                    <textarea type="text" rows="10" autofocus v-model="input" class="form-control mono-font"
                         placeholder="Enter text to convert into base64" />
                     <button type="button" class="btn btn-primary mt-2" @click="handleChange">Convert to Base64</button>
                 </div>

@@ -5,6 +5,8 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import CopyContainer from '../../components/CopyContainer/CopyContainer.vue';
 // import DateTimeConstants from '../../components/DateTimeConstants/DateTimeConstants.vue';
+import { covertCamelCase } from '../../components/utils/jsonBeautifier'
+
 
 const date = ref()
 const unix = ref()
@@ -22,7 +24,10 @@ watch(date, (newDate, oldDate) => {
     }
 })
 
-const getFormatteddates = (date) => formatteddates.value = formatDates(date)
+const getFormatteddates = (date) => {
+    const val = formatDates(date)
+    formatteddates.value = covertCamelCase(val)
+}
 
 
 </script>

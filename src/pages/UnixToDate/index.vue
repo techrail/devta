@@ -4,12 +4,14 @@ import { formatDates, labelFormatter } from '../../components/utils/UnixDateTime
 import DateTimeConstants from '../../components/DateTimeConstants/DateTimeConstants.vue';
 import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
 import CopyContainer from '../../components/CopyContainer/CopyContainer.vue';
+import { covertCamelCase } from '../../components/utils/jsonBeautifier'
 
 const unix = ref()
 const data = ref()
 
 const handleChange = () => {
-    data.value = formatDates(unix.value)
+    const res = formatDates(unix.value)
+    data.value = covertCamelCase(res)
 }
 
 const handleClick = (value) => {
@@ -28,7 +30,7 @@ const handleClick = (value) => {
                         Unix to Date converter
                     </strong>
                 </h4>
-                <input v-model="unix" @input="handleChange" autofocus type="text" class="form-control"
+                <input v-model="unix" @input="handleChange" autofocus type="text" class="form-control mono-font"
                     placeholder="Enter unix timestamp">
 
                 <div class="mt-2 p-2">
