@@ -3,7 +3,7 @@ import Sidebar from "@/Sidebar/index.vue";
 </script>
 
 <template>
-    <div class="d-md-flex flex-md-row flex-sm-column m-0 p-0">
+    <div class="m-0 p-0 w-100">
         <!-- <Sidebar /> -->
         <div class="container">
             <h1><strong>Devta⚡️</strong></h1>
@@ -18,8 +18,9 @@ import Sidebar from "@/Sidebar/index.vue";
 .container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    width: 100%;
     height: 100vh;
 }
 </style>

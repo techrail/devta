@@ -14,7 +14,6 @@ function resize() {
 
 // alphabetically sort the sidebar options
 const sortedSideBarLists = sideBarList.sort((a, b) => a.name.localeCompare(b.name))
-ś
 onMounted(() => {
     window.addEventListener('resize', resize);
 });
