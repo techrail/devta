@@ -3,7 +3,7 @@ import { ref, watch } from 'vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { convertedFormatDates, convertTimezone, timezones, getCurrentLocaleTimezone } from '../../components/utils/TimeZoneFunctions';
-import CopyContainer from '../../components/CopyContainer/CopyContainer.vue';
+import CopyContainer from '../../components/CopyContainer/SingleLineCopy.vue';
 import { covertCamelCase } from '../../components/utils/jsonBeautifier'
 
 const date = ref(null);

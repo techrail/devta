@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { getCurrentDate, getUnixTime } from '../utils/UnixDateTimeFunctions';
-import CopyContainer from '../CopyContainer/CopyContainer.vue';
+import CopyContainer from '../CopyContainer/SingleLineCopy.vue';
 
 const epochTime = ref(getUnixTime())
 const data = getCurrentDate()

@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { formatDates } from '../../components/utils/UnixDateTimeFunctions';
 import DateTimeConstants from '../../components/DateTimeConstants/DateTimeConstants.vue';
 import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
-import CopyContainer from '../../components/CopyContainer/CopyContainer.vue';
+import CopyContainer from '../../components/CopyContainer/SingleLineCopy.vue';
 import { covertCamelCase } from '../../components/utils/jsonBeautifier'
 import PageHeader from '../../components/Pageheader/index.vue';
 

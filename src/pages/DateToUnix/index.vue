@@ -3,7 +3,7 @@ import { ref, watch } from 'vue';
 import { dateToUnixTimestamp, formatDates } from '../../components/utils/UnixDateTimeFunctions';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-import CopyContainer from '../../components/CopyContainer/CopyContainer.vue';
+import CopyContainer from '../../components/CopyContainer/SingleLineCopy.vue';
 import { useRoute } from "vue-router";
 // import DateTimeConstants from '../../components/DateTimeConstants/DateTimeConstants.vue';
 import { covertCamelCase } from '../../components/utils/jsonBeautifier'
