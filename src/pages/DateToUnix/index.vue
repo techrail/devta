@@ -5,9 +5,10 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import CopyContainer from '../../components/CopyContainer/CopyContainer.vue';
 import { useRoute } from "vue-router";
-
 // import DateTimeConstants from '../../components/DateTimeConstants/DateTimeConstants.vue';
 import { covertCamelCase } from '../../components/utils/jsonBeautifier'
+import TopBarButtonsVue from '../../components/TopBarButtons/TopBarButtons.vue';
+import PageHeader from '../../components/Pageheader/PageHeader.vue';
 
 
 const date = ref()
@@ -39,16 +40,7 @@ const getFormatteddates = (date) => {
 <template>
     <main class="bg-light p-0 m-0 w-100">
         <div class="w-100 mt-3">
-            <div class="top_header">
-                <div class="heading">
-                    <!-- <h5> -->
-                    <strong>
-                        {{ route.name }}
-                    </strong>
-                    <!-- </h5> -->
-                </div>
-                <!-- <div>route links</div> -->
-            </div>
+            <PageHeader />
         </div>
         <div class="grid mt-1 bg-light">
             <div class="block card block1">
