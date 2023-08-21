@@ -1,14 +1,14 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 100%;
+  min-height: 90%;
   width: 100%;
   padding: 10px;
   gap: 10px;
 }
 
 .block {
-  height: 90vh;
+  height: 87vh;
 }
 
 .block1 {

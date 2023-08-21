@@ -27,7 +27,7 @@ const handleClick = (value) => {
         <div class="w-100 mt-3">
             <PageHeader />
         </div>
-        <div class="grid bg-light">
+        <div class="grid bg-light mt-1">
             <div class="block card block1">
                 <div class="p-3">
                     <input v-model="unix" @input="handleChange" autofocus type="text" class="form-control mono-font"
