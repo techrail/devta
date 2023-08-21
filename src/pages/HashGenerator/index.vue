@@ -18,7 +18,7 @@ const algos = {
 }
 
 const outputs = ref(Object.keys(algos).map(e => algos[e](value.value).toString()));
-const timeout = undefined;
+let timeout = undefined;
 
 function handleChange(newVal) {
     value.value = newVal;

@@ -46,7 +46,7 @@ function reset() {
     <div class="block card block1 overflow-auto">
       <div class="p-3">
         <h4>
-          <strong> Json To YAML </strong>
+          <strong> Convert Json  </strong>
         </h4>
         <div class="form-outline">
           <!-- input -->

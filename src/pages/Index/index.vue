@@ -6,7 +6,7 @@ import Sidebar from "@/Sidebar/index.vue";
     <div class="d-md-flex flex-md-row flex-sm-column m-0 p-0">
         <!-- <Sidebar /> -->
         <div class="container">
-            <h1><strong>Devta⚡️</strong></h1>
+            <h1><strong>Devta</strong><img class="img" src="src/assets/vajra2.svg"></h1>
             <p class="p-1 text-muted lead ">
                 Choose an option from the left to start working
             </p>
@@ -21,5 +21,17 @@ import Sidebar from "@/Sidebar/index.vue";
     align-items: center;
     justify-content: center;
     height: 100vh;
+}
+.img{
+  height: 80px;
+  width: 60px;
+  
+  margin-bottom: 5px;
+ 
+  transform: rotate(35deg);
+
+  
+  
+  
 }
 </style>
