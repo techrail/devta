@@ -89,8 +89,8 @@ const routes = [
   //   component: Module,
   // },
   {
-    path: "/(.*)",
-    component: ErrorPage,
+    path: "/:path",
+    redirect: { name: "Home" },
   },
 ];
 
