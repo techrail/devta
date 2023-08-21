@@ -81,7 +81,7 @@ const routes = [
   {
     path: "/jwtDebugger",
     component: JWTDebugger,
-    name: "JWT debygger",
+    name: "JWT debugger",
   },
 
   // {
