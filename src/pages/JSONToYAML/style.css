@@ -51,5 +51,8 @@
       width: 100%;
       min-height: auto;
     }
+    .red{
+      border-color: red;
+    }
   }
   

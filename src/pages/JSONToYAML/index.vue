@@ -1,6 +1,10 @@
 <script setup>
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import jsonToPrettyYaml from "json-to-pretty-yaml";
+const alert = reactive({
+  invalid: null,
+  copy: null
+});
 
 const unformattedJson = ref("");
 const formattedVal = ref("");
@@ -18,22 +22,29 @@ function convert() {
 }
 
 function format() {
+  
   try {
     formattedVal.value = jsonToPrettyYaml.stringify(
-      JSON.parse(unformattedJson.value)
+      JSON.parse(unformattedJson.value),
+      alert.invalid = false,
+      console.log(alert.invalid)
     );
   } catch (error) {
-    window.alert("Invalid JSON input.");
-    console.error("Error while formatting JSON:", error);
+    alert.invalid = true;
+    console.log(error);
+    console.log(reactive.invalid);
   }
 }
 
 function copy() {
+  alert.copy=null
   if (unformattedJson.value != "") {
     navigator.clipboard.writeText(formattedVal.value);
-    window.alert("copied to clipboard");
+    alert.copy=true
+   
   } else {
-    window.alert("please enter a json ");
+  
+    alert.copy=false
   }
 }
 function reset() {
@@ -46,12 +57,13 @@ function reset() {
     <div class="block card block1 overflow-auto">
       <div class="p-3">
         <h4>
-          <strong> Convert Json  </strong>
+          <strong> Convert Json </strong>
         </h4>
         <div class="form-outline">
           <!-- input -->
-          <textarea
+          <textarea 
             class="form-control"
+            :class="{red:alert.invalid}"
             id="textAreaExample2"
             v-model="unformattedJson"
             rows="10"
@@ -78,10 +90,18 @@ function reset() {
           <div style="margin-top: 10px">
             <button class="btn btn-primary" @click="convert()">convert</button>
           </div>
+          <div  v-show="alert.invalid"      class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
+      <strong>Inalid JSON</strong> 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 
-          <div
-            class="d-flex flex-row justify-content-center gap-5 border-primary"
-          ></div>
+        
+      <div  v-show="alert.copy"      class="alert alert-success alert-dismissible fade show mt-5" role="alert">
+      <strong>Copied</strong> 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+
         </div>
       </div>
     </div>
