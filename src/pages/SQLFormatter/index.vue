@@ -3,7 +3,8 @@ import PageHeader from '../../components/Pageheader/index.vue'
 import { ref, watch, reactive } from 'vue';
 import { format } from 'sql-formatter';
 import { dialectOptions, keywordCaseOptions, logicalOperatorNewlineOptions, indentStyleOptions } from '../../components/utils/SQLFormatterHelpers';
-import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
+import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
+// import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
 
 const sqlPlaceholder = "select supplier_name,city from (select * from suppliers join addresses on suppliers.address_id = addresses.id) as suppliers where supplier_id > 500 order by supplier_name asc, city desc; "
 const inputSQL = ref(sqlPlaceholder)
@@ -22,7 +23,14 @@ const params = reactive({
 
 const formattedSQL = ref(format(inputSQL.value, params.value))
 
+const handleClick = (value) => {
+    copyToClipboard(value)
+}
 
+const handleClear = () => {
+    inputSQL.value = ""
+    formattedSQL.value = ""
+}
 
 watch([inputSQL, params], () => {
     updateQuery()
@@ -147,10 +155,24 @@ const updateQuery = () => {
                 </div>
 
             </div>
-            <div class="block card block2 overflow-auto">
-                <div v-if="formattedSQL" class="p-2">
-                    <highlightjs :code=formattedSQL />
-                    <!-- <MultiLineCopy title="Formatted SQL" :value="formattedSQL" height="500px" /> -->
+            <div class="block card block2 ">
+                <div class="d-flex flex-column overflow-hidden h-100 justify-content-between">
+                    <div class="p-2 overflow-auto">
+                        <div v-if="formattedSQL">
+                            <highlightjs :code=formattedSQL />
+                        </div>
+                        <!-- <MultiLineCopy title="Formatted SQL" :value="formattedSQL" height="500px" /> -->
+                    </div>
+                    <div class="d-flex gap-2 p-2">
+                        <button class="btn btn-primary" type="button" @click="handleClick(formattedSQL)"
+                            data-toggle="tooltip" data-placement="top" title="Copy to clipboard">
+                            <i class="bi bi-clipboard"></i>
+                        </button>
+                        <button class="btn btn-danger" type="reset" @click="handleClear" data-toggle="tooltip"
+                            data-placement="top" title="Clear text">
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
