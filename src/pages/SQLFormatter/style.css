@@ -1,0 +1,6 @@
+#queryInput {
+  resize: none;
+  overflow: hidden;
+  min-height: 50px;
+  width: 100%;
+}

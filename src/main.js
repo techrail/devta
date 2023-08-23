@@ -25,6 +25,7 @@ import MarkdownPreview from "./pages/MarkdownPreview/index.vue";
 import TimeZoneConverter from "./pages/TimeZoneConverter/index.vue";
 import JSONToYAML from "./pages/JSONToYAML/index.vue";
 import JWTDebugger from "./pages/JWTDebugger/index.vue";
+import SQLFormatter from "./pages/SQLFormatter/index.vue";
 
 hljs.registerLanguage("json", json);
 
@@ -82,6 +83,11 @@ const routes = [
     path: "/jwtDebugger",
     component: JWTDebugger,
     name: "JWT debugger",
+  },
+  {
+    path: "/sqlFormatter",
+    component: SQLFormatter,
+    name: "SQL Formatter",
   },
 
   // {
