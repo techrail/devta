@@ -46,7 +46,7 @@ watch(route, () => {
             <router-link to="/"
                 class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <div id="top_header" class="fs-4 text-white ml-0">
-                    <img class="img" src="src/assets/vajra2.svg">
+                    <img class="img" src="../../assets/vajra2.svg">
                     <strong>
                         Devta
                     </strong>
@@ -82,7 +82,7 @@ watch(route, () => {
     <div id="small-devices" v-if="isMobile" class="d-flex flex-column">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container d-flex">
-                <router-link class="navbar-brand" to="/"><img class="img" src="/src/assets/vajra3.svg">Devta</router-link>
+                <router-link class="navbar-brand" to="/"><img class="img" src="../../assets/vajra2.svg">Devta</router-link>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
                     @click="isCollapsed = !isCollapsed">
