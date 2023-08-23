@@ -44,8 +44,13 @@ watch(route, () => {
         <!-- header -->
         <div>
             <router-link to="/"
-                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <span class="fs-4 text-white ml-0"><strong><img class="img" src="src/assets/vajra2.svg">Devta</strong></span>
+                class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                <div id="top_header" class="fs-4 text-white ml-0">
+                    <img class="img" src="src/assets/vajra2.svg">
+                    <strong>
+                        Devta
+                    </strong>
+                </div>
             </router-link>
             <hr>
         </div>
