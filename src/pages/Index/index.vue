@@ -7,7 +7,7 @@ import TopBarButtons from "../../components/TopBarButtons/TopBarButtons.vue";
     <!-- <Sidebar /> -->
     <div class="container">
       <div class="h1">
-        <img class="img" src="src/assets/vajra2.svg" /><strong>Devta</strong>
+        <img class="img" src="../../assets/vajra2.svg" /><strong>Devta</strong>
       </div>
 
       <p class="p-1 text-muted lead text-center">
