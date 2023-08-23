@@ -50,4 +50,9 @@ export const sideBarList = [
     iconClass: "bi bi-filetype-json",
     route: "/JSONToYAML",
   },
+  {
+    name: "SQL Formatter",
+    iconClass: "bi bi-filetype-sql",
+    route: "/sqlFormatter",
+  },
 ];

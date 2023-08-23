@@ -67,7 +67,7 @@ export const convertToTimeZone = (originalDate, timeZone) => {
 
 export const copyToClipboard = async (text) => {
   await navigator.clipboard.writeText(text);
-  store.showSnackbar("Contents copied to clipboard");
+  // store.showSnackbar("Contents copied to clipboard");
 };
 
 export const labelFormatter = (format) => {
