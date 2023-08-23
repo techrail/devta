@@ -1,6 +1,6 @@
 <script setup>
 import PageHeader from '../../components/Pageheader/index.vue'
-import { ref, watch } from 'vue';
+import { ref, watch, reactive } from 'vue';
 import { format } from 'sql-formatter';
 import { dialectOptions, keywordCaseOptions, logicalOperatorNewlineOptions, indentStyleOptions } from '../../components/utils/SQLFormatterHelpers';
 import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
@@ -8,7 +8,7 @@ import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
 const sqlPlaceholder = "select supplier_name,city from (select * from suppliers join addresses on suppliers.address_id = addresses.id) as suppliers where supplier_id > 500 order by supplier_name asc, city desc; "
 const inputSQL = ref(sqlPlaceholder)
 
-const params = ref({
+const params = reactive({
     denseOperators: false,
     dialect: dialectOptions[0],
     tabWidth: "2",
@@ -24,18 +24,22 @@ const formattedSQL = ref(format(inputSQL.value, params.value))
 
 
 
-watch(inputSQL, () => {
+watch([inputSQL, params], () => {
     updateQuery()
 })
 
-const handleChange = (e) => {
-    updateQuery()
-}
 
 const updateQuery = () => {
     if (!inputSQL.value) return
-    formattedSQL.value = format(inputSQL.value, params.value)
-    console.log(formattedSQL.value)
+    formattedSQL.value = format(inputSQL.value, {
+        tabWidth: params.tabWidth,
+        useTabs: params.useTabs,
+        denseOperators: params.denseOperators,
+        language: params.language,
+        keywordCase: params.keywordCase,
+        indentStyle: params.indentStyle,
+        logicalOperatorNewline: params.logicalOperatorNewline
+    })
 }
 
 
@@ -51,9 +55,8 @@ const updateQuery = () => {
                 <div class="inner_block">
                     <div class="p-2">
                         <div class="form-floating">
-                            <textarea @change="handleChange" v-model="inputSQL" autofocus type="text"
-                                class="form-control mono-font" id="queryInput" style="height: 200px;"
-                                placeholder="Enter SQL query">
+                            <textarea v-model="inputSQL" autofocus type="text" class="form-control mono-font"
+                                id="queryInput" style="height: 150px;" placeholder="Enter SQL query">
                         </textarea>
                             <label for="queryInput">Enter SQL Query</label>
                         </div>
@@ -61,35 +64,34 @@ const updateQuery = () => {
                             <strong>
                                 Options
                             </strong>
-                            <div class="d-flex inner_input_group mt-3">
+                            <div class="d-flex inner_input_group mt-1">
                                 <!-- tab spacing selector -->
                                 <div class="inner_input_group">
                                     <label for="indentSpacing font-muted">Enter tab spacing</label>
-                                    <input @change="handleChange" type="number" :value="params.tabWidth"
-                                        :v-model="params.tabWidth" id="indentSpacing" class="form form-control" max="10"
-                                        min="1">
+                                    <input type="number" v-model="params.tabWidth" id="indentSpacing"
+                                        class="form form-control" max="10" min="1">
                                 </div>
                                 <!-- checkboxes -->
                                 <div class="d-flex flex-row gap-4 justify-content-center w-100">
                                     <div>
-                                        <input @change="handleChange" class="form-check-input" :v-model="params.useTabs"
+                                        <input @change="params.useTabs = !params.useTabs" class="form-check-input"
                                             :checked="params.useTabs" type="checkbox" id="flexCheckChecked">
                                         <label class="form-check-label" for="flexCheckChecked">
                                             Use tabs
                                         </label>
                                     </div>
                                     <div>
-                                        <input @change="handleChange" class="form-check-input"
-                                            :v-model="params.newlineBeforeSemicolon"
+                                        <input @change="params.newlineBeforeSemicolon = !params.newlineBeforeSemicolon"
+                                            class="form-check-input" :v-model="params.newlineBeforeSemicolon"
                                             :checked="params.newlineBeforeSemicolon" type="checkbox" id="flexCheckChecked">
                                         <label class="form-check-label" for="flexCheckChecked">
                                             New line before ;
                                         </label>
                                     </div>
                                     <div>
-                                        <input @change="handleChange" class="form-check-input"
-                                            :v-model="params.denseOperators" :checked="params.denseOperators"
-                                            type="checkbox" id="flexCheckChecked">
+                                        <input @change="params.denseOperators = !params.denseOperators"
+                                            class="form-check-input" :v-model="params.denseOperators"
+                                            :checked="params.denseOperators" type="checkbox" id="flexCheckChecked">
                                         <label class="form-check-label" for="flexCheckChecked">
                                             Dense operators
                                         </label>
@@ -97,8 +99,8 @@ const updateQuery = () => {
                                 </div>
                                 <!-- dialect/language selector -->
                                 <div class="form-floating">
-                                    <select @change="handleChange" class="form-select" name="timezone-select"
-                                        id="timezone-select" v-model="params.dialect">
+                                    <select class="form-select" name="timezone-select" id="timezone-select"
+                                        v-model="params.dialect">
                                         <option :value="dialectOptions[0]">{{ dialectOptions[0] }}</option>
                                         <option v-for="zone in dialectOptions.slice(1)" :value="zone" :key="zone">{{
                                             zone }}</option>
@@ -107,8 +109,8 @@ const updateQuery = () => {
                                 </div>
                                 <!-- case selector -->
                                 <div class="form-floating">
-                                    <select @change="handleChange" class="form-select" name="timezone-select"
-                                        id="timezone-select" v-model="params.keywordCase">
+                                    <select class="form-select" name="timezone-select" id="timezone-select"
+                                        v-model="params.keywordCase">
                                         <option :value="keywordCaseOptions[0]">{{ keywordCaseOptions[0] }}</option>
                                         <option v-for="zone in keywordCaseOptions.slice(1)" :value="zone" :key="zone">{{
                                             zone }}</option>
@@ -117,8 +119,8 @@ const updateQuery = () => {
                                 </div>
                                 <!-- indent style selector -->
                                 <div class="form-floating">
-                                    <select @change="handleChange" class="form-select" name="timezone-select"
-                                        id="timezone-select" v-model="params.indentStyle">
+                                    <select class="form-select" name="timezone-select" id="timezone-select"
+                                        v-model="params.indentStyle">
                                         <option :value="indentStyleOptions[0]">{{ indentStyleOptions[0] }}</option>
                                         <option v-for="zone in indentStyleOptions.slice(1)" :value="zone" :key="zone">{{
                                             zone }}</option>
@@ -129,8 +131,8 @@ const updateQuery = () => {
                                 <!-- New Line logical operator -->
                                 <div>
                                     <div class="form-floating">
-                                        <select @change="handleChange" class="form-select" name="timezone-select"
-                                            id="timezone-select" v-model="params.logicalOperatorNewline">
+                                        <select class="form-select" name="timezone-select" id="timezone-select"
+                                            v-model="params.logicalOperatorNewline">
                                             <option :value="logicalOperatorNewlineOptions[0]">{{
                                                 logicalOperatorNewlineOptions[0] }}</option>
                                             <option v-for="zone in logicalOperatorNewlineOptions.slice(1)" :value="zone"
