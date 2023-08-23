@@ -11,6 +11,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap";
 import hljs from "highlight.js/lib/core";
 import json from "highlight.js/lib/languages/json";
+import sql from "highlight.js/lib/languages/sql";
 import hljsVuePlugin from "@highlightjs/vue-plugin";
 import "highlight.js/styles/atom-one-light.css";
 
@@ -28,6 +29,7 @@ import JWTDebugger from "./pages/JWTDebugger/index.vue";
 import SQLFormatter from "./pages/SQLFormatter/index.vue";
 
 hljs.registerLanguage("json", json);
+hljs.registerLanguage("sql", sql);
 
 const app = createApp(AppVue);
 const pinia = createPinia();

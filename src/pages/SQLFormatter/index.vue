@@ -149,7 +149,8 @@ const updateQuery = () => {
             </div>
             <div class="block card block2 overflow-auto">
                 <div v-if="formattedSQL" class="p-2">
-                    <MultiLineCopy title="Formatted SQL" :value="formattedSQL" height="500px" />
+                    <highlightjs :code=formattedSQL />
+                    <!-- <MultiLineCopy title="Formatted SQL" :value="formattedSQL" height="500px" /> -->
                 </div>
             </div>
         </div>
