@@ -85,7 +85,7 @@ const handleFileChange = async (event) => {
                 </div>
             </div>
             <div class="block card block2 overflow-auto">
-                <div v-if="markdown" class="mt-3">
+                <div v-if="markdown" class="mt-3 overflow-scroll">
                     <div v-html="marked.parse(markdown)" />
                 </div>
             </div>

@@ -56,7 +56,7 @@ const updateQuery = () => {
                     <div class="p-2">
                         <div class="form-floating">
                             <textarea v-model="inputSQL" autofocus type="text" class="form-control mono-font"
-                                id="queryInput" style="height: 150px;" placeholder="Enter SQL query">
+                                id="queryInput" style="height: 250px;" placeholder="Enter SQL query">
                         </textarea>
                             <label for="queryInput">Enter SQL Query</label>
                         </div>
