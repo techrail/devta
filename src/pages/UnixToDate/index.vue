@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-import { formatDates } from '../../components/utils/UnixDateTimeFunctions';
+import { formatDates } from '../../components/utils/UnixDateTime';
 import DateTimeConstants from '../../components/DateTimeConstants/DateTimeConstants.vue';
-import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
+import { copyToClipboard } from '../../components/utils/UnixDateTime';
 import CopyContainer from '../../components/CopyContainer/SingleLineCopy.vue';
 import { covertCamelCase } from '../../components/utils/jsonBeautifier'
 import PageHeader from '../../components/Pageheader/index.vue';

@@ -1,5 +1,5 @@
 <script setup>
-import { copyToClipboard } from "../utils/UnixDateTimeFunctions"
+import { copyToClipboard } from "../utils/UnixDateTime"
 const props = defineProps({
     title: String,
     value: String | Number

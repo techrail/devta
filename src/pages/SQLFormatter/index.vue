@@ -2,8 +2,8 @@
 import PageHeader from '../../components/Pageheader/index.vue'
 import { ref, watch, reactive } from 'vue';
 import { format } from 'sql-formatter';
-import { dialectOptions, keywordCaseOptions, logicalOperatorNewlineOptions, indentStyleOptions } from '../../components/utils/SQLFormatterHelpers';
-import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
+import { dialectOptions, keywordCaseOptions, logicalOperatorNewlineOptions, indentStyleOptions } from '../../components/utils/SQLFormatter';
+import { copyToClipboard } from '../../components/utils/UnixDateTime';
 // import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
 
 const sqlPlaceholder = "select supplier_name,city from (select * from suppliers join addresses on suppliers.address_id = addresses.id) as suppliers where supplier_id > 500 order by supplier_name asc, city desc; "

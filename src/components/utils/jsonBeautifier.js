@@ -1,4 +1,4 @@
-import { labelFormatter } from "./UnixDateTimeFunctions";
+import { labelFormatter } from "./UnixDateTime";
 
 export const beautifyJSON = (jsonString, indent = 2) => {
   try {

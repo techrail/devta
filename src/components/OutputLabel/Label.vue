@@ -1,5 +1,5 @@
 <script setup>
-import { copyToClipboard, labelFormatter } from '../utils/UnixDateTimeFunctions';
+import { copyToClipboard, labelFormatter } from '../utils/UnixDateTime';
 
 const props = defineProps({
     key: String,
