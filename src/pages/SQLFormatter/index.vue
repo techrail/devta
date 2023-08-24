@@ -130,15 +130,15 @@ const updateQuery = () => {
                                 </div>
 
                                 <!-- checkboxes -->
-                                <div class="d-flex flex-row gap-4 justify-content-center w-100">
-                                    <div class="form-check form-switch">
+                                <div class="d-flex flex-row gap-4 justify-content-center w-100 flex-wrap">
+                                    <div class="form-check form-switch toggler">
                                         <input @change="params.useTabs = !params.useTabs" class="form-check-input"
                                             role="switch" :checked="params.useTabs" type="checkbox" id="flexCheckChecked">
                                         <label class="form-check-label" for="flexCheckChecked">
                                             Use tabs
                                         </label>
                                     </div>
-                                    <div class="form-check form-switch">
+                                    <div class="form-check form-switch toggler">
                                         <input @change="params.newlineBeforeSemicolon = !params.newlineBeforeSemicolon"
                                             role="switch" class="form-check-input" :v-model="params.newlineBeforeSemicolon"
                                             :checked="params.newlineBeforeSemicolon" type="checkbox" id="newLine">
@@ -146,7 +146,7 @@ const updateQuery = () => {
                                             New line before ;
                                         </label>
                                     </div>
-                                    <div class="form-check form-switch">
+                                    <div class="form-check form-switch toggler">
                                         <input @change="params.denseOperators = !params.denseOperators" role="switch"
                                             class="form-check-input" :v-model="params.denseOperators"
                                             :checked="params.denseOperators" type="checkbox" id="dense">
