@@ -8,7 +8,7 @@ export const sideBarList = [
   {
     name: "Hash Generator",
     iconClass: "bi bi-hash",
-    route: "/hash_generator",
+    route: "/hash-generator",
   },
   {
     name: "Base64",
@@ -18,41 +18,41 @@ export const sideBarList = [
   {
     name: "Unix to date",
     iconClass: "bi bi-postage",
-    route: "/unixToDate",
+    route: "/unix-date-converter",
   },
   {
     name: "Date to unix",
     iconClass: "bi bi-calendar-date",
-    route: "/dateToUnix",
+    route: "/date-unix-converter",
   },
   {
     name: "Timezone Converter",
     iconClass: "bi bi-calendar-range",
-    route: "/timeZoneConverter",
+    route: "/timezone-converter",
   },
   {
     name: "Markdown Preview",
     iconClass: "bi bi-filetype-md",
-    route: "/markdownPreview",
+    route: "/markdown-preview",
   },
   {
     name: "Json Formatter",
     iconClass: "bi bi-filetype-json",
-    route: "/jsonFormatter",
+    route: "/json-formatter",
   },
   {
     name: "JWT Debugger",
     iconClass: "bi bi-bug",
-    route: "/jwtDebugger",
+    route: "/jwt-debugger",
   },
   {
     name: "Convert JSON ",
     iconClass: "bi bi-filetype-json",
-    route: "/JSONToYAML",
+    route: "/json-yaml-converter",
   },
   {
     name: "SQL Formatter",
     iconClass: "bi bi-filetype-sql",
-    route: "/sqlFormatter",
+    route: "/sql-formatter",
   },
 ];
