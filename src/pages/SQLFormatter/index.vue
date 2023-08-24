@@ -98,9 +98,15 @@ const updateQuery = () => {
                             <div class="d-flex inner_input_group mt-1">
                                 <!-- tab spacing selector -->
                                 <div class="inner_input_group">
-                                    <label for="indentSpacing font-muted">Enter tab spacing</label>
+                                    <div class="form-floating">
+                                        <input type="number" v-model="params.tabWidth" id="indentSpacing"
+                                            class="form-control" max="10" min="1">
+                                        <label for="indentSpacing" class="form-label font-muted">Enter tab spacing</label>
+                                    </div>
+
+                                    <!-- <label for="indentSpacing font-muted">Enter tab spacing</label>
                                     <input type="number" v-model="params.tabWidth" id="indentSpacing"
-                                        class="form form-control" max="10" min="1">
+                                        class="form form-control" max="10" min="1"> -->
                                 </div>
 
                                 <!-- dialect/language selector -->
