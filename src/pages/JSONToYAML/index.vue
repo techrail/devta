@@ -2,16 +2,17 @@
 import { reactive, ref } from "vue";
 import jsonToPrettyYaml from "json-to-pretty-yaml";
 import PageHeader from "../../components/Pageheader/index.vue";
-import MultiLineCopy from "../../components/CopyContainer/MultiLineCopy.vue";
-
+import hljs from "highlight.js";
+import json from "highlight.js/lib/languages/json";
 const unformattedJson = ref("");
 const formattedVal = ref("");
 const selectedvalue = ref("none");
 const alert = reactive({
   invalid: null,
-  iscopy:null,
-  notcopy:null
+  iscopy: null,
+  notcopy: null,
 });
+hljs.registerLanguage("json", json);
 
 function convert() {
   console.log(selectedvalue.value);
@@ -37,13 +38,12 @@ function format() {
 }
 
 function copy() {
-  alert.iscopy=null;
+  alert.iscopy = null;
   if (unformattedJson.value != "") {
     navigator.clipboard.writeText(formattedVal.value);
-    alert.iscopy=true;
+    alert.iscopy = true;
   } else {
-    alert.notcopy=true;
-    console.log(alert.iscopy)
+    alert.notcopy = true;
   }
 }
 function reset() {
@@ -70,13 +70,7 @@ function reset() {
               placeholder="enter your json"
             ></textarea>
             <br />
-            <div class="d-flex flex-row justify-content-center gap-5">
-              <!-- <button class="btn btn-primary" @click="format()">convert</button> -->
-              <button class="btn btn-primary" @click="reset()">reset</button>
-              <button class="btn btn-primary" @click="copy()">
-                <i class="bi bi-clipboard"></i>
-              </button>
-            </div>
+
             <br />
             <select
               class="form-select"
@@ -86,55 +80,20 @@ function reset() {
               <option value="none">Convert to...</option>
               <option value="yaml">YAML</option>
             </select>
-            <div style="margin-top: 10px">
-              <button class="btn btn-primary" @click="convert()">
-                convert
+            <div class="d-flex flex-row justify-content-center gap-5 mt-5">
+              <div class="contain flex-column">
+                <button class="btn btn-primary" @click="convert()">
+                  convert
+                </button>
+                <p v-show="alert.invalid" class="text text-danger">
+                  <strong>! Invalid Json</strong>
+                </p>
+              </div>
+
+              <button class="btn btn-primary ml-5" @click="reset()">
+                reset
               </button>
             </div>
-            <div
-              v-show="alert.invalid"
-              class="alert alert-danger alert-dismissible fade show mt-5"
-              role="alert"
-            >
-              <strong>Invalid Json</strong>
-
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-            </div>
-             <div
-              v-show="alert.notcopy"
-              class="alert alert-danger alert-dismissible fade show mt-5"
-              role="alert"
-            >
-              <strong>There is nothing to Copy</strong>
-
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-            </div>
-             <div
-              v-show="alert.iscopy"
-              class="alert alert-success alert-dismissible fade show mt-5"
-              role="alert"
-            >
-              <strong> Copied</strong>
-
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="alert"
-                aria-label="Close"
-              ></button>
-            </div>
-
-
 
             <div
               class="d-flex flex-row justify-content-center gap-5 border-primary"
@@ -144,17 +103,34 @@ function reset() {
       </div>
       <div class="block card block2 overflow-auto">
         <!-- output -->
-        <div v-if="formattedVal">
-          <div class="form-outline" style="padding-top: 60px">
-           
-            <textarea 
-            :value="formattedVal"
-            class="form-control"
-            id="textAreaExample2"
-            rows="20"
-            cols="60"
-            disabled
-          ></textarea>
+        <!-- <div v-if="formattedVal">
+          <div class="form-outline" style="padding-top: 20px">
+            <textarea
+              :value="formattedVal"
+              class="form-control"
+              id="textAreaExample2"
+              rows="20"
+              cols="60"
+              disabled
+            ></textarea>
+
+            <div class="contain">
+              <button class="btn btn-primary mt-2" @click="copy()">
+                <i class="bi bi-clipboard"></i>
+              </button>
+
+              <i v-show="alert.iscopy" class="copy bi bi-check-all"></i>
+            </div>
+          </div>
+        </div> -->
+        <div class="p-2 overflow-auto">
+          <div v-if="formattedVal">
+            <highlightjs :code="formattedVal" />
+            <button class="btn btn-primary mt-2" @click="copy()">
+              <i class="bi bi-clipboard"></i>
+            </button>
+
+            <i v-show="alert.iscopy" class="copy bi bi-check-all"></i>
           </div>
         </div>
       </div>

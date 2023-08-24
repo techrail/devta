@@ -1,12 +1,19 @@
 <script setup>
-import { ref } from "vue";
-import PageHeader from '../../components/Pageheader/index.vue';
-
+import { reactive, ref } from "vue";
+import PageHeader from "../../components/Pageheader/index.vue";
+import hljs from "highlight.js";
+import json from "highlight.js/lib/languages/json";
 
 const unformattedJson = ref("");
 
 const formattedVal = ref("");
 var indent = 2;
+const alert = reactive({
+  iscopy: null,
+  invalid: null,
+});
+
+hljs.registerLanguage("json", json);
 
 function format() {
   console.log(indent);
@@ -21,11 +28,9 @@ function format() {
       null,
       spacer
     );
-    console.log("spacer-value:", spacer);
-    console.log("formattedval-value:", formattedVal.value);
+    alert.invalid = false;
   } catch (error) {
-    window.alert("Invalid JSON input.");
-    console.error("Error while formatting JSON:", error);
+    alert.invalid = true;
   }
 }
 
@@ -46,9 +51,10 @@ function minify() {
 }
 
 function copy() {
+  alert.iscopy = null;
   if (unformattedJson.value != "") {
     navigator.clipboard.writeText(formattedVal.value);
-    window.alert("copied to clipboard");
+    alert.iscopy = true;
   } else {
     window.alert("please enter a json ");
   }
@@ -68,24 +74,39 @@ function reset() {
         <div class="p-3">
           <div class="form-outline">
             <!-- input -->
-            <textarea class="form-control mono-font" id="textAreaExample2" v-model="unformattedJson" rows="10" cols="60"
-              placeholder="enter your json"></textarea>
+            <textarea
+              class="form-control mono-font"
+              id="textAreaExample2"
+              v-model="unformattedJson"
+              rows="10"
+              cols="60"
+              placeholder="enter your json"
+            ></textarea>
             <br />
             <div class="d-flex flex-row justify-content-center gap-5">
-              <button class="btn btn-primary" @click="format()">beautify</button>
+              <div class="d-flex flex-column justify-content-center">
+                <button class="btn btn-primary" @click="format()">
+                  beautify
+                </button>
+                <p v-show="alert.invalid" class="text text-danger">
+                  <strong>! Invalid Json</strong>
+                </p>
+              </div>
 
               <button class="btn btn-primary" @click="reset()">reset</button>
 
-              <button class="btn btn-primary" @click="minify()">
-                minify/compact
-              </button>
-              <button class="btn btn-primary" @click="copy()">
-                <i class="bi bi-clipboard"></i>
-              </button>
+              <button class="btn btn-primary" @click="minify()">minify</button>
             </div>
             <br />
-            <div class="d-flex flex-row justify-content-center gap-5 border-primary">
-              <select class="form-select form-select-sm" aria-label=".form-select-sm example" v-model="indent">
+            <br /><br />
+            <div
+              class="d-flex flex-row justify-content-center gap-5 border-primary postition-absolute"
+            >
+              <select
+                class="form-select form-select-sm"
+                aria-label=".form-select-sm example"
+                v-model="indent"
+              >
                 <option selected value="2">2 Tab Space</option>
                 <option value="3">3 Tab Space</option>
                 <option value="4">4 Tab Space</option>
@@ -95,11 +116,29 @@ function reset() {
           </div>
         </div>
       </div>
-      <div class="block card block2 overflow-auto">
-        <!-- output -->
+      <!-- <div class="block card block2 overflow-auto">
+       
         <div class="form-outline" style="padding-top: 60px">
-          <textarea :value="formattedVal" class="form-control" id="textAreaExample2" rows="20" cols="70"
-            disabled></textarea>
+          <textarea
+            :value="formattedVal"
+            class="form-control"
+            id="textAreaExample2"
+            rows="20"
+            cols="70"
+            disabled
+          ></textarea>
+          <button class="btn btn-primary mt-2" @click="copy()">
+                <i class="bi bi-clipboard"></i>
+              </button>
+        </div>
+      </div> -->
+      <div class="p-2 overflow-auto">
+        <div v-if="formattedVal">
+          <highlightjs :code="formattedVal" />
+          <button class="btn btn-primary mt-2" @click="copy()">
+            <i class="bi bi-clipboard"></i>
+          </button>
+          <i v-show="alert.iscopy" class="copy bi bi-check-all"></i>
         </div>
       </div>
     </div>
