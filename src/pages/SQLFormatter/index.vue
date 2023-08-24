@@ -5,9 +5,11 @@ import { format } from 'sql-formatter';
 import { dialectOptions, keywordCaseOptions, logicalOperatorNewlineOptions, indentStyleOptions } from '../../components/utils/SQLFormatterHelpers';
 import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
 // import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
+import { identify } from 'sql-query-identifier';
 
 const sqlPlaceholder = "select supplier_name,city from (select * from suppliers join addresses on suppliers.address_id = addresses.id) as suppliers where supplier_id > 500 order by supplier_name asc, city desc; "
 const inputSQL = ref(sqlPlaceholder)
+const error = ref(false)
 
 const params = reactive({
     denseOperators: false,
@@ -36,22 +38,39 @@ watch([inputSQL, params], () => {
     updateQuery()
 })
 
+const validateQuery = (inputSQL) => {
+    try {
+        formattedSQL.value = null
+        identify(inputSQL)
+        return true
+    } catch (error) {
+        return false
+    }
+}
+
 
 const updateQuery = () => {
     if (!inputSQL.value) {
+        error.value = false
         formattedSQL.value = null
         return
     }
-    formattedSQL.value = format(inputSQL.value, {
-        tabWidth: params.tabWidth,
-        useTabs: params.useTabs,
-        denseOperators: params.denseOperators,
-        language: params.language,
-        newlineBeforeSemicolon: params.newlineBeforeSemicolon,
-        keywordCase: params.keywordCase,
-        indentStyle: params.indentStyle,
-        logicalOperatorNewline: params.logicalOperatorNewline
-    })
+    error.value = false
+    const res = validateQuery(inputSQL.value)
+    if (res) {
+        formattedSQL.value = format(inputSQL.value, {
+            tabWidth: params.tabWidth,
+            useTabs: params.useTabs,
+            denseOperators: params.denseOperators,
+            language: params.language,
+            newlineBeforeSemicolon: params.newlineBeforeSemicolon,
+            keywordCase: params.keywordCase,
+            indentStyle: params.indentStyle,
+            logicalOperatorNewline: params.logicalOperatorNewline
+        })
+    } else {
+        error.value = true
+    }
 }
 
 
@@ -166,6 +185,11 @@ const updateQuery = () => {
             <div class="block card block2 ">
                 <div class="d-flex flex-column overflow-hidden h-100 justify-content-between">
                     <div class="p-2 overflow-auto">
+                        <div v-if="error">
+                            <div class="alert alert-danger" role="alert">
+                                Invalid SQL
+                            </div>
+                        </div>
                         <div v-if="formattedSQL">
                             <highlightjs :code=formattedSQL />
                         </div>

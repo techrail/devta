@@ -26,6 +26,7 @@
     "moment-timezone": "^0.5.43",
     "pinia": "^2.1.6",
     "sql-formatter": "^12.2.4",
+    "sql-query-identifier": "^2.5.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },
