@@ -86,7 +86,8 @@ const updateQuery = () => {
                 <div class="inner_block">
                     <div class="p-2">
                         <div class="form-floating">
-                            <textarea v-model="inputSQL" autofocus type="text" class="form-control mono-font"
+                            <textarea v-model="inputSQL" autofocus type="text"
+                                :class="error ? 'form-control mono-font is-invalid' : 'form-control mono-font'"
                                 id="queryInput" style="height: 250px;" placeholder="Enter SQL query">
                         </textarea>
                             <label for="queryInput">Enter SQL Query</label>
