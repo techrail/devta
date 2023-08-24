@@ -1,0 +1,9 @@
+#tokenInput {
+  height: 81vh;
+}
+
+@media screen and (max-width: 800px) {
+  #tokenInput {
+    height: 40vh;
+  }
+}

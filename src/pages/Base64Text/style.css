@@ -1,0 +1,9 @@
+#baseInput {
+  height: 73vh;
+}
+
+@media screen and (max-width: 800px) {
+  #baseInput {
+    height: 50vh;
+  }
+}
