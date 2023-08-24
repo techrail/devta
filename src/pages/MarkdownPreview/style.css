@@ -2,8 +2,17 @@
   display: none;
 }
 
+#tokenInput {
+  height: 73vh;
+}
+
+@media screen and (max-width: 800px) {
+  #tokenInput {
+    height: 40vh;
+
 #markdown_styles {
   h1 {
     background-color: red;
+
   }
 }

@@ -46,10 +46,19 @@ const handleFileChange = async (event) => {
         <div class="grid bg-light mt-1">
             <div class="block card block1">
                 <div class="p-3">
-                    <div class="markdown-editor">
-                        <textarea v-model="markdown" autofocus type="text" class="form-control mono-font" rows="15"
-                            placeholder="Enter markdown">
+                    <div class="form-floating">
+                        <div class="markdown-editor">
+                            <div class="form-floating">
+                                <textarea v-model="markdown" autofocus type="text" class="form-control mono-font"
+                                    id="tokenInput" placeholder="Enter the token">
                     </textarea>
+                                <label for="tokenInput">Enter markdown</label>
+                            </div>
+                            <!-- <textarea v-model="markdown" autofocus type="text" class="form-control mono-font"
+                                style="height: 400px;" id="markdown" placeholder="Enter markdown">
+                    </textarea>
+                            <label for="markdown">Enter the token</label> -->
+                        </div>
 
                         <div class="d-flex flex-row mt-2 justify-content-between align-items-center gap-2">
                             <!-- <div>
@@ -96,3 +105,4 @@ const handleFileChange = async (event) => {
 </template>
 
 <style scoped src="./style.css" />
+

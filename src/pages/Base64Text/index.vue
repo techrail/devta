@@ -23,9 +23,15 @@ function handleChange() {
         <div class="grid bg-light">
             <div class="block card block1">
                 <div class="p-3">
-                    <div class="p-2 ">
-                        <textarea type="text" rows="10" autofocus v-model="input" class="form-control mono-font"
-                            placeholder="Enter text to convert into base64" />
+                    <div class="overflow-auto">
+                        <div class="form-floating">
+                            <textarea v-model="input" @click="handleChange" autofocus type="text"
+                                class="form-control mono-font" id="baseInput" placeholder="Enter the token">
+                    </textarea>
+                            <label for="baseInput">Convert to Base64</label>
+                        </div>
+                        <!-- <textarea type="text" rows="10" autofocus v-model="@click="handleChange"" class="form-control mono-font"
+                            placeholder="Enter text to convert into base64" /> -->
                         <button type="button" class="btn btn-primary mt-2" @click="handleChange">Convert to Base64</button>
                     </div>
                 </div>

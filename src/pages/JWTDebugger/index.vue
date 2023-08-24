@@ -37,7 +37,7 @@ const handleClick = async (text) => {
                     <div class="overflow-auto">
                         <div class="form-floating">
                             <textarea v-model="jwtoken" autofocus type="text" class="form-control mono-font" id="tokenInput"
-                                style="height: 400px;" placeholder="Enter the token">
+                                placeholder="Enter the token">
                     </textarea>
                             <label for="tokenInput">Enter the token</label>
                         </div>
