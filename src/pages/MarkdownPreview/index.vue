@@ -1,11 +1,12 @@
 <script setup>
 import { ref } from 'vue';
-import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
+import { copyToClipboard } from '../../components/utils/UnixDateTime';
 import { marked } from 'marked';
 import PageHeader from '../../components/Pageheader/index.vue'
+// import { MarkdownPlaceHolder } from "../../components/utils/MarkdownPreviewer"
+import { SampleMarkdown, cssOverrides } from "../../components/utils/MarkdownPreviewer"
 
-
-const markdown = ref()
+const markdown = ref(SampleMarkdown)
 
 const handleClick = (value) => {
     copyToClipboard(value)
@@ -14,6 +15,7 @@ const handleClick = (value) => {
 const handleClear = () => {
     markdown.value = ""
 }
+
 
 const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -33,7 +35,6 @@ const handleFileChange = async (event) => {
         }
     }
 }
-
 </script>
 
 <template>
@@ -44,10 +45,19 @@ const handleFileChange = async (event) => {
         <div class="grid bg-light mt-1">
             <div class="block card block1">
                 <div class="p-3">
-                    <div class="markdown-editor">
-                        <textarea v-model="markdown" autofocus type="text" class="form-control mono-font" rows="15"
-                            placeholder="Enter markdown">
+                    <div class="form-floating">
+                        <div class="markdown-editor">
+                            <div class="form-floating">
+                                <textarea v-model="markdown" autofocus type="text" class="form-control mono-font"
+                                    id="tokenInput" placeholder="Enter the token">
                     </textarea>
+                                <label for="tokenInput">Enter markdown</label>
+                            </div>
+                            <!-- <textarea v-model="markdown" autofocus type="text" class="form-control mono-font"
+                                style="height: 400px;" id="markdown" placeholder="Enter markdown">
+                    </textarea>
+                            <label for="markdown">Enter the token</label> -->
+                        </div>
 
                         <div class="d-flex flex-row mt-2 justify-content-between align-items-center gap-2">
                             <!-- <div>
@@ -85,8 +95,8 @@ const handleFileChange = async (event) => {
                 </div>
             </div>
             <div class="block card block2 overflow-auto">
-                <div v-if="markdown" class="mt-3 overflow-scroll">
-                    <div v-html="marked.parse(markdown)" />
+                <div v-if="markdown" class="mt-3 overflow-auto p-1">
+                    <div v-html="cssOverrides + marked.parse(markdown)" id="markdown_styles" />
                 </div>
             </div>
         </div>
@@ -94,3 +104,4 @@ const handleFileChange = async (event) => {
 </template>
 
 <style scoped src="./style.css" />
+

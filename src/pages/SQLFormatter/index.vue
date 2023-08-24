@@ -2,12 +2,14 @@
 import PageHeader from '../../components/Pageheader/index.vue'
 import { ref, watch, reactive } from 'vue';
 import { format } from 'sql-formatter';
-import { dialectOptions, keywordCaseOptions, logicalOperatorNewlineOptions, indentStyleOptions } from '../../components/utils/SQLFormatterHelpers';
-import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
+import { dialectOptions, keywordCaseOptions, logicalOperatorNewlineOptions, indentStyleOptions } from '../../components/utils/SQLFormatter';
+import { copyToClipboard } from '../../components/utils/UnixDateTime';
 // import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
+import { identify } from 'sql-query-identifier';
 
 const sqlPlaceholder = "select supplier_name,city from (select * from suppliers join addresses on suppliers.address_id = addresses.id) as suppliers where supplier_id > 500 order by supplier_name asc, city desc; "
 const inputSQL = ref(sqlPlaceholder)
+const error = ref(false)
 
 const params = reactive({
     denseOperators: false,
@@ -36,18 +38,39 @@ watch([inputSQL, params], () => {
     updateQuery()
 })
 
+const validateQuery = (inputSQL) => {
+    try {
+        formattedSQL.value = null
+        identify(inputSQL)
+        return true
+    } catch (error) {
+        return false
+    }
+}
+
 
 const updateQuery = () => {
-    if (!inputSQL.value) return
-    formattedSQL.value = format(inputSQL.value, {
-        tabWidth: params.tabWidth,
-        useTabs: params.useTabs,
-        denseOperators: params.denseOperators,
-        language: params.language,
-        keywordCase: params.keywordCase,
-        indentStyle: params.indentStyle,
-        logicalOperatorNewline: params.logicalOperatorNewline
-    })
+    if (!inputSQL.value) {
+        error.value = false
+        formattedSQL.value = null
+        return
+    }
+    error.value = false
+    const res = validateQuery(inputSQL.value)
+    if (res) {
+        formattedSQL.value = format(inputSQL.value, {
+            tabWidth: params.tabWidth,
+            useTabs: params.useTabs,
+            denseOperators: params.denseOperators,
+            language: params.language,
+            newlineBeforeSemicolon: params.newlineBeforeSemicolon,
+            keywordCase: params.keywordCase,
+            indentStyle: params.indentStyle,
+            logicalOperatorNewline: params.logicalOperatorNewline
+        })
+    } else {
+        error.value = true
+    }
 }
 
 
@@ -63,7 +86,8 @@ const updateQuery = () => {
                 <div class="inner_block">
                     <div class="p-2">
                         <div class="form-floating">
-                            <textarea v-model="inputSQL" autofocus type="text" class="form-control mono-font"
+                            <textarea v-model="inputSQL" autofocus type="text"
+                                :class="error ? 'form-control mono-font is-invalid' : 'form-control mono-font'"
                                 id="queryInput" style="height: 250px;" placeholder="Enter SQL query">
                         </textarea>
                             <label for="queryInput">Enter SQL Query</label>
@@ -75,36 +99,17 @@ const updateQuery = () => {
                             <div class="d-flex inner_input_group mt-1">
                                 <!-- tab spacing selector -->
                                 <div class="inner_input_group">
-                                    <label for="indentSpacing font-muted">Enter tab spacing</label>
+                                    <div class="form-floating">
+                                        <input type="number" v-model="params.tabWidth" id="indentSpacing"
+                                            class="form-control" max="10" min="1">
+                                        <label for="indentSpacing" class="form-label font-muted">Enter tab spacing</label>
+                                    </div>
+
+                                    <!-- <label for="indentSpacing font-muted">Enter tab spacing</label>
                                     <input type="number" v-model="params.tabWidth" id="indentSpacing"
-                                        class="form form-control" max="10" min="1">
+                                        class="form form-control" max="10" min="1"> -->
                                 </div>
-                                <!-- checkboxes -->
-                                <div class="d-flex flex-row gap-4 justify-content-center w-100">
-                                    <div>
-                                        <input @change="params.useTabs = !params.useTabs" class="form-check-input"
-                                            :checked="params.useTabs" type="checkbox" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Use tabs
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input @change="params.newlineBeforeSemicolon = !params.newlineBeforeSemicolon"
-                                            class="form-check-input" :v-model="params.newlineBeforeSemicolon"
-                                            :checked="params.newlineBeforeSemicolon" type="checkbox" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            New line before ;
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input @change="params.denseOperators = !params.denseOperators"
-                                            class="form-check-input" :v-model="params.denseOperators"
-                                            :checked="params.denseOperators" type="checkbox" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Dense operators
-                                        </label>
-                                    </div>
-                                </div>
+
                                 <!-- dialect/language selector -->
                                 <div class="form-floating">
                                     <select class="form-select" name="timezone-select" id="timezone-select"
@@ -149,6 +154,35 @@ const updateQuery = () => {
                                         <label for="timezone-select">AND/OR newlines</label>
                                     </div>
                                 </div>
+
+                                <!-- checkboxes -->
+                                <div class="d-flex flex-row gap-4 justify-content-center w-100 flex-wrap">
+                                    <div class="form-check form-switch toggler">
+                                        <input @change="params.useTabs = !params.useTabs" class="form-check-input"
+                                            role="switch" :checked="params.useTabs" type="checkbox" id="flexCheckChecked">
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Use tabs
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-switch toggler">
+                                        <input @change="params.newlineBeforeSemicolon = !params.newlineBeforeSemicolon"
+                                            role="switch" class="form-check-input" :v-model="params.newlineBeforeSemicolon"
+                                            :checked="params.newlineBeforeSemicolon" type="checkbox" id="newLine">
+                                        <label class="form-check-label" for="newLine">
+                                            New line before ;
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-switch toggler">
+                                        <input @change="params.denseOperators = !params.denseOperators" role="switch"
+                                            class="form-check-input" :v-model="params.denseOperators"
+                                            :checked="params.denseOperators" type="checkbox" id="dense">
+                                        <label class="form-check-label" for="dense">
+                                            Dense operators
+                                        </label>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -156,8 +190,13 @@ const updateQuery = () => {
 
             </div>
             <div class="block card block2 ">
-                <div class="d-flex flex-column overflow-hidden h-100 justify-content-between">
+                <div class="d-flex flex-column h-100 justify-content-between">
                     <div class="p-2 overflow-auto">
+                        <div v-if="error">
+                            <div class="alert alert-danger" role="alert">
+                                Invalid SQL
+                            </div>
+                        </div>
                         <div v-if="formattedSQL">
                             <highlightjs :code=formattedSQL />
                         </div>

@@ -1,8 +1,8 @@
 <script setup>
 import { ref, watch } from 'vue';
-import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
-import { getHeader } from '../../components/utils/JwtHelpers';
-import { getPayload } from '../../components/utils/JwtHelpers';
+import { copyToClipboard } from '../../components/utils/UnixDateTime';
+import { getHeader } from '../../components/utils/JwtDebugger';
+import { getPayload } from '../../components/utils/JwtDebugger';
 import PageHeader from '../../components/Pageheader/index.vue';
 
 const jwtoken = ref()
@@ -37,7 +37,7 @@ const handleClick = async (text) => {
                     <div class="overflow-auto">
                         <div class="form-floating">
                             <textarea v-model="jwtoken" autofocus type="text" class="form-control mono-font" id="tokenInput"
-                                style="height: 400px;" placeholder="Enter the token">
+                                placeholder="Enter the token">
                     </textarea>
                             <label for="tokenInput">Enter the token</label>
                         </div>

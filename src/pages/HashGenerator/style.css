@@ -1,0 +1,9 @@
+#textInput {
+  height: 72vh;
+}
+
+@media screen and (max-width: 800px) {
+  #textInput {
+    height: 40vh;
+  }
+}

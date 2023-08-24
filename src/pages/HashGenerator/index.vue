@@ -49,16 +49,18 @@ async function copyContent(idx) {
         <div class="grid bg-light">
             <div class="block card block1">
                 <div class="w-100 p-3">
-                    <div class="form-floating">
-                        <textarea v-model="value" autofocus type="text" class="form-control mono-font" id="textInput"
-                            style="height: 200px;" placeholder="Enter text">
-                    </textarea>
-                        <label for="textInput">Enter text</label>
-                    </div>
-                    <div class="row" style="padding-top: 16px;">
-                        <div class="w-50">
-                            <button class="btn btn-warning" @click="handleChange">Compute hash</button>
+                    <div class="overflow-auto">
+                        <div class="form-floating">
+                            <textarea v-model="value" autofocus type="text" class="form-control mono-font" id="textInput"
+                                placeholder="Enter text">
+                        </textarea>
+                            <label for="textInput">Enter text</label>
                         </div>
+                    </div>
+                </div>
+                <div class="p-2">
+                    <div class="w-50">
+                        <button class="btn btn-warning" @click="handleChange">Compute hash</button>
                     </div>
                 </div>
             </div>

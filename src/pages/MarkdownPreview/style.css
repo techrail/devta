@@ -1,3 +1,14 @@
 #markdownInput {
   display: none;
 }
+
+#tokenInput {
+  height: 73vh;
+}
+
+@media screen and (max-width: 800px) {
+  #tokenInput {
+    height: 40vh;
+  }
+}
+
