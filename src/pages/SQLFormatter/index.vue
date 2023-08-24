@@ -38,7 +38,10 @@ watch([inputSQL, params], () => {
 
 
 const updateQuery = () => {
-    if (!inputSQL.value) return
+    if (!inputSQL.value) {
+        formattedSQL.value = null
+        return
+    }
     formattedSQL.value = format(inputSQL.value, {
         tabWidth: params.tabWidth,
         useTabs: params.useTabs,
@@ -80,32 +83,7 @@ const updateQuery = () => {
                                     <input type="number" v-model="params.tabWidth" id="indentSpacing"
                                         class="form form-control" max="10" min="1">
                                 </div>
-                                <!-- checkboxes -->
-                                <div class="d-flex flex-row gap-4 justify-content-center w-100">
-                                    <div>
-                                        <input @change="params.useTabs = !params.useTabs" class="form-check-input"
-                                            :checked="params.useTabs" type="checkbox" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
-                                            Use tabs
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input @change="params.newlineBeforeSemicolon = !params.newlineBeforeSemicolon"
-                                            class="form-check-input" :v-model="params.newlineBeforeSemicolon"
-                                            :checked="params.newlineBeforeSemicolon" type="checkbox" id="newLine">
-                                        <label class="form-check-label" for="newLine">
-                                            New line before ;
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input @change="params.denseOperators = !params.denseOperators"
-                                            class="form-check-input" :v-model="params.denseOperators"
-                                            :checked="params.denseOperators" type="checkbox" id="dense">
-                                        <label class="form-check-label" for="dense">
-                                            Dense operators
-                                        </label>
-                                    </div>
-                                </div>
+
                                 <!-- dialect/language selector -->
                                 <div class="form-floating">
                                     <select class="form-select" name="timezone-select" id="timezone-select"
@@ -150,6 +128,35 @@ const updateQuery = () => {
                                         <label for="timezone-select">AND/OR newlines</label>
                                     </div>
                                 </div>
+
+                                <!-- checkboxes -->
+                                <div class="d-flex flex-row gap-4 justify-content-center w-100">
+                                    <div class="form-check form-switch">
+                                        <input @change="params.useTabs = !params.useTabs" class="form-check-input"
+                                            role="switch" :checked="params.useTabs" type="checkbox" id="flexCheckChecked">
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Use tabs
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input @change="params.newlineBeforeSemicolon = !params.newlineBeforeSemicolon"
+                                            role="switch" class="form-check-input" :v-model="params.newlineBeforeSemicolon"
+                                            :checked="params.newlineBeforeSemicolon" type="checkbox" id="newLine">
+                                        <label class="form-check-label" for="newLine">
+                                            New line before ;
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input @change="params.denseOperators = !params.denseOperators" role="switch"
+                                            class="form-check-input" :v-model="params.denseOperators"
+                                            :checked="params.denseOperators" type="checkbox" id="dense">
+                                        <label class="form-check-label" for="dense">
+                                            Dense operators
+                                        </label>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
