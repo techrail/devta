@@ -2,8 +2,8 @@
 import PageHeader from '../../components/Pageheader/index.vue'
 import { ref, watch, reactive } from 'vue';
 import { format } from 'sql-formatter';
-import { dialectOptions, keywordCaseOptions, logicalOperatorNewlineOptions, indentStyleOptions } from '../../components/utils/SQLFormatterHelpers';
-import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
+import { dialectOptions, keywordCaseOptions, logicalOperatorNewlineOptions, indentStyleOptions } from '../../components/utils/SQLFormatter';
+import { copyToClipboard } from '../../components/utils/UnixDateTime';
 // import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
 import { identify } from 'sql-query-identifier';
 
