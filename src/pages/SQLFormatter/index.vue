@@ -44,6 +44,7 @@ const updateQuery = () => {
         useTabs: params.useTabs,
         denseOperators: params.denseOperators,
         language: params.language,
+        newlineBeforeSemicolon: params.newlineBeforeSemicolon,
         keywordCase: params.keywordCase,
         indentStyle: params.indentStyle,
         logicalOperatorNewline: params.logicalOperatorNewline
@@ -91,16 +92,16 @@ const updateQuery = () => {
                                     <div>
                                         <input @change="params.newlineBeforeSemicolon = !params.newlineBeforeSemicolon"
                                             class="form-check-input" :v-model="params.newlineBeforeSemicolon"
-                                            :checked="params.newlineBeforeSemicolon" type="checkbox" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
+                                            :checked="params.newlineBeforeSemicolon" type="checkbox" id="newLine">
+                                        <label class="form-check-label" for="newLine">
                                             New line before ;
                                         </label>
                                     </div>
                                     <div>
                                         <input @change="params.denseOperators = !params.denseOperators"
                                             class="form-check-input" :v-model="params.denseOperators"
-                                            :checked="params.denseOperators" type="checkbox" id="flexCheckChecked">
-                                        <label class="form-check-label" for="flexCheckChecked">
+                                            :checked="params.denseOperators" type="checkbox" id="dense">
+                                        <label class="form-check-label" for="dense">
                                             Dense operators
                                         </label>
                                     </div>
