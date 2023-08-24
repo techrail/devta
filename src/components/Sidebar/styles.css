@@ -29,17 +29,18 @@ body {
 html {
   height: -webkit-fill-available;
 }
-.img{
-  height: 50px;
-  width: 50px;
-  
-  margin-bottom: 5px;
- 
+.img {
+  height: 35px;
+  width: 35px;
+  /* margin-bottom: 5px; */
   transform: rotate(35deg);
+}
 
-  
-  
-  
+#top_header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 main {

@@ -19,7 +19,8 @@ button.mdc-top-app-bar__navigation-icon {
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 90%;
+  height: 90vh;
+  overflow: hidden;
   width: 100%;
   padding: 10px;
   gap: 10px;
@@ -27,15 +28,16 @@ button.mdc-top-app-bar__navigation-icon {
 
 .block {
   height: 87vh;
+  overflow: auto;
 }
 
-.block1 {
+/* .block1 {
   padding-right: 10px;
 }
 
 .block2 {
   padding-left: 10px;
-}
+} */
 
 .input.fullWidth {
   height: 100%;
