@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue';
-import { dateToUnixTimestamp, formatDates } from '../../components/utils/UnixDateTimeFunctions';
+import { dateToUnixTimestamp, formatDates } from '../../components/utils/UnixDateTime';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import CopyContainer from '../../components/CopyContainer/SingleLineCopy.vue';

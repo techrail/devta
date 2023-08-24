@@ -1,11 +1,13 @@
 <script setup>
 import { ref } from 'vue';
-import { copyToClipboard } from '../../components/utils/UnixDateTimeFunctions';
+import { copyToClipboard } from '../../components/utils/UnixDateTime';
 import { marked } from 'marked';
 import PageHeader from '../../components/Pageheader/index.vue'
+// import { MarkdownPlaceHolder } from "../../components/utils/MarkdownPreviewer"
+import { SampleMarkdown, cssOverrides } from "../../components/utils/MarkdownPreviewer"
 
+const markdown = ref(SampleMarkdown)
 
-const markdown = ref()
 
 const handleClick = (value) => {
     copyToClipboard(value)
@@ -14,6 +16,7 @@ const handleClick = (value) => {
 const handleClear = () => {
     markdown.value = ""
 }
+
 
 const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -33,7 +36,6 @@ const handleFileChange = async (event) => {
         }
     }
 }
-
 </script>
 
 <template>
@@ -85,8 +87,8 @@ const handleFileChange = async (event) => {
                 </div>
             </div>
             <div class="block card block2 overflow-auto">
-                <div v-if="markdown" class="mt-3 overflow-scroll">
-                    <div v-html="marked.parse(markdown)" />
+                <div v-if="markdown" class="mt-3 overflow-auto p-1">
+                    <div v-html="cssOverrides + marked.parse(markdown)" id="markdown_styles" />
                 </div>
             </div>
         </div>
