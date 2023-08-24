@@ -26,5 +26,14 @@ th {
   background-color: #212529;
   color: white;
 }
+blockquote {
+	background:		#f9f9f9;
+	border-left:	10px solid #ccc;
+	margin:			1.5em 10px;
+	padding:		.5em 10px;
+}
+blockquote p {
+	display:		inline;
+}
 </style>
 `;
