@@ -20,7 +20,6 @@ button.mdc-top-app-bar__navigation-icon {
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 90vh;
-  overflow: hidden;
   width: 100%;
   padding: 10px;
   gap: 10px;

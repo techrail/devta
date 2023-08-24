@@ -189,7 +189,7 @@ const updateQuery = () => {
 
             </div>
             <div class="block card block2 ">
-                <div class="d-flex flex-column overflow-hidden h-100 justify-content-between">
+                <div class="d-flex flex-column h-100 justify-content-between">
                     <div class="p-2 overflow-auto">
                         <div v-if="error">
                             <div class="alert alert-danger" role="alert">
