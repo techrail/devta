@@ -8,7 +8,6 @@ import { SampleMarkdown, cssOverrides } from "../../components/utils/MarkdownPre
 
 const markdown = ref(SampleMarkdown)
 
-
 const handleClick = (value) => {
     copyToClipboard(value)
 }
