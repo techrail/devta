@@ -1,15 +1,43 @@
 <script setup>
 import { ref } from 'vue';
+import { onMounted } from 'vue';
 import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
 import PageHeader from '../../components/Pageheader/index.vue';
 
 const input = ref('');
 const b64 = ref('');
 
+var action = ''
+
 function handleChange() {
     console.log(input.value)
     b64.value = btoa(input.value);
 }
+
+onMounted(() => {
+    const urlParams = new URLSearchParams(location.search);
+    for (const [key, value] of urlParams) {
+        console.log("key=", key, "||| value=", value)
+        if (key === "action") {
+            action = value
+        }
+        if (key === "input") {
+            input.value = value
+        }
+    }
+
+    switch (action) {
+        case 'encode':
+            handleChange()
+            break;
+        case 'decode':
+            break;
+        case '':
+            break
+        default:
+            console.log("")
+    }
+})
 
 </script>
 
