@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import PageHeader from "../../components/Pageheader/index.vue";
 import { converterOptions, sampleJson, formatYAML, formatXML, jsonValidator } from "../../components/utils/jsonConverter"
+import { copyToClipboard } from "../../components/utils/UnixDateTime";
 
 
 const unformattedJson = ref(sampleJson);
@@ -52,6 +53,11 @@ const handleClear = () => {
   unformattedJson.value = ""
   formattedVal.value = ""
   error.value = false
+}
+
+const handleCopy = () => {
+  if (!formattedVal.value) return
+  copyToClipboard(formattedVal.value)
 }
 
 </script>
