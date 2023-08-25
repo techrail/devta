@@ -100,17 +100,17 @@ const handleCopy = () => {
       <div class="block card block2">
         <div class="d-flex flex-column h-100 justify-content-between">
           <div class="p-2 overflow-auto">
-            <div v-if="error">
-              <div class="alert alert-danger" role="alert">
-                Invalid JSON
-              </div>
-            </div>
             <div v-if="formattedVal">
+              <div v-if="error">
+                <div class="alert alert-danger" role="alert">
+                  Invalid JSON
+                </div>
+              </div>
               <highlightjs :code="formattedVal" />
             </div>
           </div>
           <div class="d-flex gap-2 p-2">
-            <button class="btn btn-primary" @click="handleCopy">
+            <button class="btn btn-primary" @click="handleCopy" data-placement="top" title="Copy to clipboard">
               <i class="bi bi-clipboard"></i>
             </button>
             <button class="btn btn-danger" @click="handleClear" type="reset" data-toggle="tooltip" data-placement="top"
