@@ -100,12 +100,12 @@ const handleCopy = () => {
       <div class="block card block2">
         <div class="d-flex flex-column h-100 justify-content-between">
           <div class="p-2 overflow-auto">
-            <div v-if="formattedVal">
-              <div v-if="error">
-                <div class="alert alert-danger" role="alert">
-                  Invalid JSON
-                </div>
+            <div v-if="error">
+              <div class="alert alert-danger" role="alert">
+                Invalid JSON
               </div>
+            </div>
+            <div v-if="formattedVal">
               <highlightjs :code="formattedVal" />
             </div>
           </div>
