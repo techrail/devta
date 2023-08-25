@@ -1,54 +1,46 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import jsonToPrettyYaml from "json-to-pretty-yaml";
 import PageHeader from "../../components/Pageheader/index.vue";
-import hljs from "highlight.js";
-import json from "highlight.js/lib/languages/json";
-const unformattedJson = ref("");
-const formattedVal = ref("");
-const selectedvalue = ref("none");
-const alert = reactive({
-  invalid: null,
-  iscopy: null,
-  notcopy: null,
-});
-hljs.registerLanguage("json", json);
+import { converterOptions, sampleJson, formatYAML, formatXML } from "../../components/utils/jsonConverter"
 
-function convert() {
-  console.log(selectedvalue.value);
-  if (selectedvalue.value == "none") {
-    return;
-  }
-  if (selectedvalue.value == "yaml") {
-    console.log("yaml is selected");
-    format();
+
+const unformattedJson = ref(sampleJson);
+const formattedVal = ref();
+const selectedvalue = ref(converterOptions[0]);
+const error = ref(false)
+
+const convert = () => {
+  switch (selectedvalue.value) {
+    case "yaml":
+      convertToYaml()
+      break;
+
+    case "xml":
+      convertToXML()
+      break;
+
+    default:
+      break;
   }
 }
 
-function format() {
-  alert.invalid = null;
+const convertToYaml = () => {
   try {
-    formattedVal.value = jsonToPrettyYaml.stringify(
-      JSON.parse(unformattedJson.value),
-      (alert.invalid = false)
-    );
+    formattedVal.value = formatYAML(unformattedJson.value)
   } catch (error) {
-    alert.invalid = true;
+    console.log(error)
   }
 }
 
-function copy() {
-  alert.iscopy = null;
-  if (unformattedJson.value != "") {
-    navigator.clipboard.writeText(formattedVal.value);
-    alert.iscopy = true;
-  } else {
-    alert.notcopy = true;
+const convertToXML = () => {
+  try {
+    formattedVal.value = formatXML(unformattedJson.value)
+  } catch (error) {
+    console.log(error)
   }
 }
-function reset() {
-  (formattedVal.value = ""), (unformattedJson.value = "");
-}
+
 </script>
 
 <template>
@@ -57,82 +49,51 @@ function reset() {
       <PageHeader />
     </div>
     <div class="grid bg-light">
-      <div class="block card block1 overflow-auto">
-        <div class="p-3">
-          <div class="form-outline">
-            <!-- input -->
-            <textarea
-              class="form-control"
-              id="textAreaExample2 mono-font"
-              v-model="unformattedJson"
-              rows="10"
-              cols="60"
-              placeholder="enter your json"
-            ></textarea>
-            <br />
-
-            <br />
-            <select
-              class="form-select"
-              aria-label="Default select example"
-              v-model="selectedvalue"
-            >
-              <option value="none">Convert to...</option>
-              <option value="yaml">YAML</option>
-            </select>
-            <div class="d-flex flex-row justify-content-center gap-5 mt-5">
-              <div class="contain flex-column">
-                <button class="btn btn-primary" @click="convert()">
-                  convert
-                </button>
-                <p v-show="alert.invalid" class="text text-danger">
-                  <strong>! Invalid Json</strong>
-                </p>
-              </div>
-
-              <button class="btn btn-primary ml-5" @click="reset()">
-                reset
-              </button>
-            </div>
-
-            <div
-              class="d-flex flex-row justify-content-center gap-5 border-primary"
-            ></div>
+      <div class="block card block1">
+        <div class="p-3 overflow-auto">
+          <div class="form-floating">
+            <textarea v-model="unformattedJson" autofocus type="text" class="form-control mono-font" id="tokenInput"
+              placeholder="Enter Json">
+                    </textarea>
+            <label for="tokenInput">Enter Json</label>
           </div>
+          <div class="d-flex flex-column mt-2 justify-content-between align-items-center gap-2">
+            <!-- format dropdown -->
+            <div class="form-floating w-100">
+              <select class="form-select" name="timezone-select" id="dropdown" v-model="selectedvalue">
+                <option :value="converterOptions[0]">{{ converterOptions[0] }}</option>
+                <option v-for="zone in converterOptions.slice(1)" :value="zone" :key="zone">{{
+                  zone }}</option>
+              </select>
+              <label for="dropdown">choose format</label>
+            </div>
+            <!-- convert button -->
+            <button type="button" @click="convert" class="btn btn-primary w-100">
+              Convert
+            </button>
+          </div>
+
         </div>
       </div>
-      <div class="block card block2 overflow-auto">
-        <!-- output -->
-        <!-- <div v-if="formattedVal">
-          <div class="form-outline" style="padding-top: 20px">
-            <textarea
-              :value="formattedVal"
-              class="form-control"
-              id="textAreaExample2"
-              rows="20"
-              cols="60"
-              disabled
-            ></textarea>
 
-            <div class="contain">
-              <button class="btn btn-primary mt-2" @click="copy()">
-                <i class="bi bi-clipboard"></i>
-              </button>
-
-              <i v-show="alert.iscopy" class="copy bi bi-check-all"></i>
+      <div class="block card block2">
+        <div class="d-flex flex-column h-100 justify-content-between">
+          <div class="p-2 overflow-auto">
+            <div v-if="formattedVal">
+              <highlightjs :code="formattedVal" />
             </div>
           </div>
-        </div> -->
-        <div class="p-2 overflow-auto">
-          <div v-if="formattedVal">
-            <highlightjs :code="formattedVal" />
-            <button class="btn btn-primary mt-2" @click="copy()">
+          <div class="d-flex gap-2 p-2">
+
+            <button class="btn btn-primary" @click="copy()">
               <i class="bi bi-clipboard"></i>
             </button>
-
-            <i v-show="alert.iscopy" class="copy bi bi-check-all"></i>
+            <button class="btn btn-danger" type="reset" data-toggle="tooltip" data-placement="top" title="Clear text">
+              <i class="bi bi-x-lg"></i>
+            </button>
           </div>
         </div>
+
       </div>
     </div>
   </main>
