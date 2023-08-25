@@ -1,17 +1,9 @@
-
-
-.copy{
-    color: rgb(12, 214, 12);
-    font-size: 20px;
-   padding-top: 10px;
-}
-.text{
-    font-size: 12px;
-
-}
-.btn{
-    height: 30px;
-    margin-top: 10px;
-    padding-bottom: 30px;
+#tokenInput {
+  height: 62vh;
 }
 
+@media screen and (max-width: 800px) {
+  #tokenInput {
+    height: 40vh;
+  }
+}

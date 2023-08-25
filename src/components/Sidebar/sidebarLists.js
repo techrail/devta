@@ -48,7 +48,7 @@ export const sideBarList = [
   {
     name: "Convert JSON ",
     iconClass: "bi bi-filetype-json",
-    route: "/json-yaml-converter",
+    route: "/json-converter",
   },
   {
     name: "SQL Formatter",
