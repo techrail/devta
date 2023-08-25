@@ -1,8 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import jsonToPrettyYaml from "json-to-pretty-yaml";
 import PageHeader from "../../components/Pageheader/index.vue";
-import { converterOptions, sampleJson, formatYAML, formatXML } from "../../components/utils/jsonConverter"
+import { converterOptions, sampleJson, formatYAML, formatXML, jsonValidator } from "../../components/utils/jsonConverter"
 
 
 const unformattedJson = ref(sampleJson);
@@ -41,6 +40,20 @@ const convertToXML = () => {
   }
 }
 
+const handleChange = () => {
+  if (!unformattedJson.value) {
+    error.value = false
+    return
+  }
+  error.value = !jsonValidator(unformattedJson.value)
+}
+
+const handleClear = () => {
+  unformattedJson.value = ""
+  formattedVal.value = ""
+  error.value = false
+}
+
 </script>
 
 <template>
@@ -52,7 +65,8 @@ const convertToXML = () => {
       <div class="block card block1">
         <div class="p-3 overflow-auto">
           <div class="form-floating">
-            <textarea v-model="unformattedJson" autofocus type="text" class="form-control mono-font" id="tokenInput"
+            <textarea v-model="unformattedJson" @input="handleChange" autofocus type="text"
+              :class="error ? 'form-control mono-font is-invalid' : 'form-control mono-font'" id="tokenInput"
               placeholder="Enter Json">
                     </textarea>
             <label for="tokenInput">Enter Json</label>
@@ -68,7 +82,8 @@ const convertToXML = () => {
               <label for="dropdown">choose format</label>
             </div>
             <!-- convert button -->
-            <button type="button" @click="convert" class="btn btn-primary w-100">
+            <button type="button" :disabled="error === true || unformattedJson.length === 0" @click="convert"
+              class="btn btn-primary w-100">
               Convert
             </button>
           </div>
@@ -79,21 +94,25 @@ const convertToXML = () => {
       <div class="block card block2">
         <div class="d-flex flex-column h-100 justify-content-between">
           <div class="p-2 overflow-auto">
+            <div v-if="error">
+              <div class="alert alert-danger" role="alert">
+                Invalid JSON
+              </div>
+            </div>
             <div v-if="formattedVal">
               <highlightjs :code="formattedVal" />
             </div>
           </div>
           <div class="d-flex gap-2 p-2">
-
-            <button class="btn btn-primary" @click="copy()">
+            <button class="btn btn-primary" @click="handleCopy">
               <i class="bi bi-clipboard"></i>
             </button>
-            <button class="btn btn-danger" type="reset" data-toggle="tooltip" data-placement="top" title="Clear text">
+            <button class="btn btn-danger" @click="handleClear" type="reset" data-toggle="tooltip" data-placement="top"
+              title="Clear text">
               <i class="bi bi-x-lg"></i>
             </button>
           </div>
         </div>
-
       </div>
     </div>
   </main>

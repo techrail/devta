@@ -38,3 +38,12 @@ export const formatXML = (inputJson) => {
     console.log(error);
   }
 };
+
+export const jsonValidator = (inputJson) => {
+  try {
+    JSON.stringify(JSON.parse(inputJson));
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
