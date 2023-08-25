@@ -75,8 +75,7 @@ watch(route, () => {
         <div class="text-white">
             <hr>
             <small>
-
-                <!-- Developer tools that are supposed to help you 🚀 -->
+                Developer tools that are supposed to help you 🚀
             </small>
         </div>
 
