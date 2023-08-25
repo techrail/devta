@@ -79,9 +79,9 @@ const routes = [
     name: "Timezone converter",
   },
   {
-    path: "/json-yaml-converter",
+    path: "/json-converter",
     component: JSONToYAML,
-    name: "JSON to YAML converter",
+    name: "JSON converter",
   },
   {
     path: "/jwt-debugger",
