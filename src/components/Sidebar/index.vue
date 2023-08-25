@@ -4,6 +4,7 @@ defineProps(['elements']);
 import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { sideBarList } from "./sidebarLists";
+import { DevtaLogo } from "../../assets";
 
 const route = useRoute();
 const isMobile = ref(window.innerWidth < 900);
@@ -43,10 +44,10 @@ watch(route, () => {
         class="d-flex flex-column justify-content-between flex-shrink-0 p-3 bg-dark p-0 m-0 vh-100 w-full">
         <!-- header -->
         <div>
-            <router-link to="/"
-                class="d-flex align-items-center mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <router-link to="/" class="d-flex align-items-center text-decoration-none">
                 <div id="top_header" class="fs-4 text-white ml-0">
-                    <img class="img" src="../../assets/vajra2.svg">
+                    <img :src="DevtaLogo" alt="" class="img">
+                    <!-- <img class="img" src="../../assets/vajra2.svg"> -->
                     <strong>
                         Devta
                     </strong>
@@ -74,7 +75,8 @@ watch(route, () => {
         <div class="text-white">
             <hr>
             <small>
-                Developer tools that are supposed to help you 🚀
+
+                <!-- Developer tools that are supposed to help you 🚀 -->
             </small>
         </div>
 

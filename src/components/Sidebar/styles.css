@@ -32,15 +32,19 @@ html {
 .img {
   height: 35px;
   width: 35px;
-  /* margin-bottom: 5px; */
-  transform: rotate(35deg);
+  display: block;
+  margin: 0%;
+  padding: 0%;
+  /* transform: rotate(30deg); */
 }
 
 #top_header {
   display: flex;
   flex-direction: row;
+  align-items: start;
+  width: 100%;
+  justify-content: start;
   align-items: center;
-  justify-content: center;
 }
 
 main {
