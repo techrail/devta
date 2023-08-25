@@ -25,7 +25,7 @@ import UnixToDate from "./pages/UnixToDate/index.vue";
 import JsonFormatter from "./pages/JsonFormatter/index.vue";
 import MarkdownPreview from "./pages/MarkdownPreview/index.vue";
 import TimeZoneConverter from "./pages/TimeZoneConverter/index.vue";
-import JSONToYAML from "./pages/JSONToYAML/index.vue";
+import JSONToYAML from "./pages/JSONConverter/index.vue";
 import JWTDebugger from "./pages/JWTDebugger/index.vue";
 import SQLFormatter from "./pages/SQLFormatter/index.vue";
 

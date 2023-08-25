@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import PageHeader from "../../components/Pageheader/index.vue";
 import { converterOptions, sampleJson, formatYAML, formatXML, jsonValidator } from "../../components/utils/jsonConverter"
+import { copyToClipboard } from "../../components/utils/UnixDateTime";
 
 
 const unformattedJson = ref(sampleJson);
@@ -54,6 +55,11 @@ const handleClear = () => {
   error.value = false
 }
 
+const handleCopy = () => {
+  if (!formattedVal.value) return
+  copyToClipboard(formattedVal.value)
+}
+
 </script>
 
 <template>
@@ -104,7 +110,7 @@ const handleClear = () => {
             </div>
           </div>
           <div class="d-flex gap-2 p-2">
-            <button class="btn btn-primary" @click="handleCopy">
+            <button class="btn btn-primary" @click="handleCopy" data-placement="top" title="Copy to clipboard">
               <i class="bi bi-clipboard"></i>
             </button>
             <button class="btn btn-danger" @click="handleClear" type="reset" data-toggle="tooltip" data-placement="top"
