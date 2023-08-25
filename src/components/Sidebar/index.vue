@@ -84,7 +84,8 @@ watch(route, () => {
     <div id="small-devices" v-if="isMobile" class="d-flex flex-column">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container d-flex">
-                <router-link class="navbar-brand" to="/"><img class="img" src="../../assets/vajra2.svg">Devta</router-link>
+                <router-link class="navbar-brand d-flex align-items-center" to="/"><img class="img"
+                        :src="DevtaLogo"><strong>Devta</strong></router-link>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
                     @click="isCollapsed = !isCollapsed">
