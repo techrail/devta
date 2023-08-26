@@ -31,13 +31,18 @@ const handleb64Change = () => {
 
 // Updates the route dynamically based on textinput 
 // Changes when there is a change in either of the text areas
-
+// Updates the route dynamically based on textinput 
+// Changes when there is a change in either of the text areas
 const dynamicRouteUpdater = (action, value) => {
-    router.push({
-        name: router.name,
-        query: { action: action, input: value },
-        silent: true
-    })
+    try {
+        router.push({
+            name: router.name,
+            query: { action: action, input: value },
+            silent: true
+        })
+    } catch (error) {
+        console.log(error.message)
+    }
 }
 
 onMounted(() => {
