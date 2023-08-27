@@ -1,12 +1,12 @@
-import { useThemeStore } from "../../stores/theme";
+// import { useThemeStore } from "../../stores/theme";
 
-const store = useThemeStore();
+// const store = useThemeStore();
 
-// toggles theme
-export const switchTheme = () => {
-  try {
-    store.toggleTheme();
-  } catch (error) {
-    console.log(error.message);
-  }
-};
+// // toggles theme
+// export const switchTheme = () => {
+//   try {
+//     store.toggleTheme();
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };

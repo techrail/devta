@@ -1,6 +1,9 @@
 <script setup>
-import { switchTheme } from '../utils/themeSwitch';
+import { useThemeStore } from '../../stores/theme';
+// import { switchTheme } from '../utils/themeSwitch';
 import { buttonData } from './buttonData';
+
+const store = useThemeStore()
 
 </script>
 
@@ -12,7 +15,7 @@ import { buttonData } from './buttonData';
             </button>
         </a>
     </div>
-    <button class="btn btn-secondary" @click="switchTheme">
+    <button class="btn btn-secondary" @click="store.toggleTheme">
         <i class="bi bi-brightness-high-fill"></i>
     </button>
 </template>
