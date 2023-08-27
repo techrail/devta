@@ -15,9 +15,18 @@ const store = useThemeStore()
             </button>
         </a>
     </div>
-    <button class="btn btn-secondary" @click="store.toggleTheme">
-        <i class="bi bi-brightness-high-fill"></i>
+    <button class="btn btn-secondary" @click="store.toggleTheme" data-placement="top"
+        :title="store.darkTheme ? 'switch to light' : 'switch to dark'">
+        <div v-if="store.darkTheme">
+            <i class="bi bi-brightness-high-fill"></i>
+        </div>
+        <div v-else>
+            <i class="bi bi-moon-fill"></i>
+        </div>
     </button>
 </template>
+
+
+<style></style>
 
 
