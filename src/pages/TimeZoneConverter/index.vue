@@ -6,6 +6,7 @@ import { convertedFormatDates, convertTimezone, timezones, getCurrentLocaleTimez
 import CopyContainer from '../../components/CopyContainer/SingleLineCopy.vue';
 import { covertCamelCase } from '../../components/utils/jsonBeautifier'
 import PageHeader from '../../components/Pageheader/index.vue';
+import { useThemeStore } from '../../stores/theme';
 
 const date = ref(null);
 const timezone = ref();
@@ -13,7 +14,7 @@ const reqTimezone = ref()
 const convertedTime = ref()
 const localTimezone = ref(getCurrentLocaleTimezone())
 const localTimeCheck = ref(false)
-
+const store = useThemeStore()
 
 
 const convert = () => {
@@ -41,16 +42,16 @@ const handleSelectChange = () => {
 </script>
 
 <template>
-    <main class="bg-light p-0 m-0 w-100">
+    <main class="p-0 m-0 w-100">
         <div class="w-100 mt-3">
             <PageHeader />
         </div>
-        <div class="grid bg-light">
+        <div class="grid">
             <div class="block card block1">
                 <div class="p-3">
                     <div class="d-flex flex-column gap-2">
                         <div class="mt-2 text-muted"><strong>Select date and time </strong></div>
-                        <VueDatePicker v-model="date" />
+                        <VueDatePicker v-model="date" :dark="store.darkTheme" />
                         <!-- <div><strong> Select current timezone </strong></div> -->
                         <div class="d-flex gap-1">
                             <input class="form-check-input" @input="handleCheckbox" v-model="localTimeCheck" type="checkbox"

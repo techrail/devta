@@ -6,11 +6,13 @@ const route = useRoute()
 </script>
 
 <template>
-    <div class="top_header">
+    <div class="top_header ">
         <div class="heading w-auto">
-            <strong>
-                {{ route.name }}
-            </strong>
+            <h2>
+                <strong>
+                    {{ route.name }}
+                </strong>
+            </h2>
         </div>
         <div class="d-flex gap-2">
             <TopBarButtons />

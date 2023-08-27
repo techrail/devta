@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { useGlobalStore } from "@stores/index.mjs";
 
 // const store = useGlobalStore();
 const value = ref('');

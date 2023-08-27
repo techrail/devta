@@ -1,7 +1,17 @@
 <script setup>
+import { onMounted } from 'vue';
 import { RouterView } from 'vue-router'
 import Sidebar from './components/Sidebar/index.vue'
+import { useThemeStore } from './stores/theme'
+
+const store = useThemeStore()
+
+onMounted(() => {
+    document.querySelector("body")?.setAttribute('data-bs-theme', store.darkTheme ? "dark" : "light")
+})
+
 </script>
+
 
 
 <template>

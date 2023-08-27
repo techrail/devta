@@ -38,11 +38,11 @@ const handleFileChange = async (event) => {
 </script>
 
 <template>
-    <main class="bg-light p-0 m-0 w-100">
+    <main class="p-0 m-0 w-100">
         <div class="w-100 mt-3">
             <PageHeader />
         </div>
-        <div class="grid bg-light mt-1">
+        <div class="grid mt-1">
             <div class="block card block1">
                 <div class="p-3">
                     <div class="form-floating">
