@@ -46,7 +46,7 @@ const handleSelectChange = () => {
         <div class="w-100 mt-3">
             <PageHeader />
         </div>
-        <div class="grid">
+        <div class="grid mt-1">
             <div class="block card block1">
                 <div class="p-3">
                     <div class="d-flex flex-column gap-2">

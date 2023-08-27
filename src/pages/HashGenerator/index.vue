@@ -46,7 +46,7 @@ async function copyContent(idx) {
             <PageHeader />
         </div>
 
-        <div class="grid">
+        <div class="grid mt-1">
             <div class="block card block1">
                 <div class="w-100 p-3">
                     <div class="overflow-auto">
