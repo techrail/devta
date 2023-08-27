@@ -20,11 +20,9 @@ const setTheme = () => {
   try {
     const localStorageTheme = localStorage.getItem("dark-theme");
     if (localStorageTheme === null) {
-      const defaultSystemTheme = localStorage.setItem(
-        "dark-theme",
-        darkThemePreference()
-      );
-      return defaultSystemTheme;
+      const isDark = darkThemePreference();
+      localStorage.setItem("dark-theme", isDark);
+      return isDark;
     }
     return JSON.parse(localStorageTheme);
   } catch (error) {
@@ -35,6 +33,7 @@ const setTheme = () => {
 
 // updates the theme
 export const updateTheme = (theme) => {
+  console.log("updateTheme", theme);
   try {
     document
       .querySelector("body")
