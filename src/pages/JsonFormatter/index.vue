@@ -65,23 +65,17 @@ function reset() {
 </script>
 
 <template>
-  <main class="bg-light p-0 m-0 w-100">
+  <main class="p-0 m-0 w-100">
     <div class="w-100 mt-3">
       <PageHeader />
     </div>
-    <div class="grid bg-light">
+    <div class="grid mt-1">
       <div class="block card block1 overflow-auto">
         <div class="p-3">
           <div class="form-outline">
             <!-- input -->
-            <textarea
-              class="form-control mono-font"
-              id="textAreaExample2"
-              v-model="unformattedJson"
-              rows="10"
-              cols="60"
-              placeholder="enter your json"
-            ></textarea>
+            <textarea class="form-control mono-font" id="textAreaExample2" v-model="unformattedJson" rows="10" cols="60"
+              placeholder="enter your json"></textarea>
             <br />
             <div class="d-flex flex-row justify-content-center gap-5">
               <div class="d-flex flex-column justify-content-center">
@@ -99,14 +93,8 @@ function reset() {
             </div>
             <br />
             <br /><br />
-            <div
-              class="d-flex flex-row justify-content-center gap-5 border-primary postition-absolute"
-            >
-              <select
-                class="form-select form-select-sm"
-                aria-label=".form-select-sm example"
-                v-model="indent"
-              >
+            <div class="d-flex flex-row justify-content-center gap-5 border-primary postition-absolute">
+              <select class="form-select form-select-sm" aria-label=".form-select-sm example" v-model="indent">
                 <option selected value="2">2 Tab Space</option>
                 <option value="3">3 Tab Space</option>
                 <option value="4">4 Tab Space</option>

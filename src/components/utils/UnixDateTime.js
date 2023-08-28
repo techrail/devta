@@ -1,5 +1,4 @@
 import moment from "moment/moment";
-import { useGlobalStore } from "@stores/index.mjs";
 
 // const store = useGlobalStore();
 

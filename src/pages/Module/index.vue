@@ -1,6 +1,5 @@
 <script setup>
 import ErrorPage from "@pages/Error/index.vue";
-import { useGlobalStore } from "@stores/index.mjs";
 import { useRoute } from "vue-router";
 import Sidebar from "@/Sidebar/index.vue";
 import LoadModule from "./LoadModule.vue";
