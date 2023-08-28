@@ -46,9 +46,9 @@ export const sideBarList = [
     route: "/jwt-debugger",
   },
   {
-    name: "Convert JSON ",
+    name: "JSON Converter",
     iconClass: "bi bi-filetype-json",
-    route: "/json-yaml-converter",
+    route: "/json-converter",
   },
   {
     name: "SQL Formatter",

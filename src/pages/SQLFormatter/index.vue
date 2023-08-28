@@ -77,16 +77,16 @@ const updateQuery = () => {
 </script>
 
 <template>
-    <main class="bg-light p-0 m-0 w-100">
+    <main class="p-0 m-0 w-100">
         <div class="w-100 mt-3">
             <PageHeader />
         </div>
-        <div class="grid bg-light mt-1">
+        <div class="grid mt-1">
             <div class="block card block1">
                 <div class="inner_block">
                     <div class="p-2">
                         <div class="form-floating">
-                            <textarea v-model="inputSQL" autofocus type="text"
+                            <textarea v-model="inputSQL" spellcheck="false" autofocus type="text"
                                 :class="error ? 'form-control mono-font is-invalid' : 'form-control mono-font'"
                                 id="queryInput" style="height: 250px;" placeholder="Enter SQL query">
                         </textarea>

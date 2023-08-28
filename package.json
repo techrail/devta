@@ -18,7 +18,7 @@
     "esbuild": "^0.19.2",
     "highlight.js": "^11.8.0",
     "jose": "^4.14.4",
-    "js-yaml": "^4.1.0",
+    "js2xmlparser": "^5.0.0",
     "json-to-pretty-yaml": "^1.2.2",
     "jwt-decode": "^3.1.2",
     "marked": "^7.0.0",
