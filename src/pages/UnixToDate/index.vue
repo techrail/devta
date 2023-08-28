@@ -23,11 +23,11 @@ const handleClick = (value) => {
 </script>
 
 <template>
-    <main class="bg-light p-0 m-0 w-100">
+    <main class="p-0 m-0 w-100">
         <div class="w-100 mt-3">
             <PageHeader />
         </div>
-        <div class="grid bg-light mt-1">
+        <div class="grid mt-1">
             <div class="block card block1">
                 <div class="p-3">
                     <input v-model="unix" @input="handleChange" autofocus type="text" class="form-control mono-font"

@@ -6,7 +6,7 @@ const route = useRoute()
 </script>
 
 <template>
-    <div class="top_header">
+    <div class="top_header ">
         <div class="heading w-auto">
             <strong>
                 {{ route.name }}
