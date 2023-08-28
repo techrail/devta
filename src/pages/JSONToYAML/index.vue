@@ -102,27 +102,6 @@ function reset() {
         </div>
       </div>
       <div class="block card block2 overflow-auto">
-        <!-- output -->
-        <!-- <div v-if="formattedVal">
-          <div class="form-outline" style="padding-top: 20px">
-            <textarea
-              :value="formattedVal"
-              class="form-control"
-              id="textAreaExample2"
-              rows="20"
-              cols="60"
-              disabled
-            ></textarea>
-
-            <div class="contain">
-              <button class="btn btn-primary mt-2" @click="copy()">
-                <i class="bi bi-clipboard"></i>
-              </button>
-
-              <i v-show="alert.iscopy" class="copy bi bi-check-all"></i>
-            </div>
-          </div>
-        </div> -->
         <div class="p-2 overflow-auto">
           <div v-if="formattedVal">
             <highlightjs :code="formattedVal" />

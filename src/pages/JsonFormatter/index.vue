@@ -7,10 +7,16 @@ import json from "highlight.js/lib/languages/json";
 const unformattedJson = ref("");
 
 const formattedVal = ref("");
+const Icon = ref("bi bi-clipboard");
 var indent = 2;
+
+
+
 const alert = reactive({
   iscopy: null,
   invalid: null,
+  isClicked:false
+   
 });
 
 hljs.registerLanguage("json", json);
@@ -49,15 +55,21 @@ function minify() {
     console.log(er);
   }
 }
+function change() {
+  alert.isClicked = false;
+}
 
 function copy() {
-  alert.iscopy = null;
-  if (unformattedJson.value != "") {
-    navigator.clipboard.writeText(formattedVal.value);
-    alert.iscopy = true;
-  } else {
-    window.alert("please enter a json ");
-  }
+  
+
+ 
+  
+  navigator.clipboard.writeText(formattedVal.value);
+  alert.isClicked = true
+     setTimeout(change,3000)
+
+   
+  
 }
 function reset() {
   (formattedVal.value = ""), (unformattedJson.value = "");
@@ -116,29 +128,13 @@ function reset() {
           </div>
         </div>
       </div>
-      <!-- <div class="block card block2 overflow-auto">
-       
-        <div class="form-outline" style="padding-top: 60px">
-          <textarea
-            :value="formattedVal"
-            class="form-control"
-            id="textAreaExample2"
-            rows="20"
-            cols="70"
-            disabled
-          ></textarea>
-          <button class="btn btn-primary mt-2" @click="copy()">
-                <i class="bi bi-clipboard"></i>
-              </button>
-        </div>
-      </div> -->
+
       <div class="p-2 overflow-auto">
         <div v-if="formattedVal">
           <highlightjs :code="formattedVal" />
           <button class="btn btn-primary mt-2" @click="copy()">
-            <i class="bi bi-clipboard"></i>
+            <i :class="alert.isClicked ?  'bi bi-check-circle-fill':'bi bi-clipboard'"></i>
           </button>
-          <i v-show="alert.iscopy" class="copy bi bi-check-all"></i>
         </div>
       </div>
     </div>
