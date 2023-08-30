@@ -7,16 +7,13 @@ import json from "highlight.js/lib/languages/json";
 const unformattedJson = ref("");
 
 const formattedVal = ref("");
-const Icon = ref("bi bi-clipboard");
+
 var indent = 2;
-
-
 
 const alert = reactive({
   iscopy: null,
   invalid: null,
-  isClicked:false
-   
+  isClicked: false,
 });
 
 hljs.registerLanguage("json", json);
@@ -60,16 +57,12 @@ function change() {
 }
 
 function copy() {
-  
-
- 
-  
   navigator.clipboard.writeText(formattedVal.value);
-  alert.isClicked = true
-     setTimeout(change,3000)
-
-   
-  
+  alert.isClicked = true;
+  function change() {
+    alert.isClicked = false;
+  }
+  setTimeout(change, 3000);
 }
 function reset() {
   (formattedVal.value = ""), (unformattedJson.value = "");
@@ -86,27 +79,35 @@ function reset() {
         <div class="p-3">
           <div class="form-outline">
             <!-- input -->
-            <textarea class="form-control mono-font" id="textAreaExample2" v-model="unformattedJson" rows="10" cols="60"
-              placeholder="enter your json"></textarea>
+            <textarea
+              class="form-control mono-font"
+              id="textAreaExample2"
+              v-model="unformattedJson"
+              rows="10"
+              cols="60"
+              placeholder="enter your json"
+              spellcheck="false"
+            ></textarea>
             <br />
             <div class="d-flex flex-row justify-content-center gap-5">
               <div class="d-flex flex-column justify-content-center">
                 <button class="btn btn-primary" @click="format()">
                   beautify
                 </button>
-                <p v-show="alert.invalid" class="text text-danger">
-                  <strong>! Invalid Json</strong>
-                </p>
               </div>
-
-              <button class="btn btn-primary" @click="reset()">reset</button>
 
               <button class="btn btn-primary" @click="minify()">minify</button>
             </div>
             <br />
             <br /><br />
-            <div class="d-flex flex-row justify-content-center gap-5 border-primary postition-absolute">
-              <select class="form-select form-select-sm" aria-label=".form-select-sm example" v-model="indent">
+            <div
+              class="d-flex flex-row justify-content-center gap-5 border-primary postition-absolute"
+            >
+              <select
+                class="form-select form-select-sm"
+                aria-label=".form-select-sm example"
+                v-model="indent"
+              >
                 <option selected value="2">2 Tab Space</option>
                 <option value="3">3 Tab Space</option>
                 <option value="4">4 Tab Space</option>
@@ -117,12 +118,43 @@ function reset() {
         </div>
       </div>
 
-      <div class="p-2 overflow-auto">
-        <div v-if="formattedVal">
-          <highlightjs :code="formattedVal" />
-          <button class="btn btn-primary mt-2" @click="copy()">
-            <i :class="alert.isClicked ?  'bi bi-check-circle-fill':'bi bi-clipboard'"></i>
-          </button>
+      <div class="block card block2">
+        <div class="d-flex flex-column h-100 justify-content-between">
+          <div class="p-2 overflow-auto">
+            <div v-if="alert.invalid">
+              <div class="alert alert-danger" role="alert">Invalid JSON</div>
+            </div>
+
+            <div v-if="formattedVal">
+              <highlightjs :code="formattedVal" />
+            </div>
+          </div>
+          <div class="d-flex gap-2 p-2">
+            <button
+              class="btn btn-primary"
+              @click="copy"
+              data-placement="top"
+              title="Copy to clipboard"
+            >
+              <i
+                :class="
+                  alert.isClicked
+                    ? 'bi bi-check-circle-fill'
+                    : 'bi bi-clipboard'
+                "
+              ></i>
+            </button>
+            <button
+              class="btn btn-danger"
+              @click="reset"
+              type="reset"
+              data-toggle="tooltip"
+              data-placement="top"
+              title="Clear text"
+            >
+              <i class="bi bi-x-lg"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
