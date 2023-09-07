@@ -20,11 +20,9 @@ When you are finished with the changes, create a pull request.
 
 Following are the steps to add new functionality:
 
-1. Create new folder inside `src\pages` and add `index.vue` in it,
-2. Add your page entry inside `stores\index.mjs`,
-3. Start coding inside `src\pages\<YOUR_MODULE_FOLDER>\index.vue`
-
-**Note: If you changes are not being reflected then try refreshing the page**
+1. Create new folder inside `src\pages`.
+2. Add a route to your component in `src\router\router.js`.
+3. Add an option to the settings sidebar on `src\components\sidebar\sidebarLists.js`
 
 ## Attribution
 
