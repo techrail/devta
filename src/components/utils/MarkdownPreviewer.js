@@ -35,5 +35,25 @@ blockquote {
 blockquote p {
 	display:		inline;
 }
+
+[data-bs-theme='dark'] td, [data-bs-theme='dark'] th {
+  border: 1px solid #555;
+}
+[data-bs-theme='dark'] tr:nth-child(even){background-color: #333;}
+[data-bs-theme='dark'] tr:hover {background-color: #444;}
+[data-bs-theme='dark'] th {
+  background-color: #444;
+  color: #f2f2f2;
+}
+[data-bs-theme='dark'] blockquote {
+	background:		#333;
+	border-left:	10px solid #777;
+	color:          #f2f2f2;
+}
+[data-bs-theme='dark'] blockquote p {
+	display:		inline;
+	color:          #f2f2f2;
+}
+
 </style>
 `;
