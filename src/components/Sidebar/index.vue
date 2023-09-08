@@ -18,6 +18,20 @@ function resize() {
 // alphabetically sort the sidebar options
 const sortedSideBarLists = sideBarList.sort((a, b) => a.name.localeCompare(b.name))
 
+let searchInput = ref("");
+
+const filteredList = () => {
+    return sortedSideBarLists.filter((sideBarItem) => 
+        containsWordsInAnyOrder(sideBarItem.name.toLowerCase(), searchInput.value.toLowerCase())
+    );
+}
+
+function containsWordsInAnyOrder(listItem, searchInput) {
+  // Create a regex pattern that matches all words in searchInput
+  const pattern = new RegExp(searchInput.split(' ').map(word => `(?=.*${word})`).join(''));
+  return pattern.test(listItem);
+}
+
 const toggleClick = () => {
     console.log(isCollapsed.value)
     isCollapsed.value = !isCollapsed.value
@@ -58,8 +72,9 @@ watch(route, () => {
 
         <!-- body -->
         <div class="overflow-auto flex-grow-1">
+            <input type="text" v-model="searchInput" placeholder="Search..." class ="form-control mono-font"/>
             <ul class="nav nav-pills flex-column gap-1">
-                <div v-for="(item, index) in sortedSideBarLists" :key="index">
+                <div v-for="(item, index) in filteredList()" :key="index">
                     <li class="nav-item ">
                         <router-link :to=item.route
                             :class="currentPath === item.route ? 'text-white nav-link active' : 'text-white nav-link '"
@@ -91,8 +106,9 @@ watch(route, () => {
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" :class="{ show: !isCollapsed }" id="navbarNav">
+                    <input type="text" v-model="searchInput" placeholder="Search..." class ="form-control mono-font"/>
                     <ul class="navbar-nav">
-                        <div v-for="(item, index) in sortedSideBarLists" :key="index">
+                        <div v-for="(item, index) in filteredList()" :key="index">
                             <li class="nav-item">
                                 <router-link :to=item.route @click="isCollapsed = !isCollapsed"
                                     :class="currentPath === item.route ? 'nav-link text-white active' : 'nav-link text-white'"
