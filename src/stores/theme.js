@@ -20,7 +20,7 @@ const addDarkThemeStylesheet = () => {
     const darkThemeStylesheet = document.createElement("link");
     darkThemeStylesheet.rel = "stylesheet";
     darkThemeStylesheet.id = "dark-theme-style";
-    darkThemeStylesheet.href = "../../highlight.js/styles/atom-one-dark.css";
+    darkThemeStylesheet.href = "../../src/highlightJs/atom-one-dark.css";
     document.head.appendChild(darkThemeStylesheet);
   }
 };
