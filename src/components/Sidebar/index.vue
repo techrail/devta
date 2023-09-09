@@ -72,7 +72,7 @@ watch(route, () => {
 
         <!-- body -->
         <div class="overflow-auto flex-grow-1">
-            <input type="text" v-model="searchInput" placeholder="Search..." class ="form-control mono-font"/>
+            <input type="text" v-model="searchInput" placeholder="Search..." class ="form-control mono-font my-2" data-bs-theme="dark"/>
             <ul class="nav nav-pills flex-column gap-1">
                 <div v-for="(item, index) in filteredList()" :key="index">
                     <li class="nav-item ">
@@ -106,7 +106,7 @@ watch(route, () => {
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" :class="{ show: !isCollapsed }" id="navbarNav">
-                    <input type="text" v-model="searchInput" placeholder="Search..." class ="form-control mono-font"/>
+                    <input type="text" v-model="searchInput" placeholder="Search..." class ="form-control mono-font my-2" data-bs-theme="dark"/>
                     <ul class="navbar-nav">
                         <div v-for="(item, index) in filteredList()" :key="index">
                             <li class="nav-item">
