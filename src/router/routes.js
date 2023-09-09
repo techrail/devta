@@ -10,6 +10,7 @@ import JSONToYAML from "../pages/JSONConverter/index.vue";
 import JWTDebugger from "../pages/JWTDebugger/index.vue";
 import SQLFormatter from "../pages/SQLFormatter/index.vue";
 import Index from "../pages/Index/index.vue";
+import RegexTester from "../pages/RegexTester/index.vue";
 
 const routes = [
   {
@@ -66,6 +67,11 @@ const routes = [
     path: "/sql-formatter",
     component: SQLFormatter,
     name: "SQL Formatter",
+  },
+  {
+    path: "/regex-tester",
+    component: RegexTester,
+    name: "Regex Tester"
   },
 
   // {
