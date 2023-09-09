@@ -15,22 +15,22 @@ const darkThemePreference = () => {
 };
 
 const addDarkThemeStylesheet = () => {
-  let existingDarkTheme = document.getElementById('dark-theme-style');
+  let existingDarkTheme = document.getElementById("dark-theme-style");
   if (!existingDarkTheme) {
     const darkThemeStylesheet = document.createElement("link");
     darkThemeStylesheet.rel = "stylesheet";
     darkThemeStylesheet.id = "dark-theme-style";
-    darkThemeStylesheet.href = "../../highlight.js/styles/a11y-dark.css";
+    darkThemeStylesheet.href = "../../highlight.js/styles/atom-one-dark.css";
     document.head.appendChild(darkThemeStylesheet);
   }
-}
+};
 
 const removeDarkThemeStylesheet = () => {
-  const existingDarkTheme = document.getElementById('dark-theme-style');
+  const existingDarkTheme = document.getElementById("dark-theme-style");
   if (existingDarkTheme) {
     document.head.removeChild(existingDarkTheme);
   }
-}
+};
 
 const setTheme = () => {
   try {
@@ -52,7 +52,6 @@ const setTheme = () => {
   }
 };
 
-
 export const updateTheme = (theme) => {
   if (theme) {
     addDarkThemeStylesheet();
@@ -60,7 +59,9 @@ export const updateTheme = (theme) => {
     removeDarkThemeStylesheet();
   }
   try {
-    document.querySelector("body")?.setAttribute("data-bs-theme", theme ? "dark" : "light");
+    document
+      .querySelector("body")
+      ?.setAttribute("data-bs-theme", theme ? "dark" : "light");
     localStorage.setItem("dark-theme", JSON.stringify(theme));
   } catch (error) {
     console.log(error.message);
