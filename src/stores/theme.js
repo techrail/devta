@@ -14,36 +14,36 @@ const darkThemePreference = () => {
   }
 };
 
-const addDarkThemeStylesheet = () => {
-  let existingDarkTheme = document.getElementById("dark-theme-style");
-  if (!existingDarkTheme) {
-    const darkThemeStylesheet = document.createElement("link");
-    darkThemeStylesheet.rel = "stylesheet";
-    darkThemeStylesheet.id = "dark-theme-style";
-    darkThemeStylesheet.href = "../../src/highlightJs/atom-one-dark.css";
-    document.head.appendChild(darkThemeStylesheet);
-  }
-};
+// const addDarkThemeStylesheet = () => {
+//   let existingDarkTheme = document.getElementById("dark-theme-style");
+//   if (!existingDarkTheme) {
+//     const darkThemeStylesheet = document.createElement("link");
+//     darkThemeStylesheet.rel = "stylesheet";
+//     darkThemeStylesheet.id = "dark-theme-style";
+//     darkThemeStylesheet.href = "../../src/highlightJs/atom-one-dark.css";
+//     document.head.appendChild(darkThemeStylesheet);
+//   }
+// };
 
-const removeDarkThemeStylesheet = () => {
-  const existingDarkTheme = document.getElementById("dark-theme-style");
-  if (existingDarkTheme) {
-    document.head.removeChild(existingDarkTheme);
-  }
-};
+// const removeDarkThemeStylesheet = () => {
+//   const existingDarkTheme = document.getElementById("dark-theme-style");
+//   if (existingDarkTheme) {
+//     document.head.removeChild(existingDarkTheme);
+//   }
+// };
 
 const setTheme = () => {
   try {
     const localStorageTheme = localStorage.getItem("dark-theme");
     if (localStorageTheme !== null) {
       const isDark = JSON.parse(localStorageTheme);
-      isDark ? addDarkThemeStylesheet() : removeDarkThemeStylesheet();
+      // isDark ? addDarkThemeStylesheet() : removeDarkThemeStylesheet();
       return isDark;
     }
     const isDark = darkThemePreference();
-    if (isDark) {
-      addDarkThemeStylesheet();
-    }
+    // if (isDark) {
+    //   addDarkThemeStylesheet();
+    // }
     return isDark;
   } catch (error) {
     console.error("Error setting theme:", error);
@@ -53,11 +53,11 @@ const setTheme = () => {
 };
 
 export const updateTheme = (theme) => {
-  if (theme) {
-    addDarkThemeStylesheet();
-  } else {
-    removeDarkThemeStylesheet();
-  }
+  // if (theme) {
+  //   addDarkThemeStylesheet();
+  // } else {
+  //   removeDarkThemeStylesheet();
+  // }
   try {
     document
       .querySelector("body")
