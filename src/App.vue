@@ -3,7 +3,6 @@ import { onMounted } from 'vue';
 import { RouterView } from 'vue-router'
 import Sidebar from './components/Sidebar/index.vue'
 import { useThemeStore } from './stores/theme'
-import "./components/highlightJs/highlight-styles.css"
 
 const store = useThemeStore()
 
