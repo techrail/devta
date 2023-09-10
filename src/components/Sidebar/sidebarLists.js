@@ -55,4 +55,9 @@ export const sideBarList = [
     iconClass: "bi bi-filetype-sql",
     route: "/sql-formatter",
   },
+  {
+    name: "Regex Tester",
+    iconClass: "bi bi-regex",
+    route: "/regex-tester"
+  }
 ];

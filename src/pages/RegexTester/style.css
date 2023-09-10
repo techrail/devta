@@ -1,0 +1,17 @@
+.fixed-textarea {
+  resize: none;
+  /* Prevent textarea from being resizable */
+  height: auto;
+}
+
+#stringInput {
+  height: 450px
+}
+
+.match-found {
+  color: darkgreen;
+}
+
+.match-not-found {
+  color: red;
+}
