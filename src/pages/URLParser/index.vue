@@ -23,6 +23,7 @@ watch(urlInput, (newUrlInput, oldUrlInput) => {
     } else {
         error.value=true;
         parsedURL.value = null;
+        params.value = null;
     }
 })
 
@@ -81,7 +82,7 @@ const handleCopy = (value) => {
                         </div> 
                     </div>
                     
-                    <div v-if="params != ''">
+                    <div v-if="params && params != ''">
                         <div class="p-2 overflow-auto">
                             <h3 class="text-muted">Query Parameters: </h3>
                         </div>
