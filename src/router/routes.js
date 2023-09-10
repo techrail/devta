@@ -10,6 +10,8 @@ import JSONToYAML from "../pages/JSONConverter/index.vue";
 import JWTDebugger from "../pages/JWTDebugger/index.vue";
 import SQLFormatter from "../pages/SQLFormatter/index.vue";
 import Index from "../pages/Index/index.vue";
+import URLParser from "../pages/URLParser/index.vue";
+
 
 const routes = [
   {
@@ -67,7 +69,11 @@ const routes = [
     component: SQLFormatter,
     name: "SQL Formatter",
   },
-
+  {
+    path: "/url-parser",
+    component: URLParser,
+    name: "URL Parser",
+  },
   // {
   //   path: "/:slug",
   //   component: Module,
