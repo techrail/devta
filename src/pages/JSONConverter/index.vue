@@ -1,14 +1,10 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import PageHeader from "../../components/Pageheader/index.vue";
-import {
-  converterOptions,
-  sampleJson,
-  formatYAML,
-  formatXML,
-  jsonValidator,
-} from "../../components/utils/jsonConverter";
+import { converterOptions, sampleJson, formatYAML, formatXML, jsonValidator } from "../../components/utils/jsonConverter";
 import { copyToClipboard } from "../../components/utils/UnixDateTime";
+
+onMounted(() => document.querySelector("[autofocus]")?.focus());
 
 const unformattedJson = ref(sampleJson);
 const formattedVal = ref();
@@ -86,11 +82,7 @@ const handleCopy = () => {
               @input="handleChange"
               autofocus
               type="text"
-              :class="
-                error
-                  ? 'form-control mono-font is-invalid'
-                  : 'form-control mono-font'
-              "
+              :class="error ? 'form-control mono-font is-invalid' : 'form-control mono-font'"
               id="tokenInput"
               placeholder="Enter Json"
               spellcheck="false"
@@ -98,37 +90,21 @@ const handleCopy = () => {
             </textarea>
             <label for="tokenInput">Enter Json</label>
           </div>
-          <div
-            class="d-flex flex-column mt-2 justify-content-between align-items-center gap-2"
-          >
+          <div class="d-flex flex-column mt-2 justify-content-between align-items-center gap-2">
             <!-- format dropdown -->
             <div class="form-floating w-100">
-              <select
-                class="form-select"
-                name="timezone-select"
-                id="dropdown"
-                v-model="selectedvalue"
-              >
+              <select class="form-select" name="timezone-select" id="dropdown" v-model="selectedvalue">
                 <option :value="converterOptions[0]">
                   {{ converterOptions[0] }}
                 </option>
-                <option
-                  v-for="zone in converterOptions.slice(1)"
-                  :value="zone"
-                  :key="zone"
-                >
+                <option v-for="zone in converterOptions.slice(1)" :value="zone" :key="zone">
                   {{ zone }}
                 </option>
               </select>
               <label for="dropdown">choose format</label>
             </div>
             <!-- convert button -->
-            <button
-              type="button"
-              :disabled="error === true || unformattedJson.length === 0"
-              @click="convert"
-              class="btn btn-primary w-100"
-            >
+            <button type="button" :disabled="error === true || unformattedJson.length === 0" @click="convert" class="btn btn-primary w-100">
               Convert
             </button>
           </div>
@@ -146,26 +122,10 @@ const handleCopy = () => {
             </div>
           </div>
           <div class="d-flex gap-2 p-2">
-            <button
-              class="btn btn-primary"
-              @click="handleCopy"
-              data-placement="top"
-              title="Copy to clipboard"
-            >
-              <i
-                :class="
-                  isClicked ? 'bi bi-check-circle-fill' : 'bi bi-clipboard'
-                "
-              ></i>
+            <button class="btn btn-primary" @click="handleCopy" data-placement="top" title="Copy to clipboard">
+              <i :class="isClicked ? 'bi bi-check-circle-fill' : 'bi bi-clipboard'"></i>
             </button>
-            <button
-              class="btn btn-danger"
-              @click="handleClear"
-              type="reset"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Clear text"
-            >
+            <button class="btn btn-danger" @click="handleClear" type="reset" data-toggle="tooltip" data-placement="top" title="Clear text">
               <i class="bi bi-x-lg"></i>
             </button>
           </div>
