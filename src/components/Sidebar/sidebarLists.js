@@ -55,4 +55,9 @@ export const sideBarList = [
     iconClass: "bi bi-filetype-sql",
     route: "/sql-formatter",
   },
+  {
+    name: "URL Parser",
+    iconClass: "bi bi-link-45deg",
+    route: "/url-parser",
+  },
 ];
