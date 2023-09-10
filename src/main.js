@@ -12,7 +12,7 @@ import json from "highlight.js/lib/languages/json";
 import sql from "highlight.js/lib/languages/sql";
 import xml from "highlight.js/lib/languages/xml";
 import hljsVuePlugin from "@highlightjs/vue-plugin";
-import "highlight.js/styles/atom-one-light.css";
+import "./components/highlightJs/highlight-styles.css";
 
 hljs.registerLanguage("json", json);
 hljs.registerLanguage("sql", sql);
