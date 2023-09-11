@@ -5,7 +5,7 @@ import { copyToClipboard } from '../../components/utils/UnixDateTime';
 
 const postgresUrl = ref('postgres://myuser:mypassword@localhost:5432/mydatabase?sslmode=require');
 const parsedData = ref(null);
-const formattedData = ref({});  // To store formatted data for different platforms
+const formattedData = ref({});
 
 const parsePostgresURL = (url) => {
     const regex = /^postgres:\/\/([^:@]+):([^@]+)@([^:\/]+)(?::(\d+))?\/([^?]+)(?:\?sslmode=(\w+))?$/;
@@ -186,8 +186,10 @@ const copySpecificContent = (type) => {
 
                             </ul>
                         </div>
+                        <strong>Language Connector Strings:</strong>
 
-                        <div class="block card block2 overflow-auto">
+                        <div class="block card block2 overflow-auto mt-2">
+
                             <div class="input-group p-1" v-if="formattedData.phpDSN">
                                 <span class="input-group-text">PHP PDO:</span>
                                 <input type="text" class="form-control" :value="formattedData.phpDSN" disabled readonly>
