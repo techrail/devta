@@ -42,6 +42,7 @@ const formatToNodeJSObject = (data) => {
 const handleClear = () => {
     postgresUrl.value = ""
     parsedData.value = ""
+    formattedData.value = {}
 }
 
 const formatToJavaJDBC = (data) => {
@@ -75,7 +76,6 @@ const convertBackToURL = () => {
     }
 }
 
-// Assuming this is your existing function to convert back to the standard PostgreSQL URL
 const formatPostgresURL = (data) => {
     let url = 'postgres://';
     url += data.user;
@@ -92,7 +92,7 @@ const formatPostgresURL = (data) => {
     }
     return url;
 }
-const formatterType = ref('phpDSN');  // default formatter
+const formatterType = ref('phpDSN');
 
 const copySpecificContent = (type) => {
     let dataToCopy = '';
