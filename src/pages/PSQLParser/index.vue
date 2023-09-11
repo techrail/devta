@@ -66,8 +66,8 @@ watchEffect(() => {
     }
 });
 
-const copyParsedData = () => {
-    copyToClipboard(JSON.stringify(parsedData.value));
+const copyParsedData = (value) => {
+    copyToClipboard(value);
 }
 
 const convertBackToURL = () => {
@@ -113,6 +113,8 @@ const copySpecificContent = (type) => {
 }
 
 
+
+
 </script>
 
 
@@ -143,13 +145,45 @@ const copySpecificContent = (type) => {
                     <div class="p-2 overflow-auto">
                         <div v-if="parsedData">
                             <strong>Parsed Data:</strong>
-                            <ul>
-                                <li>User: {{ parsedData.user }}</li>
-                                <li>Password: {{ parsedData.password }}</li>
-                                <li>Host: {{ parsedData.host }}</li>
-                                <li>Port: {{ parsedData.port }}</li>
-                                <li>Database: {{ parsedData.database }}</li>
-                                <li>SSL Mode: {{ parsedData.sslmode }}</li>
+                            <ul class="p-0">
+                                <li class="input-group p-1">
+                                    <span class="input-group-text">User:</span>
+                                    <input type="text" class="form-control" :value="parsedData.user" disabled readonly>
+                                    <span class="input-group-text" @click="copyParsedData(parsedData.user)"><i
+                                            class="bi bi-clipboard"></i></span>
+                                </li>
+                                <li class="input-group p-1">
+                                    <span class="input-group-text">host:</span>
+                                    <input type="text" class="form-control" :value="parsedData.host" disabled readonly>
+                                    <span class="input-group-text" @click="copyParsedData(parsedData.host)"><i
+                                            class="bi bi-clipboard"></i></span>
+                                </li>
+                                <li class="input-group p-1">
+                                    <span class="input-group-text">port:</span>
+                                    <input type="text" class="form-control" :value="parsedData.port" disabled readonly>
+                                    <span class="input-group-text" @click="copyParsedData(parsedData.port)"><i
+                                            class="bi bi-clipboard"></i></span>
+                                </li>
+                                <li class="input-group p-1">
+                                    <span class="input-group-text">sslmode:</span>
+                                    <input type="text" class="form-control" :value="parsedData.sslmode" disabled readonly>
+                                    <span class="input-group-text" @click="copyParsedData(parsedData.sslmode)"><i
+                                            class="bi bi-clipboard"></i></span>
+                                </li>
+                                <li class="input-group p-1">
+                                    <span class="input-group-text">password:</span>
+                                    <input type="text" class="form-control" :value="parsedData.password" disabled readonly>
+                                    <span class="input-group-text" @click="copyParsedData(parsedData.password)"><i
+                                            class="bi bi-clipboard"></i></span>
+                                </li>
+
+                                <li class="input-group p-1">
+                                    <span class="input-group-text">database:</span>
+                                    <input type="text" class="form-control" :value="parsedData.database" disabled readonly>
+                                    <span class="input-group-text" @click="copyParsedData(database)"><i
+                                            class="bi bi-clipboard"></i></span>
+                                </li>
+
                             </ul>
                         </div>
 
