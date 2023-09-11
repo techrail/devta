@@ -48,15 +48,8 @@ const handleCopy = (value) => {
         <div class="p-3">
           <div class="overflow-auto">
             <div class="form-floating">
-              <textarea
-                v-model="urlInput"
-                autofocus
-                type="text"
-                class="form-control mono-font h-100"
-                rows="4"
-                id="urlInput"
-                placeholder="Enter the URL"
-              >
+              <textarea v-model="urlInput" autofocus type="text" class="form-control mono-font" id="urlInput"
+                placeholder="Enter the URL">
               </textarea>
               <label for="urlInput">Enter the URL</label>
             </div>
@@ -65,33 +58,35 @@ const handleCopy = (value) => {
             <button class="btn btn-primary" @click="handleCopy(urlInput)" data-placement="top" title="Copy to clipboard">
               <i class="bi bi-clipboard"></i>
             </button>
-            <button class="btn btn-danger" @click="handleClear" type="reset" data-toggle="tooltip" data-placement="top" title="Clear text">
+            <button class="btn btn-danger" @click="handleClear" type="reset" data-toggle="tooltip" data-placement="top"
+              title="Clear text">
               <i class="bi bi-x-lg"></i>
             </button>
           </div>
         </div>
       </div>
+
+
       <div class="block card block2 overflow-auto">
         <div v-if="urlInput">
           <div v-if="error">
             <div class="alert alert-danger" role="alert">Invalid URL</div>
           </div>
           <div v-if="parsedURL">
-            <div class="p-2 overflow-auto">
-              <h3 class="text-muted">URL Details:</h3>
+            <div class="p-2">
+              <h4><strong> URL Details:</strong></h4>
             </div>
-            <div class="block card block2 overflow-auto">
+            <div>
               <div v-for="[key, value] in parsedURL" class="p-1 d-flex flex-column gap-2" :key="value">
                 <CopyContainer :title="key" :value="value" v-if="value != ''" />
               </div>
             </div>
           </div>
-
           <div v-if="params && params != ''">
-            <div class="p-2 overflow-auto">
-              <h3 class="text-muted">Query Parameters:</h3>
+            <div class="p-2">
+              <h4><strong>Query Parameters:</strong> </h4>
             </div>
-            <div class="block card block2 overflow-auto">
+            <div class="">
               <div v-for="[paramName, paramValue] in params" class="p-1 d-flex flex-column gap-2" :key="paramName">
                 <CopyContainer :title="paramName" :value="paramValue" />
               </div>
@@ -102,3 +97,5 @@ const handleCopy = (value) => {
     </div>
   </main>
 </template>
+
+<style scoped src="./styles.css" />
