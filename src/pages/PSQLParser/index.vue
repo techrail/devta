@@ -3,7 +3,7 @@ import PageHeader from '../../components/Pageheader/index.vue'
 import { watchEffect, ref } from 'vue';
 import { copyToClipboard } from '../../components/utils/UnixDateTime';
 
-const postgresUrl = ref('');
+const postgresUrl = ref('postgres://myuser:mypassword@localhost:5432/mydatabase?sslmode=require');
 const parsedData = ref(null);
 const formattedData = ref({});  // To store formatted data for different platforms
 
@@ -94,6 +94,25 @@ const formatPostgresURL = (data) => {
 }
 const formatterType = ref('phpDSN');  // default formatter
 
+const copySpecificContent = (type) => {
+    let dataToCopy = '';
+    switch (type) {
+        case 'phpDSN':
+            dataToCopy = formattedData.value.phpDSN;
+            break;
+        case 'nodeJS':
+            dataToCopy = JSON.stringify(formattedData.value.nodeJS, null, 2);
+            break;
+        case 'javaJDBC':
+            dataToCopy = formattedData.value.javaJDBC;
+            break;
+    }
+    if (dataToCopy) {
+        copyToClipboard(dataToCopy);
+    }
+}
+
+
 </script>
 
 
@@ -116,13 +135,7 @@ const formatterType = ref('phpDSN');  // default formatter
                 </div>
 
 
-                <div class="d-flex mt-4 px-2 flex-row justify-content-center gap-5 border-primary postition-absolute">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example" v-model="formatterType">
-                        <option selected value="javaJDBC">Java JDBC</option>
-                        <option value="nodeJS">Node.js</option>
-                        <option value="phpDSN">PHP PDO</option>
-                    </select>
-                </div>
+
 
             </div>
             <div class="block card block2">
@@ -139,18 +152,31 @@ const formatterType = ref('phpDSN');  // default formatter
                                 <li>SSL Mode: {{ parsedData.sslmode }}</li>
                             </ul>
                         </div>
-                        <div v-if="formatterType === 'phpDSN'">
-                            <strong>PHP PDO:</strong>
-                            <p>{{ formattedData.phpDSN }}</p>
+
+                        <div class="block card block2 overflow-auto">
+                            <div class="input-group p-1" v-if="formattedData.phpDSN">
+                                <span class="input-group-text">PHP PDO:</span>
+                                <input type="text" class="form-control" :value="formattedData.phpDSN" disabled readonly>
+                                <span class="input-group-text" @click="copySpecificContent('phpDSN')"><i
+                                        class="bi bi-clipboard"></i></span>
+                            </div>
+
+                            <div class="input-group p-1" v-if="formattedData.nodeJS">
+                                <span class="input-group-text">Node.js:</span>
+                                <input type="text" class="form-control"
+                                    :value="JSON.stringify(formattedData.nodeJS, null, 2)" disabled readonly>
+                                <span class="input-group-text" @click="copySpecificContent('nodeJS')"><i
+                                        class="bi bi-clipboard"></i></span>
+                            </div>
+
+                            <div class="input-group p-1" v-if="formattedData.javaJDBC">
+                                <span class="input-group-text">Java JDBC:</span>
+                                <input type="text" class="form-control" :value="formattedData.javaJDBC" disabled readonly>
+                                <span class="input-group-text" @click="copySpecificContent('javaJDBC')"><i
+                                        class="bi bi-clipboard"></i></span>
+                            </div>
                         </div>
-                        <div v-if="formatterType === 'nodeJS'">
-                            <strong>Node.js:</strong>
-                            <pre>{{ JSON.stringify(formattedData.nodeJS, null, 2) }}</pre>
-                        </div>
-                        <div v-if="formatterType === 'javaJDBC'">
-                            <strong>Java JDBC:</strong>
-                            <p>{{ formattedData.javaJDBC }}</p>
-                        </div>
+
 
                     </div>
                     <div class="d-flex gap-2 p-2">

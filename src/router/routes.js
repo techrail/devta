@@ -11,6 +11,8 @@ import JWTDebugger from "../pages/JWTDebugger/index.vue";
 import SQLFormatter from "../pages/SQLFormatter/index.vue";
 import PSQLFormatter from "../pages/PSQLParser/index.vue"
 import Index from "../pages/Index/index.vue";
+import URLParser from "../pages/URLParser/index.vue";
+
 
 const routes = [
   {
@@ -69,9 +71,14 @@ const routes = [
     name: "SQL Formatter",
   },
   {
-    path: "/psql-formatter",
+    path: "/url-parser",
+    component: URLParser,
+    name: "URL Parser",
+  },
+  {
+    path: "/postgres-parser",
     component: PSQLFormatter,
-    name: "psql Formatter",
+    name: "Postgres URL Parser",
   },
   // {
   //   path: "/:slug",

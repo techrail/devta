@@ -56,8 +56,13 @@ export const sideBarList = [
     route: "/sql-formatter",
   },
   {
-    name: "PSQL Formatter",
+    name: "Postgres URL Parser",
     iconClass: "bi bi-filetype-sql",
-    route: "/psql-formatter",
+    route: "/postgres-parser",
+  },
+  {
+    name: "URL Parser",
+    iconClass: "bi bi-link-45deg",
+    route: "/url-parser",
   },
 ];
