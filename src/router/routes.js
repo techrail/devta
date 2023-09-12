@@ -76,7 +76,7 @@ const routes = [
     name: "URL Parser",
   },
   {
-    path: "/postgres-parser",
+    path: "/postgresql-url-parser",
     component: PSQLFormatter,
     name: "Postgres URL Parser",
   },

@@ -10,31 +10,31 @@ export const sideBarList = [
     name: "Hash Generator",
     iconClass: "bi bi-hash",
     route: "/hash-generator",
-    tags: "security,Cryptography,Secure Hash"
+    tags: "Security,Cryptography,Hashing,MD5,SHA,SHA1,SHA3,SHA224,SHA256,SHA384,SHA512"
   },
   {
     name: "Base64",
     iconClass: "bi bi-journal-text",
     route: "/base64",
-    tags: "Encoding,Decoding,Encoder,Decoder,Conversion"
+    tags: "Encoding,Decoding,Encoder,Decoder,Conversion,Base64"
   },
   {
     name: "Unix to date",
     iconClass: "bi bi-postage",
     route: "/unix-date-converter",
-    tags: "datetime,Conversion,Timestamp,Epoch to Date"
+    tags: "datetime,Conversion,Timestamp,Epoch to Date,Time"
   },
   {
     name: "Date to unix",
     iconClass: "bi bi-calendar-date",
     route: "/date-unix-converter",
-    tags: "datetime,Conversion,Timestamp,Epoch Converter"
+    tags: "datetime,Conversion,Timestamp,Epoch Converter,Time"
   },
   {
     name: "Timezone Converter",
     iconClass: "bi bi-calendar-range",
     route: "/timezone-converter",
-    tags: "datetime,Conversion,Timestamp"
+    tags: "datetime,Conversion,Timestamp,Global"
   },
   {
     name: "Markdown Preview",
@@ -64,18 +64,18 @@ export const sideBarList = [
     name: "SQL Formatter",
     iconClass: "bi bi-filetype-sql",
     route: "/sql-formatter",
-    tags: "database,Syntax "
+    tags: "database,Syntax,db"
   },
   {
-    name: "Postgres URL Parser",
+    name: "PostgreSQL URL Parser",
     iconClass: "bi bi-filetype-sql",
-    route: "/postgres-parser",
-    tags: "database,Syntax,Parsing,SQL"
+    route: "/postgresql-url-parser",
+    tags: "database,Syntax,Parsing,SQL,db"
   },
   {
     name: "URL Parser",
     iconClass: "bi bi-link-45deg",
     route: "/url-parser",
-    tags: "URL Components,URL Parsing"
+    tags: "URL Components,URL Parsing,HTTP"
   },
 ];
