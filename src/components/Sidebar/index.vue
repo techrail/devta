@@ -21,7 +21,11 @@ const sortedSideBarLists = sideBarList.sort((a, b) => a.name.localeCompare(b.nam
 let searchInput = ref("");
 
 const filteredList = () => {
-  return sortedSideBarLists.filter((sideBarItem) => containsWordsInAnyOrder(sideBarItem.name.toLowerCase(), searchInput.value.toLowerCase()));
+  return sortedSideBarLists.filter((sideBarItem) => containsWordsInAnyOrder(
+      sideBarItem.name.toLowerCase()+sideBarItem.tags.toLowerCase(), 
+      searchInput.value.toLowerCase()
+    )
+  );
 };
 
 function containsWordsInAnyOrder(listItem, searchInput) {
