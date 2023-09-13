@@ -11,9 +11,6 @@ const handleChange = () => {
     if (!signature.value) return
     emit('keyChange', signature.value)
 }
-
-
-
 </script>
 
 <template>

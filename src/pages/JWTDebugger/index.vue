@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch, onMounted, watchEffect } from "vue";
 import { copyToClipboard } from "../../components/utils/UnixDateTime";
-import { algorithms, getHeader } from "../../components/utils/JwtDebugger";
+import { algorithms, getHeader, signToken } from "../../components/utils/JwtDebugger";
 import { getPayload } from "../../components/utils/JwtDebugger";
 import PageHeader from "../../components/Pageheader/index.vue";
 import SignatureInput from "../../components/JWTSignatureVerify/SignatureInput.vue";
@@ -37,8 +37,14 @@ const handleClick = async (text) => {
   }
 };
 
-const handleChange = (value) => {
-
+const handleChange = async (value) => {
+  try {
+    const res = await signToken(decodedPayload.value, selectedAlgorithm.value, value, decodedHeader.value)
+    console.log(res)
+    jwtoken.value = res
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 
@@ -93,6 +99,7 @@ const handleChange = (value) => {
               <h5 class="text-muted"><strong>Payload</strong></h5>
               <highlightjs :code="decodedPayload" />
             </div>
+
             <!-- signature verification component -->
             <div>
               <h5 class="text-muted"><strong>Verify Signature</strong></h5>

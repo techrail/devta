@@ -1,4 +1,4 @@
-import { decodeProtectedHeader, decodeJwt, jwtVerify } from "jose";
+import { decodeProtectedHeader, decodeJwt, jwtVerify, SignJWT } from "jose";
 
 export const algorithms = [
   "HS256", // default arg
@@ -23,12 +23,25 @@ export const getPayload = (data, indent = 2) =>
 
 export const validateSignature = async (jwtToken, algorithm, key) => {
   try {
-    if (algorithm[0].toLowercase() == "h") {
+    if (algorithm.toLowerCase().startsWith("h")) {
       const key = new TextEncoder().encode(key);
       const res = await jwtVerify(jwtToken, key);
       console.log(res);
     }
   } catch (error) {
     return false;
+  }
+};
+
+export const signToken = async (data, algorithm, privateKey, headers) => {
+  try {
+    if (algorithm.toLowerCase().startsWith("h")) {
+      const key = new TextEncoder().encode(privateKey ? privateKey : " ");
+      return new SignJWT(JSON.parse(data))
+        .setProtectedHeader(JSON.parse(headers))
+        .sign(key);
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
