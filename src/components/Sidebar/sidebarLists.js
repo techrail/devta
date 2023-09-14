@@ -78,4 +78,11 @@ export const sideBarList = [
     route: "/url-parser",
     tags: "URL Components,URL Parsing,HTTP"
   },
+  {
+    name: "Regex Tester",
+    iconClass: "bi bi-regex",
+    route: "/regex-tester",
+    tags: "regex"
+
+  },
 ];

@@ -1,0 +1,12 @@
+#testInput {
+  height: 72vh;
+}
+
+@media screen and (max-width: 800px) {
+  #testInput {
+    height: 40vh;
+  }
+}
+.custom-height {
+  resize: vertical;
+}

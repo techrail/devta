@@ -12,6 +12,7 @@ import SQLFormatter from "../pages/SQLFormatter/index.vue";
 import PSQLFormatter from "../pages/PSQLParser/index.vue"
 import Index from "../pages/Index/index.vue";
 import URLParser from "../pages/URLParser/index.vue";
+import RegexTester from "../pages/RegexTester/index.vue"
 
 
 const routes = [
@@ -79,6 +80,11 @@ const routes = [
     path: "/postgresql-url-parser",
     component: PSQLFormatter,
     name: "Postgres URL Parser",
+  },
+  {
+    path: "/regex-tester",
+    component: RegexTester,
+    name: "Regex Tester",
   },
   // {
   //   path: "/:slug",
