@@ -1,11 +1,12 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import PageHeader from "../../components/Pageheader/index.vue";
 import hljs from "highlight.js";
 import json from "highlight.js/lib/languages/json";
 
-const unformattedJson = ref("");
+onMounted(() => document.querySelector("[autofocus]")?.focus());
 
+const unformattedJson = ref("");
 const formattedVal = ref("");
 
 var indent = 2;
@@ -26,11 +27,7 @@ function format() {
   }
 
   try {
-    formattedVal.value = JSON.stringify(
-      JSON.parse(unformattedJson.value),
-      null,
-      spacer
-    );
+    formattedVal.value = JSON.stringify(JSON.parse(unformattedJson.value), null, spacer);
     alert.invalid = false;
   } catch (error) {
     alert.invalid = true;
@@ -39,11 +36,7 @@ function format() {
 
 function minify() {
   try {
-    formattedVal.value = JSON.stringify(
-      JSON.parse(unformattedJson.value),
-      null,
-      0
-    );
+    formattedVal.value = JSON.stringify(JSON.parse(unformattedJson.value), null, 0);
 
     console.log("coming from minify function");
   } catch (er) {
@@ -83,6 +76,7 @@ function reset() {
               class="form-control mono-font"
               id="textAreaExample2"
               v-model="unformattedJson"
+              autofocus
               rows="10"
               cols="60"
               placeholder="enter your json"
@@ -91,23 +85,15 @@ function reset() {
             <br />
             <div class="d-flex flex-row justify-content-center gap-5">
               <div class="d-flex flex-column justify-content-center">
-                <button class="btn btn-primary" @click="format()">
-                  beautify
-                </button>
+                <button class="btn btn-primary" @click="format()">beautify</button>
               </div>
 
               <button class="btn btn-primary" @click="minify()">minify</button>
             </div>
             <br />
             <br /><br />
-            <div
-              class="d-flex flex-row justify-content-center gap-5 border-primary postition-absolute"
-            >
-              <select
-                class="form-select form-select-sm"
-                aria-label=".form-select-sm example"
-                v-model="indent"
-              >
+            <div class="d-flex flex-row justify-content-center gap-5 border-primary postition-absolute">
+              <select class="form-select form-select-sm" aria-label=".form-select-sm example" v-model="indent">
                 <option selected value="2">2 Tab Space</option>
                 <option value="3">3 Tab Space</option>
                 <option value="4">4 Tab Space</option>
@@ -130,28 +116,10 @@ function reset() {
             </div>
           </div>
           <div class="d-flex gap-2 p-2">
-            <button
-              class="btn btn-primary"
-              @click="copy"
-              data-placement="top"
-              title="Copy to clipboard"
-            >
-              <i
-                :class="
-                  alert.isClicked
-                    ? 'bi bi-check-circle-fill'
-                    : 'bi bi-clipboard'
-                "
-              ></i>
+            <button class="btn btn-primary" @click="copy" data-placement="top" title="Copy to clipboard">
+              <i :class="alert.isClicked ? 'bi bi-check-circle-fill' : 'bi bi-clipboard'"></i>
             </button>
-            <button
-              class="btn btn-danger"
-              @click="reset"
-              type="reset"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Clear text"
-            >
+            <button class="btn btn-danger" @click="reset" type="reset" data-toggle="tooltip" data-placement="top" title="Clear text">
               <i class="bi bi-x-lg"></i>
             </button>
           </div>
