@@ -65,4 +65,9 @@ export const sideBarList = [
     iconClass: "bi bi-link-45deg",
     route: "/url-parser",
   },
+  {
+    name: "Regex Tester",
+    iconClass: "bi bi-regex",
+    route: "/regex-tester",
+  },
 ];
