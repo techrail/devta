@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch, onMounted, watchEffect } from "vue";
 import { copyToClipboard } from "../../components/utils/UnixDateTime";
-import { algorithms, getHeader, signToken } from "../../components/utils/JwtDebugger";
+import { algorithms, getHeader, signToken, validateSignature } from "../../components/utils/JwtDebugger";
 import { getPayload } from "../../components/utils/JwtDebugger";
 import PageHeader from "../../components/Pageheader/index.vue";
 import SignatureInput from "../../components/JWTSignatureVerify/SignatureInput.vue";
@@ -12,14 +12,9 @@ const jwtoken = ref('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3OD
 const decodedPayload = ref();
 const decodedHeader = ref();
 const validSig = ref(true)
+const key1 = ref('')
+const key2 = ref('')
 const selectedAlgorithm = ref(algorithms[0])
-
-// watch(jwtoken, (newjwtoken, oldjwtoken) => {
-//   if (!newjwtoken | (newjwtoken === oldjwtoken)) return;
-//   decodedHeader.value = getHeader(newjwtoken);
-//   decodedPayload.value = getPayload(newjwtoken);
-// });
-
 
 watchEffect(() => {
   if (!jwtoken.value) return
@@ -29,6 +24,20 @@ watchEffect(() => {
   selectedAlgorithm.value = header.alg
 })
 
+
+watch(jwtoken, async () => {
+  if (!jwtoken.value) return
+  verifyTokenSignature()
+})
+
+const verifyTokenSignature = async () => {
+  try {
+    validSig.value = await validateSignature(jwtoken.value, selectedAlgorithm.value, key1.value)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 const handleClick = async (text) => {
   try {
     await copyToClipboard(text);
@@ -37,16 +46,15 @@ const handleClick = async (text) => {
   }
 };
 
+// handles the emitted signature value
 const handleChange = async (value) => {
   try {
-    const res = await signToken(decodedPayload.value, selectedAlgorithm.value, value, decodedHeader.value)
-    console.log(res)
-    jwtoken.value = res
+    key1.value = value
+    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, value, decodedHeader.value)
   } catch (error) {
     console.log(error)
   }
 }
-
 
 </script>
 
@@ -73,7 +81,20 @@ const handleChange = async (value) => {
               <label for="tokenInput">Enter the token</label>
             </div>
           </div>
-
+          <div v-if="jwtoken" class="mt-2">
+            <!-- validator alert -->
+            <div :class="validSig ? 'alert alert-success' : 'alert alert-danger'" role="alert">
+              <small>
+                <strong>
+                  {{
+                    validSig ? 'Valid token!' : 'Invalid token!'
+                  }}
+                </strong>
+              </small>
+            </div>
+            <div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="block card block2 overflow-auto">

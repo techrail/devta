@@ -24,9 +24,9 @@ export const getPayload = (data, indent = 2) =>
 export const validateSignature = async (jwtToken, algorithm, key) => {
   try {
     if (algorithm.toLowerCase().startsWith("h")) {
-      const key = new TextEncoder().encode(key);
-      const res = await jwtVerify(jwtToken, key);
-      console.log(res);
+      const privateKey = new TextEncoder().encode(key);
+      await jwtVerify(jwtToken, privateKey);
+      return true;
     }
   } catch (error) {
     return false;
