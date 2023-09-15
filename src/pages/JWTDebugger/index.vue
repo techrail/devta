@@ -6,10 +6,11 @@ import { getPayload } from "../../components/utils/JwtDebugger";
 import PageHeader from "../../components/Pageheader/index.vue";
 import SignatureInput from "../../components/JWTSignatureVerify/SignatureInput.vue";
 import { jsonValidator } from "../../components/utils/jsonConverter";
+import { setTextInputSize } from '../../components/utils/resizableInput'
 
 onMounted(() => {
   document.querySelector("[autofocus]")?.focus()
-  setSize()
+  setTextInputSize(['tokenInput', 'payloadInput'])
 });
 
 const jwtoken = ref('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c');
@@ -53,18 +54,13 @@ const handleClick = async (text) => {
   }
 };
 
-// resizes the input field
-const setSize = () => {
-  const input = document.getElementById('payloadInput')
-  input.style.height = 'auto';
-  input.style.height = (input.scrollHeight) + 10 + 'px';
-}
 
 // handles the emitted signature value
 const handleChange = async (value) => {
   error.value = false
   error.value = !jsonValidator(decodedPayload.value)
-  setSize()
+  setTextInputSize(['payloadInput'])
+
   if (error.value == true) return
   try {
     key1.value = value
