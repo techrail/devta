@@ -9,10 +9,10 @@ import TimeZoneConverter from "../pages/TimeZoneConverter/index.vue";
 import JSONToYAML from "../pages/JSONConverter/index.vue";
 import JWTDebugger from "../pages/JWTDebugger/index.vue";
 import SQLFormatter from "../pages/SQLFormatter/index.vue";
-import PSQLFormatter from "../pages/PSQLParser/index.vue"
+import PSQLFormatter from "../pages/PSQLParser/index.vue";
 import Index from "../pages/Index/index.vue";
 import URLParser from "../pages/URLParser/index.vue";
-
+import APITester from "../pages/APITester/index.vue";
 
 const routes = [
   {
@@ -87,6 +87,11 @@ const routes = [
   {
     path: "/:path",
     redirect: { name: "Home" },
+  },
+  {
+    path: "/api-tester",
+    component: APITester,
+    name: "API Tester",
   },
 ];
 

@@ -1,0 +1,30 @@
+* {
+  --close-opacity: 1;
+}
+
+/* todo use variable for width */
+@media screen and (min-width: 576px) {
+  button.add-btn {
+    margin-right: 3rem;
+  }
+}
+/* todo use variable for width */
+@media screen and (min-width: 992px) {
+  * {
+    --close-opacity: 0;
+  }
+}
+
+.close {
+  width: 3rem;
+  opacity: var(--close-opacity);
+  cursor: pointer;
+  background-color: rgba(255, 0, 0, 0.05);
+  font-size: 1.5rem;
+}
+.rep-row:hover .close {
+  opacity: 1;
+}
+.close:hover {
+  background-color: rgba(255, 0, 0, 0.2);
+}
