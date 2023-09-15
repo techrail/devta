@@ -5,8 +5,12 @@ import { algorithms, getHeader, signToken, validateSignature } from "../../compo
 import { getPayload } from "../../components/utils/JwtDebugger";
 import PageHeader from "../../components/Pageheader/index.vue";
 import SignatureInput from "../../components/JWTSignatureVerify/SignatureInput.vue";
+import { jsonValidator } from "../../components/utils/jsonConverter";
 
-onMounted(() => document.querySelector("[autofocus]")?.focus());
+onMounted(() => {
+  document.querySelector("[autofocus]")?.focus()
+  setSize()
+});
 
 const jwtoken = ref('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c');
 const decodedPayload = ref();
@@ -15,6 +19,9 @@ const validSig = ref(true)
 const key1 = ref('')
 const key2 = ref('')
 const selectedAlgorithm = ref(algorithms[0])
+const error = ref(false)
+
+
 
 watchEffect(() => {
   if (!jwtoken.value) return
@@ -46,8 +53,19 @@ const handleClick = async (text) => {
   }
 };
 
+// resizes the input field
+const setSize = () => {
+  const input = document.getElementById('payloadInput')
+  input.style.height = 'auto';
+  input.style.height = (input.scrollHeight) + 10 + 'px';
+}
+
 // handles the emitted signature value
 const handleChange = async (value) => {
+  error.value = false
+  error.value = !jsonValidator(decodedPayload.value)
+  setSize()
+  if (error.value == true) return
   try {
     key1.value = value
     jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, value, decodedHeader.value)
@@ -66,6 +84,7 @@ const handleChange = async (value) => {
     <div class="grid mt-1">
       <div class="block card block1">
         <div class="p-3">
+          <!-- jwt warning -->
           <div class="alert alert-warning" role="alert">
             <small>
               Warning: JWTs are credentials, which can grant access to resources. Be careful where you paste them! We do
@@ -73,6 +92,7 @@ const handleChange = async (value) => {
               validation and debugging is done on the client side.
             </small>
           </div>
+          <!-- input for jwt -->
           <div class="overflow-auto">
             <div class="form-floating">
               <textarea v-model="jwtoken" autofocus type="text" class="form-control mono-font" id="tokenInput"
@@ -81,6 +101,7 @@ const handleChange = async (value) => {
               <label for="tokenInput">Enter the token</label>
             </div>
           </div>
+          <!-- validator -->
           <div v-if="jwtoken" class="mt-2">
             <!-- validator alert -->
             <div :class="validSig ? 'alert alert-success' : 'alert alert-danger'" role="alert">
@@ -92,14 +113,11 @@ const handleChange = async (value) => {
                 </strong>
               </small>
             </div>
-            <div>
-            </div>
           </div>
         </div>
       </div>
       <div class="block card block2 overflow-auto">
         <div class="p-2">
-
           <!-- algorithm dropdown -->
           <div class="form-floating mt-2">
             <select class="form-select" name="algorithm-select" id="algorithm-select" v-model="selectedAlgorithm">
@@ -110,7 +128,8 @@ const handleChange = async (value) => {
           </div>
         </div>
 
-        <div v-if="jwtoken && decodedHeader && decodedPayload">
+        <!-- JWT decode -->
+        <div v-if="jwtoken">
           <div class="p-2 overflow-auto">
             <div class="">
               <h5 class="text-muted"><strong>Header</strong></h5>
@@ -118,7 +137,10 @@ const handleChange = async (value) => {
             </div>
             <div class="">
               <h5 class="text-muted"><strong>Payload</strong></h5>
-              <highlightjs :code="decodedPayload" />
+              <!-- <highlightjs :code="decodedPayload" /> -->
+              <textarea v-model="decodedPayload" @input="handleChange"
+                :class="error ? 'form-control mono-font is-invalid' : 'form-control mono-font'"
+                id="payloadInput"></textarea>
             </div>
 
             <!-- signature verification component -->
@@ -126,10 +148,7 @@ const handleChange = async (value) => {
               <h5 class="text-muted"><strong>Verify Signature</strong></h5>
               <SignatureInput :algo-type="selectedAlgorithm" @key-change="(value) => handleChange(value)" />
             </div>
-
           </div>
-
-
         </div>
       </div>
     </div>
