@@ -6,41 +6,20 @@ import { getPayload } from "../../components/utils/JwtDebugger";
 import PageHeader from "../../components/Pageheader/index.vue";
 import SignatureInput from "../../components/JWTSignatureVerify/SignatureInput.vue";
 import { jsonValidator } from "../../components/utils/jsonConverter";
-import { setTextInputSize } from '../../components/utils/resizableInput'
 
 onMounted(() => {
   document.querySelector("[autofocus]")?.focus()
-  // setTextInputSize(['tokenInput', 'payloadInput'])
+  setSize()
 });
 
-const jwtoken = ref('');
-const decodedPayload = ref(`{
-  "sub": "1234567890",
-  "name": "John Doe",
-  "iat": 1516239022
-}`);
-const decodedHeader = ref('');
+const jwtoken = ref('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c');
+const decodedPayload = ref();
+const decodedHeader = ref();
 const validSig = ref(true)
-const key1 = ref(' ')
-const key2 = ref(' ')
+const key1 = ref('')
+const key2 = ref('')
 const selectedAlgorithm = ref(algorithms[0])
 const error = ref(false)
-const twoKeys = ref(false)
-
-
-const initialiseToken = async () => {
-  try {
-    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, key1.value, '')
-    decodedPayload.value = getPayload(jwtoken.value)
-    decodedHeader.value = getHeader(jwtoken.value)
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-
-
-
 
 const verifyTokenSignature = async () => {
   try {
@@ -58,27 +37,43 @@ const handleClick = async (text) => {
   }
 };
 
+// resizes the input field
+const setSize = () => {
+  const input = document.getElementById('payloadInput')
+  input.style.height = 'auto';
+  input.style.height = (input.scrollHeight) + 10 + 'px';
+}
 
 // handles the emitted signature value
-const handleChange = async (value1) => {
-  key1.value = value1
-}
-
-const handleCleanup = () => {
+const handleChange = async (value) => {
   error.value = false
-  validSig.value = true
-  key1.value = ('')
-  key2.value = (null)
+  error.value = !jsonValidator(decodedPayload.value)
+  setSize()
+  if (error.value == true) return
+  try {
+    key1.value = value
+    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, value, decodedHeader.value)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-watchEffect(async () => {
-  // check if the algorithm requires two keys, public and private
-  twoKeys.value = !selectedAlgorithm.value.toLowerCase().startsWith("h")
-  error.value = !jsonValidator(decodedPayload.value)
-  if (error.value) return
-  if (!twoKeys.value) {
-    initialiseToken()
-  }
+watchEffect(() => {
+  if (!jwtoken.value) return
+  decodedHeader.value = getHeader(jwtoken.value);
+  decodedPayload.value = getPayload(jwtoken.value);
+  const header = JSON.parse(decodedHeader.value)
+  selectedAlgorithm.value = header.alg
+})
+
+
+watch(jwtoken, async () => {
+  if (!jwtoken.value) return
+  verifyTokenSignature()
+})
+
+watch(selectedAlgorithm, async () => {
+  jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, key1.value, decodedHeader.value)
 })
 
 </script>
@@ -145,7 +140,7 @@ watchEffect(async () => {
             <div class="">
               <h5 class="text-muted"><strong>Payload</strong></h5>
               <!-- <highlightjs :code="decodedPayload" /> -->
-              <textarea v-model="decodedPayload" @input="handleChange" rows="5"
+              <textarea v-model="decodedPayload" @input="handleChange"
                 :class="error ? 'form-control mono-font is-invalid' : 'form-control mono-font'"
                 id="payloadInput"></textarea>
             </div>
@@ -153,9 +148,7 @@ watchEffect(async () => {
             <!-- signature verification component -->
             <div>
               <h5 class="text-muted"><strong>Verify Signature</strong></h5>
-              <div v-if="!twoKeys">
-                <SignatureInput :algo-type="selectedAlgorithm" @key-change="(k1) => handleChange(k1)" />
-              </div>
+              <SignatureInput :algo-type="selectedAlgorithm" @key-change="(value) => handleChange(value)" />
             </div>
           </div>
         </div>
