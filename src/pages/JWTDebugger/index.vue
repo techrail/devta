@@ -17,11 +17,12 @@ const jwtoken = ref('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3OD
 const decodedPayload = ref();
 const decodedHeader = ref();
 const validSig = ref(true)
-const key1 = ref()
-const key2 = ref()
+const key1 = ref('')
+const key2 = ref('')
 const selectedAlgorithm = ref(algorithms[0])
 const error = ref(false)
-const twoKeys = ref(false)
+
+
 
 watchEffect(() => {
   if (!jwtoken.value) return
@@ -37,11 +38,6 @@ watch(jwtoken, async () => {
   verifyTokenSignature()
 })
 
-watch(selectedAlgorithm, () => {
-  if (!selectedAlgorithm.value) return
-  twoKeys.value = !selectedAlgorithm.value.toLowerCase().startsWith("h")
-  jwtoken.value = signToken(decodedPayload.value, selectedAlgorithm.value, "", "", decodedHeader.value)
-})
 
 const verifyTokenSignature = async () => {
   try {
@@ -61,32 +57,18 @@ const handleClick = async (text) => {
 
 
 // handles the emitted signature value
-const handleChange = async (value1, value2) => {
-  console.log(value1, value2)
+const handleChange = async (value) => {
   error.value = false
   error.value = !jsonValidator(decodedPayload.value)
   setTextInputSize(['payloadInput'])
 
   if (error.value == true) return
   try {
-    // todo make changes based on the input values
-    key1.value = value1
-    if (twoKeys.value) {
-      if (value2 === null) return
-      key2.value = value2
-    }
-    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, value1, value2, decodedHeader.value)
-    console.log(jwtoken.value)
+    key1.value = value
+    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, value, decodedHeader.value)
   } catch (error) {
     console.log(error)
   }
-}
-
-const handleCleanup = () => {
-  error.value = false
-  validSig.value = true
-  key1.value = ('')
-  key2.value = (null)
 }
 
 </script>
@@ -161,8 +143,7 @@ const handleCleanup = () => {
             <!-- signature verification component -->
             <div>
               <h5 class="text-muted"><strong>Verify Signature</strong></h5>
-              <SignatureInput :two-keys="twoKeys" :algo-type="selectedAlgorithm"
-                @key-change="(k1, k2) => handleChange(k1, k2)" />
+              <SignatureInput :algo-type="selectedAlgorithm" @key-change="(value) => handleChange(value)" />
             </div>
           </div>
         </div>

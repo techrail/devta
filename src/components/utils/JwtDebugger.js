@@ -1,12 +1,4 @@
-import {
-  decodeProtectedHeader,
-  decodeJwt,
-  jwtVerify,
-  SignJWT,
-  generateKeyPair,
-  importPKCS8,
-  importSPKI,
-} from "jose";
+import { decodeProtectedHeader, decodeJwt, jwtVerify, SignJWT } from "jose";
 
 export const algorithms = [
   "HS256", // default arg
@@ -29,16 +21,11 @@ export const getHeader = (header, indent = 2) =>
 export const getPayload = (data, indent = 2) =>
   JSON.stringify(decodeJwt(data), null, indent);
 
-export const validateSignature = async (jwtToken, algorithm, key, pubKey) => {
+export const validateSignature = async (jwtToken, algorithm, key) => {
   try {
     if (algorithm.toLowerCase().startsWith("h")) {
       const privateKey = new TextEncoder().encode(key);
       await jwtVerify(jwtToken, privateKey);
-      return true;
-    } else {
-      if (!key || pubKey) return false;
-      const publicKey = await importSPKI(pubKey, algorithm);
-      await jwtVerify(jwtToken, publicKey);
       return true;
     }
   } catch (error) {
@@ -46,29 +33,13 @@ export const validateSignature = async (jwtToken, algorithm, key, pubKey) => {
   }
 };
 
-export const signToken = async (
-  data,
-  algorithm,
-  privateKey,
-  publicKey,
-  headers
-) => {
+export const signToken = async (data, algorithm, privateKey, headers) => {
   try {
     if (algorithm.toLowerCase().startsWith("h")) {
       const key = new TextEncoder().encode(privateKey ? privateKey : " ");
       return new SignJWT(JSON.parse(data))
         .setProtectedHeader(JSON.parse(headers))
         .sign(key);
-    } else {
-      let { pubKey, privKey } = await generateKeyPair(algorithm, {
-        extractable: true,
-      });
-
-      privKey = await importPKCS8(privateKey ? privateKey : "", algorithm);
-      pubKey = await importPKCS8(publicKey ? publicKey : "", algorithm);
-      return new SignJWT(JSON.parse(data))
-        .setProtectedHeader(JSON.parse(headers))
-        .sign(privKey);
     }
   } catch (error) {
     console.log(error);
