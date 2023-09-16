@@ -10,72 +10,78 @@ export const sideBarList = [
     name: "Hash Generator",
     iconClass: "bi bi-hash",
     route: "/hash-generator",
-    tags: "Security,Cryptography,Hashing,MD5,SHA,SHA1,SHA3,SHA224,SHA256,SHA384,SHA512"
+    tags: "Security,Cryptography,Hashing,MD5,SHA,SHA1,SHA3,SHA224,SHA256,SHA384,SHA512",
   },
   {
     name: "Base64",
     iconClass: "bi bi-journal-text",
     route: "/base64",
-    tags: "Encoding,Decoding,Encoder,Decoder,Conversion,Base64"
+    tags: "Encoding,Decoding,Encoder,Decoder,Conversion,Base64",
   },
   {
     name: "Unix to date",
     iconClass: "bi bi-postage",
     route: "/unix-date-converter",
-    tags: "datetime,Conversion,Timestamp,Epoch to Date,Time"
+    tags: "datetime,Conversion,Timestamp,Epoch to Date,Time",
   },
   {
     name: "Date to unix",
     iconClass: "bi bi-calendar-date",
     route: "/date-unix-converter",
-    tags: "datetime,Conversion,Timestamp,Epoch Converter,Time"
+    tags: "datetime,Conversion,Timestamp,Epoch Converter,Time",
   },
   {
     name: "Timezone Converter",
     iconClass: "bi bi-calendar-range",
     route: "/timezone-converter",
-    tags: "datetime,Conversion,Timestamp,Global"
+    tags: "datetime,Conversion,Timestamp,Global",
   },
   {
     name: "Markdown Preview",
     iconClass: "bi bi-filetype-md",
     route: "/markdown-preview",
-    tags: "Markdown Viewer,Markdown Rendering,Markdown Editor,Parsing"
+    tags: "Markdown Viewer,Markdown Rendering,Markdown Editor,Parsing",
   },
   {
     name: "Json Formatter",
     iconClass: "bi bi-filetype-json",
     route: "/json-formatter",
-    tags: "Syntax,JSON"
+    tags: "Syntax,JSON",
   },
   {
     name: "JWT Debugger",
     iconClass: "bi bi-bug",
     route: "/jwt-debugger",
-    tags: "Validation,Token Inspection,Token Debugging,JSON"
+    tags: "Validation,Token Inspection,Token Debugging,JSON",
   },
   {
     name: "JSON Converter",
     iconClass: "bi bi-filetype-json",
     route: "/json-converter",
-    tags: "Conversion,Syntax,JSON"
+    tags: "Conversion,Syntax,JSON",
   },
   {
     name: "SQL Formatter",
     iconClass: "bi bi-filetype-sql",
     route: "/sql-formatter",
-    tags: "database,Syntax,db"
+    tags: "database,Syntax,db",
   },
   {
     name: "PostgreSQL URL Parser",
     iconClass: "bi bi-filetype-sql",
     route: "/postgresql-url-parser",
-    tags: "database,Syntax,Parsing,SQL,db"
+    tags: "database,Syntax,Parsing,SQL,db",
   },
   {
     name: "URL Parser",
     iconClass: "bi bi-link-45deg",
     route: "/url-parser",
-    tags: "URL Components,URL Parsing,HTTP"
+    tags: "URL Components,URL Parsing,HTTP",
+  },
+  {
+    name: "API Tester",
+    iconClass: "bi bi-send-check-fill",
+    route: "/api-tester",
+    tags: "api, testing, get, post, put, patch, delete",
   },
 ];
