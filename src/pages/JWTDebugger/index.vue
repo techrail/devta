@@ -21,42 +21,26 @@ const decodedPayload = ref(`{
 }`);
 const decodedHeader = ref('');
 const validSig = ref(true)
-const key1 = ref('')
-const key2 = ref('')
+const key1 = ref(' ')
+const key2 = ref(' ')
 const selectedAlgorithm = ref(algorithms[0])
 const error = ref(false)
 const twoKeys = ref(false)
 
 
-watchEffect(async () => {
-  // check if the algorithm requires two keys, public and private
-  twoKeys.value = !selectedAlgorithm.value.toLowerCase().startsWith("h")
-  if (!twoKeys.value)
-    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, key1)
-})
+const initialiseToken = async () => {
+  try {
+    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, key1.value, '')
+    decodedPayload.value = getPayload(jwtoken.value)
+    decodedHeader.value = getHeader(jwtoken.value)
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 
 
 
-
-// watchEffect(() => {
-//   decodedHeader.value = getHeader(jwtoken.value);
-//   decodedPayload.value = getPayload(jwtoken.value);
-//   const header = JSON.parse(decodedHeader.value)
-//   selectedAlgorithm.value = header.alg
-// })
-
-
-// watch(jwtoken, async () => {
-//   if (!jwtoken.value) return
-//   verifyTokenSignature()
-// })
-
-// watch(selectedAlgorithm, () => {
-//   if (!selectedAlgorithm.value) return
-//   twoKeys.value = !selectedAlgorithm.value.toLowerCase().startsWith("h")
-//   jwtoken.value = signToken(decodedPayload.value, selectedAlgorithm.value, "", "", decodedHeader.value)
-// })
 
 const verifyTokenSignature = async () => {
   try {
@@ -77,22 +61,7 @@ const handleClick = async (text) => {
 
 // handles the emitted signature value
 const handleChange = async (value1) => {
-  error.value = false
-  error.value = !jsonValidator(decodedPayload.value)
-  // setTextInputSize(['payloadInput'])
-
-  if (error.value == true) return
-  try {
-    // todo make changes based on the input values
-    key1.value = value1
-    if (!twoKeys.value) {
-      jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, value1, null, decodedHeader.value)
-    } else {
-
-    }
-  } catch (error) {
-    console.log(error)
-  }
+  key1.value = value1
 }
 
 const handleCleanup = () => {
@@ -101,6 +70,16 @@ const handleCleanup = () => {
   key1.value = ('')
   key2.value = (null)
 }
+
+watchEffect(async () => {
+  // check if the algorithm requires two keys, public and private
+  twoKeys.value = !selectedAlgorithm.value.toLowerCase().startsWith("h")
+  error.value = !jsonValidator(decodedPayload.value)
+  if (error.value) return
+  if (!twoKeys.value) {
+    initialiseToken()
+  }
+})
 
 </script>
 

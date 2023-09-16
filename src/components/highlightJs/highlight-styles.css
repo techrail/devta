@@ -24,6 +24,8 @@ hue-6-2: #c18401
   padding: 0.5em;
   color: #383a42;
   background: #fafafa;
+  border: 1px solid #e3e6ea;
+  border-radius: 8px;
 }
 
 .hljs-comment,
@@ -121,6 +123,8 @@ hue-6-2: #e6c07b
   padding: 0.5em;
   color: #abb2bf;
   background: #282c34;
+  border: 1px solid #434a50;
+  border-radius: 8px;
 }
 
 [data-bs-theme="dark"] .hljs-comment,

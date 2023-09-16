@@ -23,12 +23,15 @@ export const algorithms = [
   "ES512",
 ];
 
+// returns the header
 export const getHeader = (header, indent = 2) =>
   JSON.stringify(decodeProtectedHeader(header), null, indent);
 
+// returns the formatted payload json
 export const getPayload = (data, indent = 2) =>
   JSON.stringify(decodeJwt(data), null, indent);
 
+// validates the signature
 export const validateSignature = async (jwtToken, algorithm, key, pubKey) => {
   try {
     if (algorithm.toLowerCase().startsWith("h")) {
