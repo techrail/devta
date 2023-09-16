@@ -6,6 +6,8 @@ import {
   generateKeyPair,
   importPKCS8,
   importSPKI,
+  exportPKCS8,
+  exportSPKI,
 } from "jose";
 
 export const algorithms = [
@@ -60,18 +62,65 @@ export const signToken = async (data, algorithm, privateKey, publicKey) => {
         })
         .sign(key);
     } else {
-      let { pubKey, privKey } = await generateKeyPair(algorithm, {
+      let keys = await generateKeyPair(algorithm, {
         extractable: true,
       });
+      if (privateKey) {
+        keys.privateKey = await importPKCS8(privateKey, algorithm);
+      }
+      if (publicKey) {
+        keys.publicKey = await importPKCS8(publicKey, algorithm);
+      }
+      // Create a JWT object
+      const jwt = new SignJWT(JSON.parse(data)).setProtectedHeader({
+        typ: "JWT",
+        alg: algorithm,
+      });
+      // Sign the JWT using the private key
+      const token = await jwt.sign(keys.privateKey);
 
-      // privKey = await importPKCS8(privateKey ? privateKey : "", algorithm);
-      // pubKey = await importPKCS8(publicKey ? publicKey : "", algorithm);
-      return new SignJWT(JSON.parse(data))
-        .setProtectedHeader({
-          alg: algorithm,
-          typ: "JWT",
-        })
-        .sign(privKey);
+      // Export the private and public keys
+      const privateKeyExported = await exportPKCS8(keys.privateKey);
+      const publicKeyExported = await exportSPKI(keys.publicKey);
+
+      // Return the token and keys
+      return {
+        token,
+        privateKey: privateKeyExported,
+        publicKey: publicKeyExported,
+      };
+
+      // let { pubKey, privKey } = await generateKeyPair(algorithm, {
+      //   extractable: true,
+      // });
+      // if (publicKey !== "" || publicKey) {
+      //   pubKey = await importPKCS8(publicKey, algorithm);
+      // }
+
+      // if (privateKey !== "" || publicKey) {
+      //   privKey = await importPKCS8(privateKey, algorithm);
+      // }
+      // const jwt = new SignJWT(JSON.parse(data)).setProtectedHeader({
+      //   typ: "JWT",
+      //   alg: algorithm,
+      // });
+      // token = await jwt.sign(privKey);
+      // privateKey = await exportPKCS8(privKey);
+      // publicKey = await exportSPKI(pubKey);
+      // return { token, privateKey, publicKey };
+
+      // let { pubKey, privKey } = await generateKeyPair(algorithm, {
+      //   extractable: true,
+      // });
+
+      // // privKey = await importPKCS8(privateKey ? privateKey : "", algorithm);
+      // // pubKey = await importPKCS8(publicKey ? publicKey : "", algorithm);
+      // return new SignJWT(JSON.parse(data))
+      //   .setProtectedHeader({
+      //     alg: algorithm,
+      //     typ: "JWT",
+      //   })
+      //   .sign(privKey);
     }
   } catch (error) {
     console.log(error);

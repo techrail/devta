@@ -6,20 +6,21 @@ import { getPayload } from "../../components/utils/JwtDebugger";
 import PageHeader from "../../components/Pageheader/index.vue";
 import SignatureInput from "../../components/JWTSignatureVerify/SignatureInput.vue";
 import { jsonValidator } from "../../components/utils/jsonConverter";
+import PubPrivKeyContainer from "../../components/JWTSignatureVerify/PubPrivKeyContainer.vue";
 
 onMounted(() => {
   document.querySelector("[autofocus]")?.focus()
-  setSize()
 });
 
 const jwtoken = ref('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c');
 const decodedPayload = ref();
 const decodedHeader = ref();
 const validSig = ref(true)
-const key1 = ref('')
-const key2 = ref('')
+const key1 = ref()
+const key2 = ref()
 const selectedAlgorithm = ref(algorithms[0])
 const error = ref(false)
+const twoKeys = ref(false)
 
 const verifyTokenSignature = async () => {
   try {
@@ -37,18 +38,10 @@ const handleClick = async (text) => {
   }
 };
 
-// resizes the input field
-const setSize = () => {
-  const input = document.getElementById('payloadInput')
-  input.style.height = 'auto';
-  input.style.height = (input.scrollHeight) + 10 + 'px';
-}
-
 // handles the emitted signature value
-const handleChange = async (value) => {
+const handleChange = async (value, value2) => {
   error.value = false
   error.value = !jsonValidator(decodedPayload.value)
-  setSize()
   if (error.value == true) return
   try {
     key1.value = value
@@ -66,14 +59,24 @@ watchEffect(() => {
   selectedAlgorithm.value = header.alg
 })
 
-
 watch(jwtoken, async () => {
   if (!jwtoken.value) return
   verifyTokenSignature()
 })
 
 watch(selectedAlgorithm, async () => {
-  jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, key1.value, decodedHeader.value)
+  key1.value = ''
+  key2.value = ''
+  const check = !selectedAlgorithm.value.toLowerCase().startsWith("h")
+  twoKeys.value = check
+  if (!check) {
+    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, key1.value, key2.value, decodedHeader.value)
+  } else {
+    const tokData = await signToken(decodedPayload.value, selectedAlgorithm.value, key1.value, key2.value, decodedHeader.value)
+    jwtoken.value = tokData.token
+    key1.value = tokData.privateKey
+    key2.value = tokData.publicKey
+  }
 })
 
 </script>
@@ -140,15 +143,21 @@ watch(selectedAlgorithm, async () => {
             <div class="">
               <h5 class="text-muted"><strong>Payload</strong></h5>
               <!-- <highlightjs :code="decodedPayload" /> -->
-              <textarea v-model="decodedPayload" @input="handleChange"
+              <textarea v-model="decodedPayload" rows="5" @input="handleChange"
                 :class="error ? 'form-control mono-font is-invalid' : 'form-control mono-font'"
                 id="payloadInput"></textarea>
             </div>
 
             <!-- signature verification component -->
             <div>
-              <h5 class="text-muted"><strong>Verify Signature</strong></h5>
-              <SignatureInput :algo-type="selectedAlgorithm" @key-change="(value) => handleChange(value)" />
+              <h5 class="text-muted mt-3"><strong>Verify Signature</strong></h5>
+              <div v-if="!twoKeys">
+                <SignatureInput :algo-type="selectedAlgorithm" @key-change="(value) => handleChange(value, null)" />
+              </div>
+              <div v-else>
+                <PubPrivKeyContainer :algo-type="selectedAlgorithm" @key-change="(value) => handleChange(value, null)"
+                  :private-key="key2" :public-key="key1" />
+              </div>
             </div>
           </div>
         </div>

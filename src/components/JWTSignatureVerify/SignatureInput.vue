@@ -9,7 +9,7 @@ const props = defineProps({
 
 const handleChange = () => {
     if (!signature.value) return
-    emit('keyChange', signature.value)
+    emit('keyChange', signature.value, null)
 }
 </script>
 
