@@ -52,6 +52,17 @@ const handleChange = async (value, value2) => {
   }
 }
 
+const handlePayloadChange = async () => {
+  try {
+    error.value = !jsonValidator(decodedPayload.value)
+    if (error.value == true) return
+    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, key1.value, key2.value)
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 watchEffect(() => {
   if (!jwtoken.value) return
   decodedHeader.value = getHeader(jwtoken.value);
@@ -144,7 +155,7 @@ watch(selectedAlgorithm, async () => {
             <div class="">
               <h5 class="text-muted"><strong>Payload</strong></h5>
               <!-- <highlightjs :code="decodedPayload" /> -->
-              <textarea v-model="decodedPayload" rows="5" @input="handleChange"
+              <textarea v-model="decodedPayload" rows="5" @input="handlePayloadChange"
                 :class="error ? 'form-control mono-font is-invalid' : 'form-control mono-font'"
                 id="payloadInput"></textarea>
             </div>
