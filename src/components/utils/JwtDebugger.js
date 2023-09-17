@@ -37,11 +37,11 @@ export const getPayload = (data, indent = 2) =>
 export const validateSignature = async (jwtToken, algorithm, key, pubKey) => {
   try {
     if (algorithm.toLowerCase().startsWith("h")) {
-      const privateKey = new TextEncoder().encode(key);
+      const privateKey = new TextEncoder().encode(key ? key : " ");
       await jwtVerify(jwtToken, privateKey);
       return true;
     } else {
-      if (!key || pubKey) return false;
+      if (!key || !pubKey) return false;
       const publicKey = await importSPKI(pubKey, algorithm);
       await jwtVerify(jwtToken, publicKey);
       return true;
@@ -65,10 +65,10 @@ export const signToken = async (data, algorithm, privateKey, publicKey) => {
       let keys = await generateKeyPair(algorithm, {
         extractable: true,
       });
-      if (privateKey) {
+      if (privateKey && privateKey !== " ") {
         keys.privateKey = await importPKCS8(privateKey, algorithm);
       }
-      if (publicKey) {
+      if (publicKey && publicKey !== " ") {
         keys.publicKey = await importPKCS8(publicKey, algorithm);
       }
       // Create a JWT object

@@ -7,6 +7,7 @@ const props = defineProps({
     algoType: String
 })
 
+
 const handleChange = () => {
     if (!signature.value) return
     emit('keyChange', signature.value, null)

@@ -16,15 +16,15 @@ const jwtoken = ref('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3OD
 const decodedPayload = ref();
 const decodedHeader = ref();
 const validSig = ref(true)
-const key1 = ref()
-const key2 = ref()
+const key1 = ref(' ')
+const key2 = ref(' ')
 const selectedAlgorithm = ref(algorithms[0])
 const error = ref(false)
 const twoKeys = ref(false)
 
 const verifyTokenSignature = async () => {
   try {
-    validSig.value = await validateSignature(jwtoken.value, selectedAlgorithm.value, key1.value)
+    validSig.value = await validateSignature(jwtoken.value, selectedAlgorithm.value, key1.value, key2.value)
   } catch (error) {
     console.log(error)
   }
@@ -45,7 +45,8 @@ const handleChange = async (value, value2) => {
   if (error.value == true) return
   try {
     key1.value = value
-    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, value, decodedHeader.value)
+    key2.value = value2
+    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, value, value2)
   } catch (error) {
     console.log(error)
   }
@@ -65,17 +66,17 @@ watch(jwtoken, async () => {
 })
 
 watch(selectedAlgorithm, async () => {
-  key1.value = ''
-  key2.value = ''
+  key1.value = ' '
+  key2.value = ' '
   const check = !selectedAlgorithm.value.toLowerCase().startsWith("h")
   twoKeys.value = check
   if (!check) {
     jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, key1.value, key2.value, decodedHeader.value)
   } else {
     const tokData = await signToken(decodedPayload.value, selectedAlgorithm.value, key1.value, key2.value, decodedHeader.value)
-    jwtoken.value = tokData.token
-    key1.value = tokData.privateKey
-    key2.value = tokData.publicKey
+    jwtoken.value = tokData?.token
+    key1.value = tokData?.privateKey
+    key2.value = tokData?.publicKey
   }
 })
 
@@ -155,8 +156,10 @@ watch(selectedAlgorithm, async () => {
                 <SignatureInput :algo-type="selectedAlgorithm" @key-change="(value) => handleChange(value, null)" />
               </div>
               <div v-else>
-                <PubPrivKeyContainer :algo-type="selectedAlgorithm" @key-change="(value) => handleChange(value, null)"
-                  :private-key="key2" :public-key="key1" />
+                <div v-if="key1 && key2">
+                  <PubPrivKeyContainer :algo-type="selectedAlgorithm" @key-change="(value, value2) => { }"
+                    :private-key="key2" :public-key="key1" />
+                </div>
               </div>
             </div>
           </div>
