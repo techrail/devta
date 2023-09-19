@@ -1,16 +1,18 @@
 <script setup>
 import { ref } from "vue"
 const emit = defineEmits(['keyChange'])
+import { useKeyStore } from "../../stores/jwtKeys";
 
 const signature = ref()
 const props = defineProps({
     algoType: String
 })
-
+const store = useKeyStore()
 
 const handleChange = () => {
     if (!signature.value) return
-    emit('keyChange', signature.value, null)
+    store.updateKeys(signature, ' ')
+    emit('keyChange')
 }
 </script>
 

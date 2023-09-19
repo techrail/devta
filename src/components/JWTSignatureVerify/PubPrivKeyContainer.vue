@@ -1,5 +1,7 @@
 <script setup>
 import { onMounted, ref, watchEffect } from "vue"
+import { useKeyStore } from "../../stores/jwtKeys";
+
 const emit = defineEmits(['keyChange'])
 const props = defineProps({
     algoType: String,
@@ -7,12 +9,15 @@ const props = defineProps({
     privateKey: String,
 })
 
+const store = useKeyStore()
+
 const privKey = ref(props.privateKey)
 const pubKey = ref(props.publicKey)
 
 const handleChange = () => {
     if (!pubKey.value || !privKey.value) return
-    emit('keyChange', pubKey.value, privKey.value)
+    store.updateKeys(privKey.value, pubKey.value)
+    emit('keyChange')
 }
 </script>
 
@@ -29,10 +34,9 @@ const handleChange = () => {
                 <div class="d-flex flex-column gap-2 mt-2">
                     <textarea :v-model="privKey" :value="privateKey" rows="5" @input="handleChange"
                         class="form-control mono-font" id="sig1" />
-                    <textarea :v-model="privKey" :value="publicKey" rows="5" @input="handleChange"
+                    <textarea :v-model="pubKey" :value="publicKey" rows="5" @input="handleChange"
                         class="form-control mono-font" id="sig2" />
                     )
-
                 </div>
             </small>
         </div>
