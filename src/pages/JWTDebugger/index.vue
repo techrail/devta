@@ -53,7 +53,6 @@ const createToken = async () => {
   }
 }
 
-
 const handleClick = async (text) => {
   try {
     await copyToClipboard(text);

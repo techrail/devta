@@ -33,9 +33,10 @@ const handleChange = () => {
 
                 <div class="d-flex flex-column gap-2 mt-2">
                     <textarea :v-model="privKey" :value="privateKey" rows="5" @input="handleChange"
-                        class="form-control mono-font" id="sig1" />
-                    <textarea :v-model="pubKey" :value="publicKey" rows="5" @input="handleChange"
-                        class="form-control mono-font" id="sig2" />
+                        class="form-control mono-font" id="sig1" placeholder="Public key in pcks format" />
+                    <textarea :v-model="pubKey" :value="publicKey"
+                        placeholder="Private key in pcks format. This key never leaves the browser" rows="5"
+                        @input="handleChange" class="form-control mono-font" id="sig2" />
                     )
                 </div>
             </small>
