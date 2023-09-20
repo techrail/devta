@@ -27,15 +27,13 @@ const jwtoken = ref('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3OD
 const decodedPayload = ref();
 const decodedHeader = ref();
 const validSig = ref(true)
-const key1 = ref(' ')
-const key2 = ref(' ')
 const selectedAlgorithm = ref(algorithms[0])
 const error = ref(false)
 const twoKeys = ref(false)
 
 const verifyTokenSignature = async () => {
   try {
-    validSig.value = await validateSignature(jwtoken.value, selectedAlgorithm.value, key1.value, key2.value)
+    validSig.value = await validateSignature(jwtoken.value, selectedAlgorithm.value)
   } catch (error) {
     console.log(error)
   }
@@ -68,7 +66,12 @@ const handlePayloadChange = async () => {
   try {
     error.value = !jsonValidator(decodedPayload.value)
     if (error.value == true) return
-    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value)
+    if (selectedAlgorithm.value.toLowerCase().startsWith("h")) {
+      jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value)
+    } else {
+      const { token } = await signToken(decodedPayload.value, selectedAlgorithm.value)
+      jwtoken.value = token
+    }
   } catch (error) {
     console.log(error)
   }
@@ -106,17 +109,17 @@ const signToken = async (data, algorithm) => {
       let keys = await generateKeyPair(algorithm, {
         extractable: true,
       });
-
       if (store.privateKey && store.privateKey !== " ") {
         keys.privateKey = await importPKCS8(store.privateKey, algorithm, {
           extractable: true
         });
       }
       if (store.publicKey && store.privateKey !== " ") {
-        keys.publicKey = await importPKCS8(store.publicKey, algorithm, {
+        keys.publicKey = await importSPKI(store.publicKey, algorithm, {
           extractable: true
         });
       }
+      console.log("keys->", keys)
       // Create a JWT object
       const jwt = new SignJWT(JSON.parse(data)).setProtectedHeader({
         typ: "JWT",
@@ -161,9 +164,9 @@ watch(selectedAlgorithm, async () => {
   twoKeys.value = check
   if (error.value) return
   if (!check) {
-    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, key1.value, key2.value, decodedHeader.value)
+    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value)
   } else {
-    const tokData = await signToken(decodedPayload.value, selectedAlgorithm.value, key1.value, key2.value, decodedHeader.value)
+    const tokData = await signToken(decodedPayload.value, selectedAlgorithm.value)
     jwtoken.value = tokData?.token
     store.updateKeys(tokData.privateKey, tokData.publicKey)
     // key1.value = tokData?.privateKey
