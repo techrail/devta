@@ -3,8 +3,11 @@ import { defineStore } from "pinia";
 export const useKeyStore = defineStore("keys", {
   state: () => ({ privateKey: " ", publicKey: " " }),
   getters: {
-    getKeys: (state) => {
-      state.privateKey, state.publicKey;
+    getKeys: () => {
+      return {
+        publicKey: this.publicKey,
+        privateKey: this.privateKey,
+      };
     },
   },
   actions: {

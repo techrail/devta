@@ -34,15 +34,17 @@ export const getPayload = (data, indent = 2) =>
   JSON.stringify(decodeJwt(data), null, indent);
 
 // validates the signature
-export const validateSignature = async (jwtToken, algorithm, key, pubKey) => {
+export const validateSignature = async (jwtToken, algorithm, store) => {
   try {
     if (algorithm.toLowerCase().startsWith("h")) {
-      const privateKey = new TextEncoder().encode(key ? key : " ");
+      const privateKey = new TextEncoder().encode(
+        store.privateKey ? store.privateKey : " "
+      );
       await jwtVerify(jwtToken, privateKey);
       return true;
     } else {
-      if (!key || !pubKey) return false;
-      const publicKey = await importSPKI(pubKey, algorithm);
+      if (!store.privateKey || !store.publicKey) return false;
+      const publicKey = await importSPKI(store.publicKey, algorithm);
       await jwtVerify(jwtToken, publicKey);
       return true;
     }
@@ -51,10 +53,12 @@ export const validateSignature = async (jwtToken, algorithm, key, pubKey) => {
   }
 };
 
-export const signToken = async (data, algorithm, privateKey, publicKey) => {
+export const signToken = async (data, algorithm, store) => {
   try {
     if (algorithm.toLowerCase().startsWith("h")) {
-      const key = new TextEncoder().encode(privateKey ? privateKey : " ");
+      const key = new TextEncoder().encode(
+        store.privateKey ? store.privateKey : " "
+      );
       return new SignJWT(JSON.parse(data))
         .setProtectedHeader({
           alg: algorithm,
@@ -62,16 +66,20 @@ export const signToken = async (data, algorithm, privateKey, publicKey) => {
         })
         .sign(key);
     } else {
-      console.log(privateKey, publicKey);
       let keys = await generateKeyPair(algorithm, {
         extractable: true,
       });
-      if (privateKey && privateKey !== " ") {
-        keys.privateKey = await importPKCS8(privateKey, algorithm);
+      if (store.privateKey && store.privateKey !== " ") {
+        keys.privateKey = await importPKCS8(store.privateKey, algorithm, {
+          extractable: true,
+        });
       }
-      if (publicKey && privateKey !== " ") {
-        keys.publicKey = await importPKCS8(publicKey, algorithm);
+      if (store.publicKey && store.privateKey !== " ") {
+        keys.publicKey = await importSPKI(store.publicKey, algorithm, {
+          extractable: true,
+        });
       }
+      console.log("keys->", keys);
       // Create a JWT object
       const jwt = new SignJWT(JSON.parse(data)).setProtectedHeader({
         typ: "JWT",
@@ -79,7 +87,7 @@ export const signToken = async (data, algorithm, privateKey, publicKey) => {
       });
       // Sign the JWT using the private key
       const token = await jwt.sign(keys.privateKey);
-
+      console.log("token->", token);
       // Export the private and public keys
       const privateKeyExported = await exportPKCS8(keys.privateKey);
       const publicKeyExported = await exportSPKI(keys.publicKey);

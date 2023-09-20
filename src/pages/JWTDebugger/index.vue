@@ -1,21 +1,13 @@
 <script setup>
 import { ref, watch, onMounted, watchEffect } from "vue";
 import { copyToClipboard } from "../../components/utils/UnixDateTime";
-import { algorithms, getHeader, getPayload } from "../../components/utils/JwtDebugger";
+import { algorithms, getHeader, getPayload, validateSignature, signToken } from "../../components/utils/JwtDebugger";
 import PageHeader from "../../components/Pageheader/index.vue";
 import SignatureInput from "../../components/JWTSignatureVerify/SignatureInput.vue";
 import { jsonValidator } from "../../components/utils/jsonConverter";
 import PubPrivKeyContainer from "../../components/JWTSignatureVerify/PubPrivKeyContainer.vue";
 import { useKeyStore } from "../../stores/jwtKeys";
-import {
-  jwtVerify,
-  SignJWT,
-  generateKeyPair,
-  importPKCS8,
-  importSPKI,
-  exportPKCS8,
-  exportSPKI,
-} from "jose";
+
 
 const store = useKeyStore()
 
@@ -29,15 +21,38 @@ const decodedHeader = ref();
 const validSig = ref(true)
 const selectedAlgorithm = ref(algorithms[0])
 const error = ref(false)
-const twoKeys = ref(false)
+
+
+const generateKeys = () => { return { publicKey: store.publicKey, privateKey: store.privateKey } }
 
 const verifyTokenSignature = async () => {
   try {
-    validSig.value = await validateSignature(jwtoken.value, selectedAlgorithm.value)
+    validSig.value = await validateSignature(jwtoken.value, selectedAlgorithm.value, generateKeys())
   } catch (error) {
     console.log(error)
   }
 }
+
+const createToken = async () => {
+  try {
+    // checks if the payload json is valid
+    error.value = !jsonValidator(decodedPayload.value)
+    if (error.value == true) return
+
+    // check for h-algorithms
+    if (selectedAlgorithm.value.toLowerCase().startsWith("h")) {
+      jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value, generateKeys())
+    } else {
+      const { token, privateKey, publicKey } = await signToken(decodedPayload.value, selectedAlgorithm.value, generateKeys())
+      jwtoken.value = token
+      // updates the generated keys
+      store.updateKeys(privateKey, publicKey)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
 const handleClick = async (text) => {
   try {
@@ -47,103 +62,10 @@ const handleClick = async (text) => {
   }
 };
 
-// handles the emitted signature value
+// handles the emitted signature value and changes in the payload
 const handleChange = async () => {
-  error.value = false
-  error.value = !jsonValidator(decodedPayload.value)
-  if (error.value == true) return
-  try {
-    // key1.value = value
-    // key2.value = value2
-    // store.updateKeys(value, value2)
-    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value)
-  } catch (error) {
-    console.log(error)
-  }
+  createToken()
 }
-
-const handlePayloadChange = async () => {
-  try {
-    error.value = !jsonValidator(decodedPayload.value)
-    if (error.value == true) return
-    if (selectedAlgorithm.value.toLowerCase().startsWith("h")) {
-      jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value)
-    } else {
-      const { token } = await signToken(decodedPayload.value, selectedAlgorithm.value)
-      jwtoken.value = token
-    }
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-
-const validateSignature = async (jwtToken, algorithm) => {
-  try {
-    if (algorithm.toLowerCase().startsWith("h")) {
-      const privateKey = new TextEncoder().encode(store.privateKey ? store.privateKey : " ");
-      await jwtVerify(jwtToken, privateKey);
-      return true;
-    } else {
-      if (!store.privateKey || !store.publicKey) return false;
-      const publicKey = await importSPKI(store.publicKey, algorithm);
-      await jwtVerify(jwtToken, publicKey);
-      return true;
-    }
-  } catch (error) {
-    return false;
-  }
-};
-
-const signToken = async (data, algorithm) => {
-  try {
-    if (algorithm.toLowerCase().startsWith("h")) {
-      const key = new TextEncoder().encode(store.privateKey ? store.privateKey : " ");
-      return new SignJWT(JSON.parse(data))
-        .setProtectedHeader({
-          alg: algorithm,
-          typ: "JWT",
-        })
-        .sign(key);
-    } else {
-      let keys = await generateKeyPair(algorithm, {
-        extractable: true,
-      });
-      if (store.privateKey && store.privateKey !== " ") {
-        keys.privateKey = await importPKCS8(store.privateKey, algorithm, {
-          extractable: true
-        });
-      }
-      if (store.publicKey && store.privateKey !== " ") {
-        keys.publicKey = await importSPKI(store.publicKey, algorithm, {
-          extractable: true
-        });
-      }
-      console.log("keys->", keys)
-      // Create a JWT object
-      const jwt = new SignJWT(JSON.parse(data)).setProtectedHeader({
-        typ: "JWT",
-        alg: algorithm,
-      });
-      // Sign the JWT using the private key
-      const token = await jwt.sign(keys.privateKey);
-      console.log("token->", token)
-      // Export the private and public keys
-      const privateKeyExported = await exportPKCS8(keys.privateKey);
-      const publicKeyExported = await exportSPKI(keys.publicKey);
-
-      // Return the token and keys
-      return {
-        token,
-        privateKey: privateKeyExported,
-        publicKey: publicKeyExported,
-      };
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 
 watchEffect(() => {
   if (!jwtoken.value) return
@@ -160,18 +82,7 @@ watch(jwtoken, async () => {
 
 watch(selectedAlgorithm, async () => {
   store.clearKeys()
-  const check = !selectedAlgorithm.value.toLowerCase().startsWith("h")
-  twoKeys.value = check
-  if (error.value) return
-  if (!check) {
-    jwtoken.value = await signToken(decodedPayload.value, selectedAlgorithm.value)
-  } else {
-    const tokData = await signToken(decodedPayload.value, selectedAlgorithm.value)
-    jwtoken.value = tokData?.token
-    store.updateKeys(tokData.privateKey, tokData.publicKey)
-    // key1.value = tokData?.privateKey
-    // key2.value = tokData?.publicKey
-  }
+  createToken()
 })
 
 </script>
@@ -238,7 +149,7 @@ watch(selectedAlgorithm, async () => {
             <div class="">
               <h5 class="text-muted"><strong>Payload</strong></h5>
               <!-- <highlightjs :code="decodedPayload" /> -->
-              <textarea v-model="decodedPayload" rows="5" @input="handlePayloadChange"
+              <textarea v-model="decodedPayload" rows="5" @input="handleChange"
                 :class="error ? 'form-control mono-font is-invalid' : 'form-control mono-font'"
                 id="payloadInput"></textarea>
             </div>
@@ -246,7 +157,7 @@ watch(selectedAlgorithm, async () => {
             <!-- signature verification component -->
             <div>
               <h5 class="text-muted mt-3"><strong>Verify Signature</strong></h5>
-              <div v-if="!twoKeys">
+              <div v-if="selectedAlgorithm.toLowerCase().startsWith('h')">
                 <SignatureInput :algo-type="selectedAlgorithm" @key-change="() => handleChange()" />
               </div>
               <div v-else>
