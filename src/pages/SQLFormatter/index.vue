@@ -6,8 +6,12 @@ import { dialectOptions, keywordCaseOptions, logicalOperatorNewlineOptions, inde
 import { copyToClipboard } from "../../components/utils/UnixDateTime";
 // import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
 import { identify } from "sql-query-identifier";
+import { setTextInputSize } from "../../components/utils/resizableInput";
 
-onMounted(() => document.querySelector("[autofocus]")?.focus());
+onMounted(() => {
+  document.querySelector("[autofocus]")?.focus()
+  setTextInputSize(['queryInput'])
+});
 
 const sqlPlaceholder =
   "select supplier_name,city from (select * from suppliers join addresses on suppliers.address_id = addresses.id) as suppliers where supplier_id > 500 order by supplier_name asc, city desc; ";
@@ -39,6 +43,7 @@ const handleClear = () => {
 
 watch([inputSQL, params], () => {
   updateQuery();
+  setTextInputSize(['queryInput'])
 });
 
 const validateQuery = (inputSQL) => {
@@ -86,16 +91,9 @@ const updateQuery = () => {
         <div class="inner_block">
           <div class="p-2">
             <div class="form-floating">
-              <textarea
-                v-model="inputSQL"
-                spellcheck="false"
-                autofocus
-                type="text"
-                :class="error ? 'form-control mono-font is-invalid' : 'form-control mono-font'"
-                id="queryInput"
-                style="height: 250px"
-                placeholder="Enter SQL query"
-              >
+              <textarea v-model="inputSQL" spellcheck="false" autofocus type="text"
+                :class="error ? 'form-control mono-font is-invalid' : 'form-control mono-font'" id="queryInput"
+                style="height: 250px" placeholder="Enter SQL query">
               </textarea>
               <label for="queryInput">Enter SQL Query</label>
             </div>
@@ -105,7 +103,8 @@ const updateQuery = () => {
                 <!-- tab spacing selector -->
                 <div class="inner_input_group">
                   <div class="form-floating">
-                    <input type="number" v-model="params.tabWidth" id="indentSpacing" class="form-control" max="10" min="1" />
+                    <input type="number" v-model="params.tabWidth" id="indentSpacing" class="form-control" max="10"
+                      min="1" />
                     <label for="indentSpacing" class="form-label font-muted">Enter tab spacing</label>
                   </div>
 
@@ -142,9 +141,11 @@ const updateQuery = () => {
                 <!-- New Line logical operator -->
                 <div>
                   <div class="form-floating">
-                    <select class="form-select" name="timezone-select" id="timezone-select" v-model="params.logicalOperatorNewline">
+                    <select class="form-select" name="timezone-select" id="timezone-select"
+                      v-model="params.logicalOperatorNewline">
                       <option :value="logicalOperatorNewlineOptions[0]">{{ logicalOperatorNewlineOptions[0] }}</option>
-                      <option v-for="zone in logicalOperatorNewlineOptions.slice(1)" :value="zone" :key="zone">{{ zone }}</option>
+                      <option v-for="zone in logicalOperatorNewlineOptions.slice(1)" :value="zone" :key="zone">{{ zone }}
+                      </option>
                     </select>
                     <label for="timezone-select">AND/OR newlines</label>
                   </div>
@@ -153,38 +154,19 @@ const updateQuery = () => {
                 <!-- checkboxes -->
                 <div class="d-flex flex-row gap-4 justify-content-center w-100 flex-wrap">
                   <div class="form-check form-switch toggler">
-                    <input
-                      @change="params.useTabs = !params.useTabs"
-                      class="form-check-input"
-                      role="switch"
-                      :checked="params.useTabs"
-                      type="checkbox"
-                      id="flexCheckChecked"
-                    />
+                    <input @change="params.useTabs = !params.useTabs" class="form-check-input" role="switch"
+                      :checked="params.useTabs" type="checkbox" id="flexCheckChecked" />
                     <label class="form-check-label" for="flexCheckChecked"> Use tabs </label>
                   </div>
                   <div class="form-check form-switch toggler">
-                    <input
-                      @change="params.newlineBeforeSemicolon = !params.newlineBeforeSemicolon"
-                      role="switch"
-                      class="form-check-input"
-                      :v-model="params.newlineBeforeSemicolon"
-                      :checked="params.newlineBeforeSemicolon"
-                      type="checkbox"
-                      id="newLine"
-                    />
+                    <input @change="params.newlineBeforeSemicolon = !params.newlineBeforeSemicolon" role="switch"
+                      class="form-check-input" :v-model="params.newlineBeforeSemicolon"
+                      :checked="params.newlineBeforeSemicolon" type="checkbox" id="newLine" />
                     <label class="form-check-label" for="newLine"> New line before ; </label>
                   </div>
                   <div class="form-check form-switch toggler">
-                    <input
-                      @change="params.denseOperators = !params.denseOperators"
-                      role="switch"
-                      class="form-check-input"
-                      :v-model="params.denseOperators"
-                      :checked="params.denseOperators"
-                      type="checkbox"
-                      id="dense"
-                    />
+                    <input @change="params.denseOperators = !params.denseOperators" role="switch" class="form-check-input"
+                      :v-model="params.denseOperators" :checked="params.denseOperators" type="checkbox" id="dense" />
                     <label class="form-check-label" for="dense"> Dense operators </label>
                   </div>
                 </div>
@@ -205,17 +187,12 @@ const updateQuery = () => {
             <!-- <MultiLineCopy title="Formatted SQL" :value="formattedSQL" height="500px" /> -->
           </div>
           <div class="d-flex gap-2 p-2">
-            <button
-              class="btn btn-primary"
-              type="button"
-              @click="handleClick(formattedSQL)"
-              data-toggle="tooltip"
-              data-placement="top"
-              title="Copy to clipboard"
-            >
+            <button class="btn btn-primary" type="button" @click="handleClick(formattedSQL)" data-toggle="tooltip"
+              data-placement="top" title="Copy to clipboard">
               <i class="bi bi-clipboard"></i>
             </button>
-            <button class="btn btn-danger" type="reset" @click="handleClear" data-toggle="tooltip" data-placement="top" title="Clear text">
+            <button class="btn btn-danger" type="reset" @click="handleClear" data-toggle="tooltip" data-placement="top"
+              title="Clear text">
               <i class="bi bi-x-lg"></i>
             </button>
           </div>
