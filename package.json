@@ -27,7 +27,7 @@
     "publish": {
       "provider": "github",
       "repo": "devta",
-      "owner": "pratyushtiwary",
+      "owner": "techrail",
       "releaseType": "draft"
     }
   },
