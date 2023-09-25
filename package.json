@@ -47,7 +47,6 @@
     "bootstrap": "^5.3.1",
     "bootstrap-icons": "^1.10.5",
     "crypto-js": "^4.1.1",
-    "electron": "^26.2.2",
     "electron-is-dev": "^2.0.0",
     "esbuild": "^0.19.2",
     "highlight.js": "^11.8.0",
@@ -66,6 +65,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
+    "electron": "^26.2.2",
     "electron-builder": "^24.6.4",
     "vite": "^4.4.9"
   }
