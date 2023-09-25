@@ -38,7 +38,7 @@
     "electron:dev": "electron .",
     "postinstall": "electron-builder install-app-deps",
     "electron:build-linux": "electron-builder --linux --publish always",
-    "electron:build-windows": "electron-builder --linux --publish always"
+    "electron:build-windows": "electron-builder --windows--publish always"
   },
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",
