@@ -1,0 +1,38 @@
+name: Build & Publish
+
+on: push
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate Build
+        run: npm run build
+
+      - if: matrix.os == 'ubuntu-latest'
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        name: Building electron release for linux
+        run: npm run electron:build-linux
+
+      - if: matrix.os == 'windows-latest'
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        name: Building electron release for windows
+        run: npm run electron:build-windows

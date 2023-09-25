@@ -1,12 +1,14 @@
 <script setup>
-import TopBarButtons from "../../components/TopBarButtons/TopBarButtons.vue";
 import { DevtaLogo } from "../../assets";
+import TopBarButtons from "../../components/TopBarButtons/TopBarButtons.vue";
+
+const IS_ELECTRON = window.IS_ELECTRON || false;
 </script>
 
 <template>
   <div class="m-0 p-0 w-100">
     <!-- <Sidebar /> -->
-    <div class="container">
+    <div class="container" :style="IS_ELECTRON && 'height: calc(100vh - 54px) !important'">
       <div class="h1">
         <img class="img" :src="DevtaLogo" /><strong>Devta</strong>
       </div>
