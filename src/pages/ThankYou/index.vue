@@ -5,7 +5,7 @@ import dependencies from "./dependencies";
 <template>
     <div class="d-flex align-items-center flex-column w-100 mt-5 text-center">
         <h3>Thanks to these awesome packages!</h3>
-        <p>The following packages are used in the project to help deliver awesome tools to you!</p>
+        <p>The following packages are used in this project to help deliver awesome tools to you!</p>
         <div class="packages">
             <div class="package card text-start" v-for="item in dependencies">
                 <div class="card-body d-flex flex-column">
