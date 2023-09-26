@@ -5,10 +5,10 @@ const path = require("path");
 
 const createWindow = () => {
   const win = new BrowserWindow({
+    show: false,
     icon: "./public/logo.png",
     frame: false,
-    width: 850,
-    height: 600,
+    minHeight: 600,
     minWidth: 850,
     webPreferences: {
       allowRunningInsecureContent: true,
@@ -34,6 +34,8 @@ const createWindow = () => {
       slashes: true,
     })
   );
+  win.maximize();
+  win.show();
   if (isDev) {
     win.openDevTools();
   }

@@ -100,7 +100,7 @@ watch(route, () => {
       <small> Developer tools that are supposed to help you 🚀 </small>
     </div>
   </div>
-  <div id="small-devices" v-if="isMobile" class="d-flex flex-column">
+  <div id="small-devices" v-if="isMobile && !IS_ELECTRON" class="d-flex flex-column">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container d-flex">
         <router-link class="navbar-brand d-flex align-items-center" to="/"><img class="img"
