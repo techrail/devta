@@ -14,7 +14,6 @@ import ThankYou from "../pages/ThankYou/index.vue";
 import TimeZoneConverter from "../pages/TimeZoneConverter/index.vue";
 import URLParser from "../pages/URLParser/index.vue";
 import UnixToDate from "../pages/UnixToDate/index.vue";
-import APITester from "../pages/APITester/index.vue";
 import ImagetoBase64 from "../pages/ImageToBase64/index.vue";
 
 const routes = [
