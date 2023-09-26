@@ -1,6 +1,7 @@
 {
   "name": "devta",
-  "main": "main.js",
+  "main": "main.cjs",
+  "type": "module",
   "private": true,
   "version": "0.0.0",
   "build": {
@@ -21,7 +22,7 @@
     },
     "files": [
       "dist/**/*",
-      "main.js",
+      "main.mjs",
       "preload.js"
     ],
     "publish": {
