@@ -3,14 +3,13 @@ import {ref, onMounted} from "vue";
 import { copyToClipboard } from "../../components/utils/UnixDateTime";
 import PageHeader from "../../components/Pageheader/index.vue";
 
-// on clicking convert button convert image file in imageInput into base64 and display in baseOutput
-const convert = () => {
-    if (b64.value) {
-        b64.value = "";
-    }
-    b64.value = document.getElementById("imageInput").files[0];
-    console.log(b64.value);
-};
+
+const b64 = ref("");
+const input = ref("");
+const error = ref(false);
+const imageInput = ref("");
+
+//convert image to base64
 const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -20,14 +19,38 @@ const handleImageChange = (event) => {
                 try {
                     b64.value = reader.result;
                 } catch (error) {
-                    console.error("Error parsing Markdown:", error);
+                    console.error("Error parsing image", error);
                 }
             };
             reader.readAsDataURL(file);
+            
         } else {
             window.alert("Please select a .jpg, .jpeg or .png file under 1 MB.");
         }
     }
+};
+
+const handleImageFromLink = async (link) => {
+  try {
+    const response = await fetch(link);
+    if (!response.ok) {
+      throw new Error("Failed to fetch image");
+    }
+
+    const blob = await response.blob();
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      // Set the result as Base64
+      b64.value = reader.result;
+    };
+
+    reader.readAsDataURL(blob);
+  } catch (error) {
+    console.error("Error loading image from link", error);
+    // Handle the error, for example, display an error message
+    b64.value = "";
+  }
 };
 
 const handleb64Change = () => {
@@ -40,15 +63,26 @@ const handleb64Change = () => {
     }
 };
 
-
-
 const handleCopy = (value) => {
     copyToClipboard(value);
 };
 const handleClear = () => {
     document.getElementById("imageInput").value = "";
+    document.getElementById("imageLink").value = "";
     b64.value = "";
-}
+    b64.value = "";
+};
+
+const handleDownload = () => {
+    // download the base64 string as html file
+  const blob = new Blob([`<html><body>${b64.value}</body></html>`], { type: "text/html" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "base64_string.html";
+  a.click();
+  URL.revokeObjectURL(url);
+};
 
 </script>
 
@@ -75,12 +109,24 @@ const handleClear = () => {
                             placeholder="Upload Image"
                             />
                         </div>
+                        <div class="p-2">
+                            <p class="muted">Paste image link</p>
+                            <input
+                              @input="handleImageFromLink"
+                              v-model="imageInput"
+                              autofocus
+                              type="text"
+                              id="imageLink"
+                              class="form-control mono-font"
+                              placeholder="Paste Image Link"
+                            />
+                          </div>
                     </div>
                     
-                    <div class="d-flex p-2 justify-content-between">
-                        <button class="btn btn-primary w-50" @click="convert" type="reset" data-toggle="tooltip" data-placement="top" title="Clear text">
+                    <div class="d-flex p-2 justify-content-end">
+                        <!-- <button class="btn btn-primary w-50" @click="handleConvert" type="reset" data-toggle="tooltip" data-placement="top" title="Clear text">
                             Convert
-                        </button>
+                        </button> -->
                         <button class="btn btn-danger " @click="handleClear" type="reset" data-toggle="tooltip" data-placement="top" title="Clear text">
                             <i class="bi bi-x-lg"></i>
                         </button>
@@ -102,13 +148,16 @@ const handleClear = () => {
                                  placeholder="Enter the token"
                                 >
                                 </textarea>
-                            <label for="baseOutput">Encoded Base64</label>
+                            <label for="baseOutput">Encoded Base64 Image</label>
                         </div>
                     </div>
-                    <div class="d-flex gap-2 p-2">
+                    <div class="d-flex gap-2 p-2 justify-content-between">
                         <button class="btn btn-primary" @click="handleCopy(b64)" data-placement="top" title="Copy to clipboard">
                           <i class="bi bi-clipboard"></i>
                         </button>
+                        <button class="btn btn-secondary" @click="handleDownload(b64)" data-placement="top" title="Copy to clipboard">
+                            <i class="bi bi-download"></i>
+                          </button>
                       </div>
                 </div>
             </div>
