@@ -1,0 +1,10 @@
+#baseOutput {
+    height: 72vh;
+  }
+  
+  @media screen and (max-width: 800px) {
+    #baseOutput {
+      height: 50vh;
+    }
+  }
+  
