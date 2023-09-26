@@ -84,4 +84,10 @@ export const sideBarList = [
     route: "/api-tester",
     tags: "api, testing, get, post, put, patch, delete",
   },
+  {
+    name: "Image to Base64",
+    iconClass: "bi bi-card-image",
+    route: "/image-base64-converter",
+    tags: "Image, base64, Converter, Encoding, Decoding, Encoding, Decoding",
+  },
 ];
