@@ -36,19 +36,15 @@ const handleImageFromLink = async (link) => {
     if (!response.ok) {
       throw new Error("Failed to fetch image");
     }
-
     const blob = await response.blob();
     const reader = new FileReader();
-
     reader.onload = () => {
-      // Set the result as Base64
       b64.value = reader.result;
     };
-
     reader.readAsDataURL(blob);
   } catch (error) {
     console.error("Error loading image from link", error);
-    // Handle the error, for example, display an error message
+    
     b64.value = "";
   }
 };
@@ -75,7 +71,7 @@ const handleClear = () => {
 
 const handleDownload = () => {
     // download the base64 string as html file
-  const blob = new Blob([`<html><body>${b64.value}</body></html>`], { type: "text/html" });
+  const blob = new Blob([`<html><body><img src="${b64.value}" /></body></html>`], { type: "text/html" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
