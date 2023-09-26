@@ -1,14 +1,14 @@
 <script setup>
 import { useRoute } from 'vue-router';
 import TopBarButtons from '../TopBarButtons/TopBarButtons.vue';
-
+defineProps(['hideHeading'])
 const route = useRoute()
 </script>
 
 <template>
     <div class="top_header ">
         <div class="heading w-auto">
-            <strong>
+            <strong v-if="!$props.hideHeading">
                 {{ route.name }}
             </strong>
         </div>
