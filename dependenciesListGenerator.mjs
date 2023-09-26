@@ -154,6 +154,7 @@ async function generateDependenciesList() {
 
 export default () => ({
   name: "dependencies-list-generator",
+  apply: "build",
   async configResolved() {
     await generateDependenciesList();
   },
