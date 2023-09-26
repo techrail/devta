@@ -22,7 +22,7 @@
     },
     "files": [
       "dist/**/*",
-      "main.mjs",
+      "main.cjs",
       "preload.js"
     ],
     "publish": {
