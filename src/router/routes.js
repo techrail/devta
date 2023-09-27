@@ -1,18 +1,19 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HashGenerator from "../pages/HashGenerator/index.vue";
+import APITester from "../pages/APITester/index.vue";
 import Base64Text from "../pages/Base64Text/index.vue";
 import DateToUnix from "../pages/DateToUnix/index.vue";
-import UnixToDate from "../pages/UnixToDate/index.vue";
-import JsonFormatter from "../pages/JsonFormatter/index.vue";
-import MarkdownPreview from "../pages/MarkdownPreview/index.vue";
-import TimeZoneConverter from "../pages/TimeZoneConverter/index.vue";
+import HashGenerator from "../pages/HashGenerator/index.vue";
+import Index from "../pages/Index/index.vue";
 import JSONToYAML from "../pages/JSONConverter/index.vue";
 import JWTDebugger from "../pages/JWTDebugger/index.vue";
-import SQLFormatter from "../pages/SQLFormatter/index.vue";
+import JsonFormatter from "../pages/JsonFormatter/index.vue";
+import MarkdownPreview from "../pages/MarkdownPreview/index.vue";
 import PSQLFormatter from "../pages/PSQLParser/index.vue";
-import Index from "../pages/Index/index.vue";
+import SQLFormatter from "../pages/SQLFormatter/index.vue";
+import ThankYou from "../pages/ThankYou/index.vue";
+import TimeZoneConverter from "../pages/TimeZoneConverter/index.vue";
 import URLParser from "../pages/URLParser/index.vue";
-import APITester from "../pages/APITester/index.vue";
+import UnixToDate from "../pages/UnixToDate/index.vue";
 import ImagetoBase64 from "../pages/ImageToBase64/index.vue";
 
 const routes = [
@@ -98,6 +99,11 @@ const routes = [
     path: "/image-base64-converter",
     component: ImagetoBase64,
     name: "Image Base64 Converter",
+  },
+  {
+    path: "/thank-you",
+    component: ThankYou,
+    name: "Thank You",
   },
 ];
 

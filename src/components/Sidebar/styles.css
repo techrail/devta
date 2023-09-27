@@ -29,6 +29,7 @@ body {
 html {
   height: -webkit-fill-available;
 }
+
 .img {
   height: 35px;
   width: 35px;
@@ -114,4 +115,9 @@ hr {
 .nav-item:hover {
   background-color: rgb(108, 117, 125);
   border-radius: 5px;
+}
+
+#large-devices {
+  position: sticky;
+  top: 0;
 }
