@@ -1,8 +1,10 @@
 # Devta Contribution Guide
 
-Thanks for investing your time in contributing to the project. Whether you want to fix a bug, add a new feature, or improve documentation, your help is greatly appreciated.
+Thank you for investing your time in contributing to the project. Whether you want to fix a bug, add a new feature, or improve documentation, your help is greatly appreciated.❤️
 
-Before you start contributing, please take a moment to review this guide.
+Before you start contributing, please make sure to read the relevant section before making your contribution. It will make it a lot easier for us maintainers and smooth out the experience for all involved. The community looks forward to your contributions. 🎉
+
+> You can join us on [Discord](https://discord.gg/aKkWFghPrV) where we discuss about ongoing and upcoming projects.
 
 ## Issues
 
