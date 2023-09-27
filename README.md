@@ -28,7 +28,7 @@ Devta is open source, it's transparent and people can always peek under the hood
 
 ## Project Status
 
-The project has just started. There is nothing in there but if you can help us out, it would be great! The project is being built using vite (VueJS) and Twitter Bootstrap.
+The project is being built using vite (VueJS) and Bootstrap.
 
 PS: This project is inspired from the fantastic [DevUtils](https://devutils.com/) app which is available _only for macOS_ as a _paid tool_.
 
@@ -80,8 +80,8 @@ npm run dev
 
 ## Contributing
 
-Please checkout the [Contributing guide](./CONTRIBUTING.md) to know more on how to contribute to this project in any way.
+We welcome contributions from the community! If you're interested in contributing to the project, please checkout the [Contributing guide](./CONTRIBUTING.md) to get started.
 
 ## License
 
-This project is licensed under the MIT license. See the [LICENSE](./LICENSE) file for more details.
+This project is licensed under the MIT license. See the [LICENSE](./LICENSE) for more details.
