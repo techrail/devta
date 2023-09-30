@@ -21,10 +21,8 @@ const sortedSideBarLists = sideBarList.sort((a, b) => a.name.localeCompare(b.nam
 let searchInput = ref("");
 
 const filteredList = () => {
-  return sortedSideBarLists.filter((sideBarItem) => containsWordsInAnyOrder(
-      sideBarItem.name.toLowerCase()+sideBarItem.tags.toLowerCase(), 
-      searchInput.value.toLowerCase()
-    )
+  return sortedSideBarLists.filter((sideBarItem) =>
+    containsWordsInAnyOrder(sideBarItem.name.toLowerCase() + sideBarItem.tags.toLowerCase(), searchInput.value.toLowerCase())
   );
 };
 
@@ -63,7 +61,7 @@ watch(route, () => {
   <!-- <div class="col-sm-3"> -->
   <div
     id="large-devices"
-    style="width: 280px"
+    style="width: 280px; position: sticky; top: 0"
     v-if="!isMobile"
     class="d-flex flex-column justify-content-between flex-shrink-0 p-3 bg-dark p-0 m-0 vh-100 w-full"
   >
