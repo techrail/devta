@@ -25,7 +25,6 @@ const convert = () => {
     case "csv":
       convertToCSV();
       break;
-      
     default:
       break;
   }

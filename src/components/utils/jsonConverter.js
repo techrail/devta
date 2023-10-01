@@ -75,24 +75,22 @@ export const jsonValidator = (inputJson) => {
 
 const flattenObject = (obj, parentKey = "") => {
   let result = {};
-  for (const key in obj) {     
+  for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
       const newKey = parentKey ? `${parentKey}/${key}` : key;
       if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
         let nestedObj = flattenObject(obj[key], newKey);
         result = { ...result, ...nestedObj };
-      } 
+      }
       else if(Array.isArray(obj[key])) {
         obj[key].forEach((item, index) => {
           result[`${newKey}/${index}`] = item;
-        });      
+        });
       }
       else {
         result[newKey] = obj[key];
       }
     }
   }
-  return result; 
+  return result;
 }
-
-
