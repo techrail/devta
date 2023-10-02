@@ -14,7 +14,7 @@ import Index from "../pages/Index/index.vue";
 import URLParser from "../pages/URLParser/index.vue";
 import APITester from "../pages/APITester/index.vue";
 import ImagetoBase64 from "../pages/ImageToBase64/index.vue";
-
+import CRONParser from "../pages/CRONParser/index.vue";
 const routes = [
   {
     path: "/",
@@ -98,6 +98,11 @@ const routes = [
     path: "/image-base64-converter",
     component: ImagetoBase64,
     name: "Image Base64 Converter",
+  },
+  {
+    path: "/cron-parser",
+    component: CRONParser,
+    name: "CRON Parser",
   },
 ];
 
