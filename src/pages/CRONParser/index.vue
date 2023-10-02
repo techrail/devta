@@ -45,5 +45,5 @@ watch(cronExpression, () => {
 </script>
 
 <style scoped>
-/* Add your custom CSS styles here */
+
 </style>
