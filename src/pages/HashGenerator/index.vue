@@ -66,13 +66,6 @@ async function copyContent(idx) {
       </div>
 
       <div class="block card block2 overflow-auto">
-        <!-- <div v-for="(element, index) in Object.keys(algos)">
-          <div class="input-group p-1">
-            <span class="input-group-text">{{ element }}</span>
-            <input type="text" class="form-control" :value="outputs[index]" disabled readonly />
-            <span class="input-group-text" @click="copyContent(index)"><i class="bi bi-clipboard"></i></span>
-          </div>
-        </div> -->
         <div v-for="(element, index) in Object.keys(algos)" class="d-flex flex-column p-2">
           <div v-if="index <= 1">
             <SingleLineCopy :title="element" :value="outputs[index]" />
