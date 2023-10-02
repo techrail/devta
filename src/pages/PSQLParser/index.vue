@@ -1,9 +1,10 @@
 <script setup>
 import PageHeader from '../../components/Pageheader/index.vue'
-import { watchEffect, ref } from 'vue';
+import { watchEffect, ref, onMounted, watch } from 'vue';
 import { copyToClipboard } from '../../components/utils/UnixDateTime';
 import SingleLineCopy from '../../components/CopyContainer/SingleLineCopy.vue';
 import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
+import { setTextInputSize } from '../../components/utils/resizableInput';
 const postgresUrl = ref('postgres://myuser:mypassword@localhost:5432/mydatabase?sslmode=require');
 const parsedData = ref(null);
 const formattedData = ref({});
@@ -77,6 +78,7 @@ const convertBackToURL = () => {
     }
 }
 
+
 const formatPostgresURL = (data) => {
     let url = 'postgres://';
     url += data.user;
@@ -134,6 +136,16 @@ const copySpecificContent = (type) => {
                                 id="postgresInput" style="height: 150px;" placeholder="Enter PostgreSQL URL"></textarea>
                             <label for="postgresInput">Enter PostgreSQL URL</label>
                         </div>
+                        <div class="d-flex gap-2 p-2">
+                            <button class="btn btn-primary" type="button" @click="copyParsedData" data-toggle="tooltip"
+                                data-placement="top" title="Copy Parsed Data">
+                                <i class="bi bi-clipboard"></i>
+                            </button>
+                            <button class="btn btn-danger" type="reset" @click="handleClear" data-toggle="tooltip"
+                                data-placement="top" title="Clear text">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -164,16 +176,7 @@ const copySpecificContent = (type) => {
                         </div>
 
                     </div>
-                    <div class="d-flex gap-2 p-2">
-                        <button class="btn btn-primary" type="button" @click="copyParsedData" data-toggle="tooltip"
-                            data-placement="top" title="Copy Parsed Data">
-                            <i class="bi bi-clipboard"></i>
-                        </button>
-                        <button class="btn btn-danger" type="reset" @click="handleClear" data-toggle="tooltip"
-                            data-placement="top" title="Clear text">
-                            <i class="bi bi-x-lg"></i>
-                        </button>
-                    </div>
+
                 </div>
             </div>
         </div>
