@@ -1,3 +1,23 @@
+<script setup>
+import { ref, watch } from "vue";
+import PageHeader from "../../components/Pageheader/index.vue";
+import cronstrue from "cronstrue";
+
+const cronExpression = ref("");
+const parsedResult = ref("");
+
+const parseCronExpression = () => {
+  try {
+    parsedResult.value = cronstrue.toString(cronExpression.value);
+  } catch (error) {
+    parsedResult.value = "Invalid CRON expression";
+  }
+};
+
+watch(cronExpression, () => {
+  parseCronExpression();
+});
+</script>
 <template>
   <main class="p-0 m-0 w-100 bg-body">
     <div class="w-100 mt-3">
@@ -70,26 +90,7 @@
   </main>
 </template>
 
-<script setup>
-import { ref, watch } from "vue";
-import PageHeader from "../../components/Pageheader/index.vue";
-import cronstrue from "cronstrue";
 
-const cronExpression = ref("");
-const parsedResult = ref("");
-
-const parseCronExpression = () => {
-  try {
-    parsedResult.value = cronstrue.toString(cronExpression.value);
-  } catch (error) {
-    parsedResult.value = "Invalid CRON expression";
-  }
-};
-
-watch(cronExpression, () => {
-  parseCronExpression();
-});
-</script>
 
 <style scoped>
 /* You can add your custom CSS styles here */
