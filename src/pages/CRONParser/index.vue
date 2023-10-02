@@ -18,6 +18,7 @@ watch(cronExpression, () => {
   parseCronExpression();
 });
 </script>
+
 <template>
   <main class="p-0 m-0 w-100 bg-body">
     <div class="w-100 mt-3">
@@ -40,7 +41,7 @@ watch(cronExpression, () => {
       </div>
       <div class="block card block2">
         <div class="p-3">
-          <div class="d-flex gap-2 p-2">
+          <div class="d-flex flex-column gap-2 p-2">
             <p>{{ parsedResult }}</p>
           </div>
         </div>
@@ -90,8 +91,4 @@ watch(cronExpression, () => {
   </main>
 </template>
 
-
-
-<style scoped>
-/* You can add your custom CSS styles here */
-</style>
+<style scoped src="./style.css"></style>
