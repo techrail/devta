@@ -3,6 +3,8 @@ import CryptoJS from "crypto-js";
 import { ref, onMounted } from "vue";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import PageHeader from "../../components/Pageheader/index.vue";
+import SingleLineCopy from "../../components/CopyContainer/SingleLineCopy.vue";
+import MultiLineCopy from "../../components/CopyContainer/MultiLineCopy.vue"
 
 // const store = useGlobalStore();
 onMounted(() => document.querySelector("[autofocus]")?.focus());
@@ -50,7 +52,8 @@ async function copyContent(idx) {
         <div class="w-100 p-3">
           <div class="overflow-auto">
             <div class="form-floating">
-              <textarea v-model="value" autofocus type="text" class="form-control mono-font" id="textInput" placeholder="Enter text"> </textarea>
+              <textarea v-model="value" autofocus type="text" class="form-control mono-font" id="textInput"
+                placeholder="Enter text"> </textarea>
               <label for="textInput">Enter text</label>
             </div>
           </div>
@@ -63,11 +66,12 @@ async function copyContent(idx) {
       </div>
 
       <div class="block card block2 overflow-auto">
-        <div v-for="(element, index) in Object.keys(algos)">
-          <div class="input-group p-1">
-            <span class="input-group-text">{{ element }}</span>
-            <input type="text" class="form-control" :value="outputs[index]" disabled readonly />
-            <span class="input-group-text" @click="copyContent(index)"><i class="bi bi-clipboard"></i></span>
+        <div v-for="(element, index) in Object.keys(algos)" class="d-flex flex-column p-2">
+          <div v-if="index <= 1">
+            <SingleLineCopy :title="element" :value="outputs[index]" />
+          </div>
+          <div v-else>
+            <MultiLineCopy :title="element" :value="outputs[index]" height="100px" />
           </div>
         </div>
       </div>
