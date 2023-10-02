@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import PageHeader from "../../components/Pageheader/index.vue";
-import { converterOptions, sampleJson, formatYAML, formatXML, jsonValidator } from "../../components/utils/jsonConverter";
+import { converterOptions, sampleJson, formatYAML, formatXML, jsonValidator, formatCSV } from "../../components/utils/jsonConverter";
 import { copyToClipboard } from "../../components/utils/UnixDateTime";
 
 onMounted(() => document.querySelector("[autofocus]")?.focus());
@@ -22,6 +22,9 @@ const convert = () => {
       convertToXML();
       break;
 
+    case "csv":
+      convertToCSV();
+      break;
     default:
       break;
   }
@@ -38,6 +41,14 @@ const convertToYaml = () => {
 const convertToXML = () => {
   try {
     formattedVal.value = formatXML(unformattedJson.value);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const convertToCSV = () => {
+  try {
+    formattedVal.value = formatCSV(unformattedJson.value);
   } catch (error) {
     console.log(error);
   }
