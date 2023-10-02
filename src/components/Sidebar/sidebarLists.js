@@ -90,4 +90,10 @@ export const sideBarList = [
     route: "/image-base64-converter",
     tags: "Image, base64, Converter, Encoding, Decoding, Encoding, Decoding",
   },
+  {
+    name: "CRON expression parser",
+    iconClass: "bi bi-alarm",
+    route: "/cron-parser",
+    tags: "CRON, Parser, Expression, Cron Expression, Cron Parser",
+  },
 ];
