@@ -61,9 +61,9 @@ watch(route, () => {
 </script>
 <template>
   <!-- <div class="col-sm-3"> -->
-  <div id="large-devices" style="width: 280px" v-if="!isMobile"
+  <div id="large-devices" v-if="!isMobile"
     class="d-flex flex-column justify-content-between flex-shrink-0 p-3 bg-dark p-0 m-0 vh-100 w-full"
-    :style="IS_ELECTRON && 'height: calc(100vh - 54px) !important'">
+    :style="'width: 280px; position: sticky; top: 0;' + (IS_ELECTRON && 'height: calc(100vh - 54px) !important')">
     <!-- header -->
     <div v-if="!IS_ELECTRON">
       <router-link to="/" class="d-flex align-items-center text-decoration-none">
