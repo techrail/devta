@@ -90,4 +90,10 @@ export const sideBarList = [
     route: "/image-base64-converter",
     tags: "Image, base64, Converter, Encoding, Decoding, Encoding, Decoding",
   },
+  {
+    name: "Color Picker",
+    iconClass: "bi bi-eyedropper",
+    route: "/color-picker-converter",
+    tags: "",
+  }
 ];
