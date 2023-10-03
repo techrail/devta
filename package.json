@@ -4,21 +4,24 @@
   "type": "module",
   "private": true,
   "version": "0.0.0",
+  "author": {
+    "name": "Techrail",
+    "email": "techrail.in@outlook.com",
+    "url": "http://github.com/techrail/"
+  },
   "build": {
     "appId": "in.techrail.devta",
     "productName": "Devta",
     "directories": {
-      "buildResources": "dist"
+      "output": "build"
     },
     "win": {
       "icon": "./dist/logo.png"
     },
     "linux": {
-      "target": [
-        "AppImage"
-      ],
-      "category": "Utility",
-      "icon": "./dist/logo.png"
+      "target": "deb",
+      "icon": "./logo_256x256.icns",
+      "category": "Utility"
     },
     "files": [
       "dist/**/*",
