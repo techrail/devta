@@ -91,6 +91,12 @@ export const sideBarList = [
     tags: "Image, base64, Converter, Encoding, Decoding, Encoding, Decoding",
   },
   {
+    name: "CRON expression parser",
+    iconClass: "bi bi-alarm",
+    route: "/cron-parser",
+    tags: "CRON, Parser, Expression, Cron Expression, Cron Parser",
+  },
+  {
     name: "Color Picker",
     iconClass: "bi bi-eyedropper",
     route: "/color-picker-converter",

@@ -1,11 +1,17 @@
 <script setup>
 import PageHeader from '../../components/Pageheader/index.vue'
-import { watchEffect, ref } from 'vue';
+import { watchEffect, ref, onMounted, watch } from 'vue';
 import { copyToClipboard } from '../../components/utils/UnixDateTime';
-
+import SingleLineCopy from '../../components/CopyContainer/SingleLineCopy.vue';
+import MultiLineCopy from '../../components/CopyContainer/MultiLineCopy.vue';
+import { setTextInputSize } from '../../components/utils/resizableInput';
 const postgresUrl = ref('postgres://myuser:mypassword@localhost:5432/mydatabase?sslmode=require');
 const parsedData = ref(null);
 const formattedData = ref({});
+
+
+onMounted(() => document.querySelector("[autofocus]")?.focus());
+
 
 const parsePostgresURL = (url) => {
     const regex = /^postgres:\/\/([^:@]+):([^@]+)@([^:\/]+)(?::(\d+))?\/([^?]+)(?:\?sslmode=(\w+))?$/;
@@ -76,6 +82,7 @@ const convertBackToURL = () => {
     }
 }
 
+
 const formatPostgresURL = (data) => {
     let url = 'postgres://';
     url += data.user;
@@ -133,98 +140,47 @@ const copySpecificContent = (type) => {
                                 id="postgresInput" style="height: 150px;" placeholder="Enter PostgreSQL URL"></textarea>
                             <label for="postgresInput">Enter PostgreSQL URL</label>
                         </div>
+                        <div class="d-flex gap-2 p-2">
+                            <button class="btn btn-primary" type="button" @click="copyParsedData(postgresUrl)"
+                                data-toggle="tooltip" data-placement="top" title="Copy Parsed Data">
+                                <i class="bi bi-clipboard"></i>
+                            </button>
+                            <button class="btn btn-danger" type="reset" @click="handleClear" data-toggle="tooltip"
+                                data-placement="top" title="Clear text">
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-
-
-
-
             </div>
             <div class="block card block2">
                 <div class="d-flex flex-column h-100 justify-content-between">
                     <div class="p-2 overflow-auto">
                         <div v-if="parsedData">
                             <strong>Parsed Data:</strong>
-                            <ul class="p-0">
-                                <li class="input-group p-1">
-                                    <span class="input-group-text">User:</span>
-                                    <input type="text" class="form-control" :value="parsedData.user" disabled readonly>
-                                    <span class="input-group-text" @click="copyParsedData(parsedData.user)"><i
-                                            class="bi bi-clipboard"></i></span>
-                                </li>
-                                <li class="input-group p-1">
-                                    <span class="input-group-text">host:</span>
-                                    <input type="text" class="form-control" :value="parsedData.host" disabled readonly>
-                                    <span class="input-group-text" @click="copyParsedData(parsedData.host)"><i
-                                            class="bi bi-clipboard"></i></span>
-                                </li>
-                                <li class="input-group p-1">
-                                    <span class="input-group-text">port:</span>
-                                    <input type="text" class="form-control" :value="parsedData.port" disabled readonly>
-                                    <span class="input-group-text" @click="copyParsedData(parsedData.port)"><i
-                                            class="bi bi-clipboard"></i></span>
-                                </li>
-                                <li class="input-group p-1">
-                                    <span class="input-group-text">sslmode:</span>
-                                    <input type="text" class="form-control" :value="parsedData.sslmode" disabled readonly>
-                                    <span class="input-group-text" @click="copyParsedData(parsedData.sslmode)"><i
-                                            class="bi bi-clipboard"></i></span>
-                                </li>
-                                <li class="input-group p-1">
-                                    <span class="input-group-text">password:</span>
-                                    <input type="text" class="form-control" :value="parsedData.password" disabled readonly>
-                                    <span class="input-group-text" @click="copyParsedData(parsedData.password)"><i
-                                            class="bi bi-clipboard"></i></span>
-                                </li>
-
-                                <li class="input-group p-1">
-                                    <span class="input-group-text">database:</span>
-                                    <input type="text" class="form-control" :value="parsedData.database" disabled readonly>
-                                    <span class="input-group-text" @click="copyParsedData(database)"><i
-                                            class="bi bi-clipboard"></i></span>
-                                </li>
+                            <ul class="p-0 mt-2">
+                                <div class="d-flex flex-column gap-2">
+                                    <SingleLineCopy title="User" :value="parsedData.user" />
+                                    <SingleLineCopy title="Host" :value="parsedData.host" />
+                                    <SingleLineCopy title="Port" :value="parsedData.port" />
+                                    <SingleLineCopy title="SSLMode" :value="parsedData.sslmode" />
+                                    <SingleLineCopy title="Password" :value="parsedData.password" />
+                                    <SingleLineCopy title="Database" :value="parsedData.database" />
+                                </div>
 
                             </ul>
-                        </div>
-                        <strong>Language Connector Strings:</strong>
+                            <strong>Language Connector Strings:</strong>
 
-                        <div class="block card block2 overflow-auto mt-2">
-
-                            <div class="input-group p-1" v-if="formattedData.phpDSN">
-                                <span class="input-group-text">PHP PDO:</span>
-                                <input type="text" class="form-control" :value="formattedData.phpDSN" disabled readonly>
-                                <span class="input-group-text" @click="copySpecificContent('phpDSN')"><i
-                                        class="bi bi-clipboard"></i></span>
-                            </div>
-
-                            <div class="input-group p-1" v-if="formattedData.nodeJS">
-                                <span class="input-group-text">Node.js:</span>
-                                <input type="text" class="form-control"
-                                    :value="JSON.stringify(formattedData.nodeJS, null, 2)" disabled readonly>
-                                <span class="input-group-text" @click="copySpecificContent('nodeJS')"><i
-                                        class="bi bi-clipboard"></i></span>
-                            </div>
-
-                            <div class="input-group p-1" v-if="formattedData.javaJDBC">
-                                <span class="input-group-text">Java JDBC:</span>
-                                <input type="text" class="form-control" :value="formattedData.javaJDBC" disabled readonly>
-                                <span class="input-group-text" @click="copySpecificContent('javaJDBC')"><i
-                                        class="bi bi-clipboard"></i></span>
+                            <div class="d-flex flex-column gap-2 mt-2">
+                                <MultiLineCopy title="Node.js" :value="JSON.stringify(formattedData.nodeJS, null, 2)"
+                                    height="200px" />
+                                <MultiLineCopy title="PHP PDO" :value="formattedData.phpDSN" height="100px" />
+                                <MultiLineCopy title="Java JDBC" :value="formattedData.javaJDBC" height="100px" />
                             </div>
                         </div>
 
+                    </div>
 
-                    </div>
-                    <div class="d-flex gap-2 p-2">
-                        <button class="btn btn-primary" type="button" @click="copyParsedData" data-toggle="tooltip"
-                            data-placement="top" title="Copy Parsed Data">
-                            <i class="bi bi-clipboard"></i>
-                        </button>
-                        <button class="btn btn-danger" type="reset" @click="handleClear" data-toggle="tooltip"
-                            data-placement="top" title="Clear text">
-                            <i class="bi bi-x-lg"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
