@@ -1,12 +1,11 @@
 <script setup>
-import { ref, onMounted ,watch } from "vue";
+import { ref, onMounted, watchEffect } from "vue";
 import PageHeader from "../../components/Pageheader/index.vue";
 import { converterOptions, sampleJson, formatYAML, formatXML, jsonValidator, formatCSV } from "../../components/utils/jsonConverter";
 import { copyToClipboard } from "../../components/utils/UnixDateTime";
 
 onMounted(() => {
   document.querySelector("[autofocus]")?.focus();
-  convertToYaml();
 });
 
 const unformattedJson = ref(sampleJson);
@@ -80,7 +79,8 @@ const handleCopy = () => {
   }
   setTimeout(change, 3000);
 };
-watch(selectedvalue, () => {
+
+watchEffect(() => {
   convert();
 });
 </script>
