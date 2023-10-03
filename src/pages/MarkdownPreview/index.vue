@@ -36,6 +36,20 @@ const handleFileChange = async (event) => {
     }
   }
 };
+
+const downloadMarkdown = () => {
+  // Get the content of the Markdown 
+  const markdownContent = markdown.value
+  // Create a Blob with the Markdown content
+  const blob = new Blob([markdownContent], { type: 'text/markdown' });
+
+  // Create a download link
+  const link = document.createElement('a');
+  link.download = 'markdownFile.md';
+  link.href = window.URL.createObjectURL(blob);
+  link.click();
+}
+
 </script>
 
 <template>
@@ -49,7 +63,8 @@ const handleFileChange = async (event) => {
           <div class="form-floating">
             <div class="markdown-editor">
               <div class="form-floating">
-                <textarea v-model="markdown" autofocus type="text" class="form-control mono-font" id="tokenInput" placeholder="Enter the token">
+                <textarea v-model="markdown" autofocus type="text" class="form-control mono-font" id="tokenInput"
+                  placeholder="Enter the token">
                 </textarea>
                 <label for="tokenInput">Enter markdown</label>
               </div>
@@ -66,17 +81,11 @@ const handleFileChange = async (event) => {
                             </div> -->
               <div class="mt-1 d-flex align-items-center gap-1">
                 <!-- file input that only accpets markdown files lesser than 1mb -->
-                <input
-                  type="file"
-                  @change="handleFileChange"
-                  size="1048576"
-                  class="form-control"
-                  accept=".md"
-                  name="Upload markdown file"
-                  id="markdownInput"
-                />
+                <input type="file" @change="handleFileChange" size="1048576" class="form-control" accept=".md"
+                  name="Upload markdown file" id="markdownInput" />
                 <label for="markdownInput">
-                  <div role="button" data-toggle="tooltip" data-placement="top" title="Upload local file" class="btn btn-secondary">
+                  <div role="button" data-toggle="tooltip" data-placement="top" title="Upload local file"
+                    class="btn btn-secondary">
                     <i class="bi bi-upload"></i>
                   </div>
                 </label>
@@ -84,17 +93,16 @@ const handleFileChange = async (event) => {
               </div>
 
               <div class="d-flex gap-2">
-                <button
-                  class="btn btn-primary mt-1"
-                  type="button"
-                  @click="handleClick(markdown)"
-                  data-toggle="tooltip"
-                  data-placement="top"
-                  title="Copy to clipboard"
-                >
+                <button class="btn btn-warning mt-1" :disabled="markdown === ''" type="button" @click="downloadMarkdown"
+                  data-toggle="tooltip" data-placement="top" title="Download .md">
+                  <i class="bi bi-download"></i>
+                </button>
+                <button class="btn btn-primary mt-1" :disabled="markdown === ''" type="button"
+                  @click="handleClick(markdown)" data-toggle="tooltip" data-placement="top" title="Copy to clipboard">
                   <i class="bi bi-clipboard"></i>
                 </button>
-                <button class="btn btn-danger mt-1" type="reset" @click="handleClear" data-toggle="tooltip" data-placement="top" title="Clear text">
+                <button class="btn btn-danger mt-1" type="reset" @click="handleClear" data-toggle="tooltip"
+                  data-placement="top" title="Clear text">
                   <i class="bi bi-x-lg"></i>
                 </button>
               </div>
