@@ -104,7 +104,7 @@ const handleCopy = () => {
           <div class="d-flex flex-column mt-2 justify-content-between align-items-center gap-2">
             <!-- format dropdown -->
             <div class="form-floating w-100">
-              <select class="form-select" name="timezone-select" id="dropdown" v-model="selectedvalue">
+              <select class="form-select" name="timezone-select" id="dropdown" v-model="selectedvalue" :disabled="error">
                 <option :value="converterOptions[0]">
                   {{ converterOptions[0] }}
                 </option>
