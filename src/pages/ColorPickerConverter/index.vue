@@ -170,9 +170,11 @@ const copyParsedData = (value) => {
       <div class="block card block2 overflow-auto">
         <div class="p-3">
           <ul class="p-0">
+            <li class="list-group-item"><h5 class="text-muted"><strong>Picker</strong></h5></li>
             <li class="input-group p-1">
               <input :value=HEX class="form-control" type="color" @input=refreshOutput>
             </li>
+            <li class="list-group-item"><h5 class="text-muted mt-2"><strong>Values</strong></h5></li>
             <li class="input-group p-1">
               <span class="input-group-text">RGB</span>
               <input :value="RGB" class="form-control" disabled readonly type="text">
