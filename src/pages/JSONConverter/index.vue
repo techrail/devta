@@ -1,10 +1,13 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted ,watch } from "vue";
 import PageHeader from "../../components/Pageheader/index.vue";
 import { converterOptions, sampleJson, formatYAML, formatXML, jsonValidator, formatCSV } from "../../components/utils/jsonConverter";
 import { copyToClipboard } from "../../components/utils/UnixDateTime";
 
-onMounted(() => document.querySelector("[autofocus]")?.focus());
+onMounted(() => {
+  document.querySelector("[autofocus]")?.focus();
+  convertToYaml();
+});
 
 const unformattedJson = ref(sampleJson);
 const formattedVal = ref();
@@ -77,6 +80,9 @@ const handleCopy = () => {
   }
   setTimeout(change, 3000);
 };
+watch(selectedvalue, () => {
+  convert();
+});
 </script>
 
 <template>
@@ -114,10 +120,6 @@ const handleCopy = () => {
               </select>
               <label for="dropdown">choose format</label>
             </div>
-            <!-- convert button -->
-            <button type="button" :disabled="error === true || unformattedJson.length === 0" @click="convert" class="btn btn-primary w-100">
-              Convert
-            </button>
           </div>
         </div>
       </div>
