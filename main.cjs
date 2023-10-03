@@ -6,7 +6,7 @@ const path = require("path");
 const createWindow = () => {
   const win = new BrowserWindow({
     show: false,
-    icon: "./public/logo.png",
+    icon: "./dist/logo.png",
     frame: false,
     minHeight: 600,
     minWidth: 850,
