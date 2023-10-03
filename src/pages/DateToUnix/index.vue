@@ -44,7 +44,7 @@ const getFormatteddates = (date) => {
             <PageHeader />
         </div>
         <div class="grid mt-1">
-            <div class="block card block1">
+            <div class="block card block1 overflow-inherit">
                 <div class="p-3">
                     <div class="p-2">
                         <p class="muted">Choose a date and time from the datepicker</p>
