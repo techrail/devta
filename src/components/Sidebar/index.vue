@@ -25,8 +25,7 @@ const filteredList = () => {
   return sortedSideBarLists.filter((sideBarItem) => containsWordsInAnyOrder(
     sideBarItem.name.toLowerCase() + sideBarItem.tags.toLowerCase(),
     searchInput.value.toLowerCase()
-  )
-  );
+  ));
 };
 
 function containsWordsInAnyOrder(listItem, searchInput) {
