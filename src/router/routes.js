@@ -15,6 +15,8 @@ import URLParser from "../pages/URLParser/index.vue";
 import APITester from "../pages/APITester/index.vue";
 import ImagetoBase64 from "../pages/ImageToBase64/index.vue";
 import CRONParser from "../pages/CRONParser/index.vue";
+import ColorPickerConverter from "../pages/ColorPickerConverter/index.vue";
+
 const routes = [
   {
     path: "/",
@@ -103,6 +105,11 @@ const routes = [
     path: "/cron-parser",
     component: CRONParser,
     name: "CRON Parser",
+  },
+  {
+    path: "/color-picker-converter",
+    component: ColorPickerConverter,
+    name: "Color Picker",
   },
 ];
 

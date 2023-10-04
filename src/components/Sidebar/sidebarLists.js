@@ -96,4 +96,10 @@ export const sideBarList = [
     route: "/cron-parser",
     tags: "CRON, Parser, Expression, Cron Expression, Cron Parser",
   },
+  {
+    name: "Color Picker",
+    iconClass: "bi bi-eyedropper",
+    route: "/color-picker-converter",
+    tags: "",
+  }
 ];
