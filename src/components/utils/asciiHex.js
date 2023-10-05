@@ -16,13 +16,17 @@ export const asciiToHex = (userInput) => {
 }
 export const hexValidator = (userInput) => {
   try {
-    const hexWords = userInput.replace(/\s+/g, '')
-    const regex = /^[0-9a-f]+$/gm;
-    if (hexWords.match(regex) ){
-      return true
-  }else{
-      return false
-  }
+    if (userInput != null) {
+      const hexWords = userInput.replace(/\s+/g, '')
+      const regex = /^[0-9a-f]+$/gm;
+      if (hexWords.match(regex) ){
+        return true
+      } else{
+        return false
+      }
+    } else {
+      return true;
+    }
   } catch (error) {
     console.log(error);
   }

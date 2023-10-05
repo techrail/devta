@@ -60,7 +60,7 @@ const handleChange = () => {
 };
 
 const handleClear = () => {
-  input.value = "";
+  input.value = null;
   formattedVal.value = "";
   error.value = false;
 };
