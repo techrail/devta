@@ -61,6 +61,12 @@ export const sideBarList = [
     tags: "Conversion,Syntax,JSON",
   },
   {
+    name: "ASCII-Hex Converter",
+    iconClass: "bi bi-hexagon",
+    route: "/ascii-to-hex",
+    tags: "Conversion,Syntax,JSON",
+  },
+  {
     name: "SQL Formatter",
     iconClass: "bi bi-filetype-sql",
     route: "/sql-formatter",

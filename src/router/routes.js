@@ -7,6 +7,7 @@ import JsonFormatter from "../pages/JsonFormatter/index.vue";
 import MarkdownPreview from "../pages/MarkdownPreview/index.vue";
 import TimeZoneConverter from "../pages/TimeZoneConverter/index.vue";
 import JSONToYAML from "../pages/JSONConverter/index.vue";
+import ASCIIHex from "../pages/ASCII-HexConverter/index.vue";
 import JWTDebugger from "../pages/JWTDebugger/index.vue";
 import SQLFormatter from "../pages/SQLFormatter/index.vue";
 import PSQLFormatter from "../pages/PSQLParser/index.vue";
@@ -62,6 +63,11 @@ const routes = [
     path: "/json-converter",
     component: JSONToYAML,
     name: "JSON converter",
+  },
+  {
+    path: "/ascii-to-hex",
+    component: ASCIIHex,
+    name: "ASCII Hex Converter",
   },
   {
     path: "/jwt-debugger",
