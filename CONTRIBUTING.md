@@ -29,6 +29,7 @@ Please choose the appropriate issue type when creating a new issue:
 
 - **Bug Report**: If you encounter a problem or unexpected behavior with the project.
 - **Feature Request**: If you have an idea for a new feature or improvement.
+- **UI Fix**: If the user interface needs to be changed or fixed.
 - **Question / Support Request**: If you have a question or need assistance with using the project.
 - **Documentation Issue**: If you find issues with project documentation (e.g., typos, unclear instructions).
 
@@ -44,9 +45,9 @@ Follow these guidelines when creating issues:
 
 When you are finished with the changes, create a pull request.
 
-- Mention the changes made and please add screenshots and other things if necessary,
-- Reference related issues in your pull request.
+- Mention the changes made and please add screenshots and other things if necessary.
 - Keep your pull requests focused on a single feature or bug fix.
+- Ensure that you [link the pull request to the issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword).
 
 ## How to add a new component
 
@@ -71,6 +72,7 @@ Please keep this in mind when making a contribution
 - Since this project doesn't have any definitive style guide due to the nature of the components, try to use similar components as a reference or reach out to the contributors if you face any issue.
 - Please make use of the reusable components at `src/components` wherever applicable.
 - Please make sure to name the directory the same name of your route but in camel case.
+- Please make sure that the user interface is fully responsive.
 
 ## Attribution
 

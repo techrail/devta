@@ -1,10 +1,12 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watchEffect } from "vue";
 import PageHeader from "../../components/Pageheader/index.vue";
 import { converterOptions, sampleJson, formatYAML, formatXML, jsonValidator, formatCSV } from "../../components/utils/jsonConverter";
 import { copyToClipboard } from "../../components/utils/UnixDateTime";
 
-onMounted(() => document.querySelector("[autofocus]")?.focus());
+onMounted(() => {
+  document.querySelector("[autofocus]")?.focus();
+});
 
 const unformattedJson = ref(sampleJson);
 const formattedVal = ref();
@@ -77,6 +79,10 @@ const handleCopy = () => {
   }
   setTimeout(change, 3000);
 };
+
+watchEffect(() => {
+  convert();
+});
 </script>
 
 <template>
@@ -104,7 +110,7 @@ const handleCopy = () => {
           <div class="d-flex flex-column mt-2 justify-content-between align-items-center gap-2">
             <!-- format dropdown -->
             <div class="form-floating w-100">
-              <select class="form-select" name="timezone-select" id="dropdown" v-model="selectedvalue">
+              <select class="form-select" name="timezone-select" id="dropdown" v-model="selectedvalue" :disabled="error">
                 <option :value="converterOptions[0]">
                   {{ converterOptions[0] }}
                 </option>
@@ -114,10 +120,6 @@ const handleCopy = () => {
               </select>
               <label for="dropdown">choose format</label>
             </div>
-            <!-- convert button -->
-            <button type="button" :disabled="error === true || unformattedJson.length === 0" @click="convert" class="btn btn-primary w-100">
-              Convert
-            </button>
           </div>
         </div>
       </div>

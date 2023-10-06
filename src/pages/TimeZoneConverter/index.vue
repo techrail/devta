@@ -47,7 +47,7 @@ const handleSelectChange = () => {
             <PageHeader />
         </div>
         <div class="grid mt-1">
-            <div class="block card block1">
+            <div class="block card block1 overflow-inherit">
                 <div class="p-3">
                     <div class="d-flex flex-column gap-2">
                         <div class="mt-2 text-muted"><strong>Select date and time </strong></div>
