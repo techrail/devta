@@ -1,12 +1,48 @@
 {
   "name": "devta",
+  "main": "main.cjs",
+  "type": "module",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "author": {
+    "name": "Techrail",
+    "email": "techrail.in@outlook.com",
+    "url": "http://github.com/techrail/"
+  },
+  "build": {
+    "appId": "in.techrail.devta",
+    "productName": "Devta",
+    "directories": {
+      "output": "build"
+    },
+    "win": {
+      "icon": "./dist/logo.png"
+    },
+    "linux": {
+      "target": "deb",
+      "icon": "./logo_256x256.icns",
+      "category": "Utility"
+    },
+    "files": [
+      "dist/**/*",
+      "main.cjs",
+      "preload.js"
+    ],
+    "publish": {
+      "provider": "github",
+      "repo": "devta",
+      "owner": "techrail",
+      "releaseType": "draft"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "electron:dev": "electron .",
+    "postinstall": "electron-builder install-app-deps",
+    "electron:build-linux": "electron-builder --linux --publish always",
+    "electron:build-windows": "electron-builder --windows --publish always"
   },
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",
@@ -17,6 +53,7 @@
     "cron-parser": "^4.9.0",
     "cronstrue": "^2.32.0",
     "crypto-js": "^4.1.1",
+    "electron-is-dev": "^2.0.0",
     "esbuild": "^0.19.2",
     "highlight.js": "^11.8.0",
     "jose": "^4.14.4",
@@ -34,6 +71,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.2.3",
+    "electron": "^26.2.2",
+    "electron-builder": "^24.6.4",
     "vite": "^4.4.9"
   }
 }
