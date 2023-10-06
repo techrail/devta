@@ -106,6 +106,6 @@ export const sideBarList = [
     name: "Base36",
     iconClass: "bi bi-journal-text",
     route: "/base36",
-    tags: "Converter, Base36, Decoder, Decimal, Base10",
+    tags: "Converter, Base36, Decimal, Base10",
   },
 ];
