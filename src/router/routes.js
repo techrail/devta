@@ -20,6 +20,7 @@ import APITester from "../pages/APITester/index.vue";
 import ImagetoBase64 from "../pages/ImageToBase64/index.vue";
 import CRONParser from "../pages/CRONParser/index.vue";
 import ColorPickerConverter from "../pages/ColorPickerConverter/index.vue";
+import Base36 from "../pages/Base36/index.vue";
 
 const routes = [
   {
@@ -114,6 +115,11 @@ const routes = [
     path: "/color-picker-converter",
     component: ColorPickerConverter,
     name: "Color Picker",
+  },
+  {
+    path: "/base36",
+    component: Base36,
+    name: "Base36",
   },
 ];
 
