@@ -107,5 +107,11 @@ export const sideBarList = [
     iconClass: "bi bi-eyedropper",
     route: "/color-picker-converter",
     tags: "",
-  }
+  },
+  {
+    name: "Base36",
+    iconClass: "bi bi-journal-text",
+    route: "/base36",
+    tags: "Converter, Base36, Decimal, Base10",
+  },
 ];

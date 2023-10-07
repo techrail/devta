@@ -3,6 +3,7 @@ import { useRoute } from 'vue-router';
 import TopBarButtons from '../TopBarButtons/TopBarButtons.vue';
 
 const route = useRoute()
+const IS_ELECTRON = window.IS_ELECTRON || false;
 </script>
 
 <template>
@@ -13,7 +14,7 @@ const route = useRoute()
             </strong>
         </div>
         <div class="d-flex gap-2">
-            <TopBarButtons />
+            <TopBarButtons v-if="!IS_ELECTRON" />
         </div>
     </div>
 </template>

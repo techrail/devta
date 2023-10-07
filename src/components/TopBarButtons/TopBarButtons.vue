@@ -4,16 +4,24 @@ import { useThemeStore } from '../../stores/theme';
 import { buttonData } from './buttonData';
 
 const store = useThemeStore()
+const IS_ELECTRON = window.IS_ELECTRON || false;
 
+function open(link) {
+    window.actions.open(link)
+}
 </script>
 
 <template>
     <div id="root" v-for="(item, index) in buttonData" :key="index">
-        <a :href="item.url" target="_blank" rel="noopener noreferrer">
+        <a :href="item.url" target="_blank" rel="noopener noreferrer" v-if="!IS_ELECTRON">
             <button data-toggle="tooltip" data-placement="top" :title="item.tooltipTitle" class="btn btn-secondary">
                 <i :class="item.iconClass"></i>
             </button>
         </a>
+        <button data-toggle="tooltip" data-placement="top" :title="item.tooltipTitle" class="btn btn-secondary" v-else
+            @click="open(item.url)">
+            <i :class="item.iconClass"></i>
+        </button>
     </div>
     <button class="btn btn-secondary" @click="store.toggleTheme" data-placement="top"
         :title="store.darkTheme ? 'switch to light' : 'switch to dark'">

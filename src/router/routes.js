@@ -1,4 +1,8 @@
-import { createRouter, createWebHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHistory,
+  createWebHashHistory,
+} from "vue-router";
 import HashGenerator from "../pages/HashGenerator/index.vue";
 import Base64Text from "../pages/Base64Text/index.vue";
 import DateToUnix from "../pages/DateToUnix/index.vue";
@@ -17,6 +21,7 @@ import APITester from "../pages/APITester/index.vue";
 import ImagetoBase64 from "../pages/ImageToBase64/index.vue";
 import CRONParser from "../pages/CRONParser/index.vue";
 import ColorPickerConverter from "../pages/ColorPickerConverter/index.vue";
+import Base36 from "../pages/Base36/index.vue";
 
 const routes = [
   {
@@ -117,10 +122,15 @@ const routes = [
     component: ColorPickerConverter,
     name: "Color Picker",
   },
+  {
+    path: "/base36",
+    component: Base36,
+    name: "Base36",
+  },
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: window.IS_ELECTRON ? createWebHashHistory() : createWebHistory(),
   routes,
 });
 
