@@ -1,5 +1,4 @@
 <script setup>
-import PageHeader from "@/PageHeader/index.vue";
 import {ref} from "vue";
 import {copyToClipboard} from "@/utils/UnixDateTime.js";
 
