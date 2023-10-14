@@ -1,8 +1,4 @@
-import {
-  createRouter,
-  createWebHistory,
-  createWebHashHistory,
-} from "vue-router";
+import { createRouter, createWebHistory, createWebHashHistory } from "vue-router";
 import HashGenerator from "../pages/HashGenerator/index.vue";
 import Base64Text from "../pages/Base64Text/index.vue";
 import DateToUnix from "../pages/DateToUnix/index.vue";
@@ -21,6 +17,7 @@ import ImagetoBase64 from "../pages/ImageToBase64/index.vue";
 import CRONParser from "../pages/CRONParser/index.vue";
 import ColorPickerConverter from "../pages/ColorPickerConverter/index.vue";
 import Base36 from "../pages/Base36/index.vue";
+import LMIDGenerator from "../pages/LMIDGenerator/index.vue";
 
 const routes = [
   {
@@ -120,6 +117,11 @@ const routes = [
     path: "/base36",
     component: Base36,
     name: "Base36",
+  },
+  {
+    path: "/lmid-generator",
+    component: LMIDGenerator,
+    name: "LMID - Generator",
   },
 ];
 
