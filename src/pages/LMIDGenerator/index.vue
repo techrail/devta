@@ -1,15 +1,19 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref, shallowRef, watch } from "vue";
-import PageHeader from "../../components/Pageheader/index.vue";
+
 import { copyToClipboard } from "@/utils/UnixDateTime.js";
-import SingleLineCopy from "../../components/CopyContainer/SingleLineCopy.vue";
-const levels = ["Panic", "Alert", "Error", "Warning", "Notice", "Info", "Debug"];
-const settings = ref({
+import { localStorageRef } from "@/utils/common";
+
+import PageHeader from "@/Pageheader/index.vue";
+import SingleLineCopy from "@/CopyContainer/SingleLineCopy.vue";
+
+const INTERVAL = 1000;
+const LEVELS = ["Panic", "Alert", "Error", "Warning", "Notice", "Info", "Debug"];
+const settings = localStorageRef("lmid-settings", {
   encoding: 36,
   showDiffLogLevels: false,
   autoCopy: false,
 });
-const INTERVAL = 1000;
 const tickerRef = shallowRef(null);
 const utcTime = ref(new Date());
 const getUtcTimeString = () => utcTime.value.toUTCString();
@@ -27,12 +31,16 @@ const getLMID = (timestamp) => {
   return (timestamp - delta.value).toString(36).toUpperCase();
 };
 
+const isInvalidDelta = computed(() => {
+  return delta.value > getUtcTimestamp();
+});
 const tickHandler = () => {
   utcTime.value = new Date();
+  if (isInvalidDelta.value) return;
+
   lmid.value = getLMID(getUtcTimestamp());
   if (settings.value.autoCopy) copyToClipboard(lmid.value);
 };
-
 // watch delta and encoding changes, if changed instanly generate a new LMID and not wait till the next tick
 watch([() => settings.value.encoding, delta], (a) => {
   tickHandler();
@@ -64,10 +72,12 @@ onUnmounted(() => {
                 v-model="delta"
                 type="number"
                 class="form-control mono-font"
+                :class="{ 'is-invalid': isInvalidDelta }"
                 id="deltaInput"
                 placeholder="Amount you want to minus"
               />
               <label for="deltaInput">Delta / Amount to substract</label>
+              <div class="invalid-feedback">Delta cannot be greater than current timestamp.</div>
             </div>
 
             <div class="text-muted mt-4 mb-2">Settings</div>
@@ -106,7 +116,7 @@ onUnmounted(() => {
             <SingleLineCopy title="LMID" :value="lmid" />
             <div v-if="settings.showDiffLogLevels">
               <h6 class="mt-4 mb-3 text-muted">With different log levels</h6>
-              <SingleLineCopy class="mb-2" v-for="l in levels" :title="l" :value="`${l.substring(0, 1)}#${lmid}`" />
+              <SingleLineCopy class="mb-2" v-for="l in LEVELS" :title="l" :value="`${l.substring(0, 1)}#${lmid}`" />
             </div>
           </div>
         </div>

@@ -1,9 +1,44 @@
-#baseInput {
-    height: 72vh;
+:deep() {
+  --panic-color: #ff5733;
+  --alert-color: #ffa733;
+  --error-color: #ff5733;
+  --warning-color: #ffc733;
+  --notice-color: #33ffb5;
+  --info-color: #33a5ff;
+  --debug-color: #a533ff;
 }
 
-@media screen and (max-width: 800px) {
-    #baseInput {
-        height: 50vh;
-    }
+:deep(#panic) {
+  color: var(--panic-color);
+}
+:deep(#alert) {
+  color: var(--alert-color);
+}
+:deep(#error) {
+  color: var(--error-color);
+}
+:deep(#warning) {
+  color: var(--warning-color);
+}
+:deep(#notice) {
+  color: var(--notice-color);
+}
+:deep(#info) {
+  color: var(--info-color);
+}
+:deep(#debug) {
+  color: var(--debug-color);
+}
+
+/* For dark mode */
+@media (prefers-color-scheme: dark) {
+  :deep() {
+    --panic-color: #ff8844;
+    --alert-color: #ffc266;
+    --error-color: #ff8844;
+    --warning-color: #ffcc66;
+    --notice-color: #44ffd6;
+    --info-color: #44a2ff;
+    --debug-color: #b944ff;
+  }
 }
