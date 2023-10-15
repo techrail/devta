@@ -106,7 +106,7 @@ onUnmounted(() => {
               without extensive details.
             </div>
             See the detailed writeup
-            <a href="https://techrail.in/knowledge-base/logging-errors-properly" class="d-inline-block mt-2">here</a>
+            <a target="_blank" href="https://techrail.in/knowledge-base/logging-errors-properly" class="d-inline-block mt-2">here</a>
           </div>
         </div>
       </div>
