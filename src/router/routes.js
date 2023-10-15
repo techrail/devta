@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory, createWebHistory } from "vue-router";
 import APITester from "../pages/APITester/index.vue";
+import ASCIIHex from "../pages/ASCII-HexConverter/index.vue"
 import Base36 from "../pages/Base36/index.vue";
 import Base64Text from "../pages/Base64Text/index.vue";
 import CRONParser from "../pages/CRONParser/index.vue";
