@@ -108,4 +108,10 @@ export const sideBarList = [
     route: "/base36",
     tags: "Converter, Base36, Decimal, Base10",
   },
+  {
+    name: "LMID Generator",
+    iconClass: "bi bi-gear-wide-connected",
+    route: "/lmid",
+    tags: "lmid, generator, logging, messages, errors",
+  },
 ];

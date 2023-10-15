@@ -1,50 +1,29 @@
 <script setup>
-import { onMounted } from "vue"
-import { setTextInputSize } from "../utils/resizableInput"
-import { copyToClipboard } from "../utils/UnixDateTime"
+import { copyToClipboard } from "../utils/UnixDateTime";
+import { formatToID } from "../utils/common";
 const props = defineProps({
-    title: String,
-    value: String | Number,
-    height: String,
-    key: Number
-})
-
+  title: String,
+  value: String | Number,
+  height: String,
+  key: Number,
+  id: String,
+});
 
 const handleClick = () => {
-    copyToClipboard(props.value)
-}
-
-// // generates a randomised id for the resizable form to work
-// const generateRandom = (length = 10) => {
-//     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-//     let result = '';
-//     for (let i = 0; i < length; i++) {
-//         const randomIndex = Math.floor(Math.random() * characters.length);
-//         result += characters.charAt(randomIndex);
-//     }
-//     return result;
-// }
-
-// onMounted(() => {
-//     const randomId = "resizable-input-" + generateRandom()
-//     const targetDiv = document.getElementById('resizable-form')
-//     targetDiv.id = randomId
-//     setTextInputSize([randomId])
-// })
-
+  copyToClipboard(props.value);
+};
+const id = props.id || formatToID(props.title);
 const style = {
-    height: props.height
-}
-
-
+  height: props.height,
+};
 </script>
 
 <template>
-    <form class="form-floating d-flex gap-1 w-full" id="resizable-form">
-        <textarea type="text" class="form-control" :style="style" readonly id="floatingInputValue" :value="value" />
-        <label for="floatingInputValue">{{ title }}</label>
-        <button @click="handleClick" class="btn btn-outline-secondary" type="button" id="copyButton">
-            <i class="bi bi-clipboard"></i>
-        </button>
-    </form>
+  <div class="form-floating d-flex gap-1 w-full">
+    <textarea type="text" class="form-control" :style="style" readonly :id="id" :value="value" />
+    <label :for="id">{{ title }}</label>
+    <button @click="handleClick" class="btn btn-outline-secondary" type="button">
+      <i class="bi bi-clipboard"></i>
+    </button>
+  </div>
 </template>
