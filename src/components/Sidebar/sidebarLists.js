@@ -111,7 +111,7 @@ export const sideBarList = [
   {
     name: "LMID Generator",
     iconClass: "bi bi-gear-wide-connected",
-    route: "/lmid-generator",
-    tags: "lmid, generator",
+    route: "/lmid",
+    tags: "lmid, generator, logging, messages, errors",
   },
 ];

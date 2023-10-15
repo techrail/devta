@@ -3,7 +3,7 @@
   --alert-color: #ffa733;
   --error-color: #ff5733;
   --warning-color: #ffc733;
-  --notice-color: #33ffb5;
+  --notice-color: #2fcc93;
   --info-color: #33a5ff;
   --debug-color: #a533ff;
 }
@@ -31,7 +31,7 @@
 }
 
 /* For dark mode */
-@media (prefers-color-scheme: dark) {
+[data-bs-theme="dark"] * {
   :deep() {
     --panic-color: #ff8844;
     --alert-color: #ffc266;

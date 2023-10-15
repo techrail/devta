@@ -1,23 +1,24 @@
-import { createRouter, createWebHistory, createWebHashHistory } from "vue-router";
-import HashGenerator from "../pages/HashGenerator/index.vue";
-import Base64Text from "../pages/Base64Text/index.vue";
-import DateToUnix from "../pages/DateToUnix/index.vue";
-import UnixToDate from "../pages/UnixToDate/index.vue";
-import JsonFormatter from "../pages/JsonFormatter/index.vue";
-import MarkdownPreview from "../pages/MarkdownPreview/index.vue";
-import TimeZoneConverter from "../pages/TimeZoneConverter/index.vue";
-import JSONToYAML from "../pages/JSONConverter/index.vue";
-import JWTDebugger from "../pages/JWTDebugger/index.vue";
-import SQLFormatter from "../pages/SQLFormatter/index.vue";
-import PSQLFormatter from "../pages/PSQLParser/index.vue";
-import Index from "../pages/Index/index.vue";
-import URLParser from "../pages/URLParser/index.vue";
+import { createRouter, createWebHashHistory, createWebHistory } from "vue-router";
+
 import APITester from "../pages/APITester/index.vue";
-import ImagetoBase64 from "../pages/ImageToBase64/index.vue";
+import Base36 from "../pages/Base36/index.vue";
+import Base64Text from "../pages/Base64Text/index.vue";
 import CRONParser from "../pages/CRONParser/index.vue";
 import ColorPickerConverter from "../pages/ColorPickerConverter/index.vue";
-import Base36 from "../pages/Base36/index.vue";
+import DateToUnix from "../pages/DateToUnix/index.vue";
+import HashGenerator from "../pages/HashGenerator/index.vue";
+import ImagetoBase64 from "../pages/ImageToBase64/index.vue";
+import Index from "../pages/Index/index.vue";
+import JSONToYAML from "../pages/JSONConverter/index.vue";
+import JWTDebugger from "../pages/JWTDebugger/index.vue";
+import JsonFormatter from "../pages/JsonFormatter/index.vue";
 import LMIDGenerator from "../pages/LMIDGenerator/index.vue";
+import MarkdownPreview from "../pages/MarkdownPreview/index.vue";
+import PSQLFormatter from "../pages/PSQLParser/index.vue";
+import SQLFormatter from "../pages/SQLFormatter/index.vue";
+import TimeZoneConverter from "../pages/TimeZoneConverter/index.vue";
+import URLParser from "../pages/URLParser/index.vue";
+import UnixToDate from "../pages/UnixToDate/index.vue";
 
 const routes = [
   {
@@ -119,9 +120,9 @@ const routes = [
     name: "Base36",
   },
   {
-    path: "/lmid-generator",
+    path: "/lmid",
     component: LMIDGenerator,
-    name: "LMID - Generator",
+    name: "LMID Generator",
   },
 ];
 
