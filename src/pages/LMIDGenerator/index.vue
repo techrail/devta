@@ -42,7 +42,7 @@ const shareableURL = computed(() => {
   return `${window.location.origin}${window.location.pathname}?enc=${settings.value.encoding}&showLogLevels=${settings.value.showLogLevels}&delta=${delta.value}`;
 });
 const isInvalidDelta = computed(() => {
-  return delta.value > getUtcTimestamp();
+  return isNaN(parseInt(delta.value)) || delta.value > getUtcTimestamp();
 });
 
 const tickHandler = () => {
@@ -96,8 +96,8 @@ onUnmounted(() => {
                 id="deltaInput"
                 placeholder="Amount you want to minus"
               />
-              <label for="deltaInput">Delta / Amount to substract</label>
-              <div class="invalid-feedback">Delta cannot be greater than current timestamp.</div>
+              <label for="deltaInput">Delta / Amount to substract *</label>
+              <div class="invalid-feedback">Delta cannot be greater than current timestamp & should be a number.</div>
             </div>
             <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
               <a style="cursor: move" class="btn btn-sm btn-warning" :href="shareableURL" title="Bookmarklet for LMID Shareable Link">
