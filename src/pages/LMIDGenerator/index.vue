@@ -1,5 +1,6 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref, shallowRef, watch } from "vue";
+import { useRoute } from "vue-router";
 
 import { copyToClipboard } from "@/utils/UnixDateTime.js";
 import { localStorageRef } from "@/utils/common";
@@ -7,20 +8,26 @@ import { localStorageRef } from "@/utils/common";
 import PageHeader from "@/Pageheader/index.vue";
 import SingleLineCopy from "@/CopyContainer/SingleLineCopy.vue";
 
+const params = useRoute().query;
 const INTERVAL = 1000;
 const LEVELS = ["Panic", "Alert", "Error", "Warning", "Notice", "Info", "Debug"];
-const settings = localStorageRef("lmid-settings", {
-  encoding: 36,
-  showDiffLogLevels: false,
-  autoCopy: false,
-});
+const settings = localStorageRef(
+  "lmid-settings",
+  {
+    encoding: params.enc || 36,
+    showLogLevels: params.showLogLevels == "true",
+  },
+  Object.keys(params).length <= 0
+);
+
+// TODO : create a copy button component which handles showing copy feedback to user
+const uxCopyFeedback = ref(false);
 const tickerRef = shallowRef(null);
 const utcTime = ref(new Date());
 const getUtcTimeString = () => utcTime.value.toUTCString();
 const getUtcTimestamp = () => (utcTime.value.getTime() / 1000) | 0; // use bitwise or to round to a int, instead of using math.floor
+const delta = ref(isNaN(parseInt(params.delta)) ? 16 * 10 ** 8 : parseInt(params.delta));
 const lmid = ref("");
-const delta = ref(16 * 10 ** 8);
-
 const getLMID = (timestamp) => {
   if (settings.value.encoding == 64) {
     return btoa(timestamp - delta.value)
@@ -31,16 +38,29 @@ const getLMID = (timestamp) => {
   return (timestamp - delta.value).toString(36).toUpperCase();
 };
 
+const shareableURL = computed(() => {
+  return `${window.location.origin}${window.location.pathname}?enc=${settings.value.encoding}&showLogLevels=${settings.value.showLogLevels}&delta=${delta.value}`;
+});
 const isInvalidDelta = computed(() => {
   return delta.value > getUtcTimestamp();
 });
+
 const tickHandler = () => {
   utcTime.value = new Date();
   if (isInvalidDelta.value) return;
 
   lmid.value = getLMID(getUtcTimestamp());
-  if (settings.value.autoCopy) copyToClipboard(lmid.value);
+
+  // this requires use interaction so we can atmost copy once and subsequent copy will throw errors
+  // I will keep this year so any dev with same idea can see this
+  // if (settings.value.autoCopy) copyToClipboard(lmid.value);
 };
+const copyHandler = async () => {
+  uxCopyFeedback.value = true;
+  await navigator.clipboard.writeText(shareableURL.value.replace("\n", "\r\n"));
+  setTimeout(() => (uxCopyFeedback.value = false), 1500);
+};
+
 // watch delta and encoding changes, if changed instanly generate a new LMID and not wait till the next tick
 watch([() => settings.value.encoding, delta], (a) => {
   tickHandler();
@@ -79,8 +99,15 @@ onUnmounted(() => {
               <label for="deltaInput">Delta / Amount to substract</label>
               <div class="invalid-feedback">Delta cannot be greater than current timestamp.</div>
             </div>
-
-            <div class="text-muted mt-4 mb-2">Settings</div>
+            <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
+              <a style="cursor: move" class="btn btn-sm btn-warning" :href="shareableURL" title="Bookmarklet for LMID Shareable Link">
+                Drag Me To Bookmark <i class="ps-1 bi bi-bookmarks-fill"></i>
+              </a>
+              <button class="btn btn-sm btn-primary" @click="copyHandler" title="Copy LMID Shareable Link To Clipboard">
+                Copy Shareable Link <i class="ps-1 bi" :class="uxCopyFeedback ? 'bi-check-circle-fill' : 'bi-clipboard'"></i>
+              </button>
+            </div>
+            <div class="text-muted mt-4 mb-2">Settings ( stored locally )</div>
             <div class="px-2">
               <div class="d-flex gap-3 mb-2 radios">
                 <div class="form-check">
@@ -94,7 +121,7 @@ onUnmounted(() => {
               </div>
 
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" v-model="settings.showDiffLogLevels" id="showLogLevels" />
+                <input class="form-check-input" type="checkbox" v-model="settings.showLogLevels" id="showLogLevels" />
                 <label class="form-check-label" for="showLogLevels" style="user-select: none; cursor: pointer"> Show log levels</label>
               </div>
             </div>
@@ -114,7 +141,7 @@ onUnmounted(() => {
         <div class="p-3">
           <div class="overflow-auto">
             <SingleLineCopy title="LMID" :value="lmid" />
-            <div v-if="settings.showDiffLogLevels">
+            <div v-if="settings.showLogLevels">
               <h6 class="mt-4 mb-3 text-muted">With different log levels</h6>
               <SingleLineCopy class="mb-2" v-for="l in LEVELS" :title="l" :value="`${l.substring(0, 1)}#${lmid}`" />
             </div>
