@@ -100,7 +100,13 @@ onUnmounted(() => {
               <div class="invalid-feedback">Delta cannot be greater than current timestamp & should be a number.</div>
             </div>
             <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
-              <a style="cursor: move" class="btn btn-sm btn-warning" :href="shareableURL" title="Bookmarklet for LMID Shareable Link">
+              <a
+                style="cursor: move"
+                @click="(e) => e.preventDefault()"
+                class="btn btn-sm btn-warning"
+                :href="shareableURL"
+                title="Bookmarklet for LMID Shareable Link"
+              >
                 Drag Me To Bookmark <i class="ps-1 bi bi-bookmarks-fill"></i>
               </a>
               <button class="btn btn-sm btn-primary" @click="copyHandler" title="Copy LMID Shareable Link To Clipboard">
