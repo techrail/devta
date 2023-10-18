@@ -12,12 +12,14 @@ export function formatToID(title) {
  * better to create multiple localStorageRef instead
  * @param {string} key - key of the localStorage entry
  * @param {T} initialValue - The initialValue to use for the ref
+ * @param {Boolean} useStoredValue - Read the value for the key provide from storage and uses that as the initial value
+ * You can pass false to skip getting value from local storage
  * @returns {ref<T>}
  */
-export function localStorageRef(key, initialValue) {
+export function localStorageRef(key, initialValue, useStoredValue = true) {
   const storedValue = localStorage.getItem(key);
   if (!!!initialValue || typeof key != "string") throw new Error("Valid key not provided for localStorageRef");
-  const reactiveValue = ref(storedValue ? JSON.parse(storedValue) : initialValue);
+  const reactiveValue = ref(storedValue && useStoredValue ? JSON.parse(storedValue) : initialValue);
   watch(
     reactiveValue,
     (newValue) => {

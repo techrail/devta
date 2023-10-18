@@ -35,7 +35,7 @@
   :deep() {
     --panic-color: #ff8844;
     --alert-color: #ffc266;
-    --error-color: #ff8844;
+    --error-color: #ff5733;
     --warning-color: #ffcc66;
     --notice-color: #44ffd6;
     --info-color: #44a2ff;
