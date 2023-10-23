@@ -1,0 +1,20 @@
+#tokenInput {
+    height: 70vh;
+    margin-bottom: 3vh;
+  }
+
+#output {
+    height: 70vh;
+  }
+  
+#format {
+   border: 100px;
+}
+  @media screen and (max-width: 800px) {
+    #tokenInput {
+      height: 40vh;
+    }
+    #output {
+      height: 40vh; 
+    }
+  }

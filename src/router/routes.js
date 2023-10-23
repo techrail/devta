@@ -16,6 +16,7 @@ import LMIDGenerator from "../pages/LMIDGenerator/index.vue";
 import MarkdownPreview from "../pages/MarkdownPreview/index.vue";
 import PSQLFormatter from "../pages/PSQLParser/index.vue";
 import SQLFormatter from "../pages/SQLFormatter/index.vue";
+import StringCaseConverter from "../pages/StringCaseConverter/index.vue"
 import TimeZoneConverter from "../pages/TimeZoneConverter/index.vue";
 import URLParser from "../pages/URLParser/index.vue";
 import UnixToDate from "../pages/UnixToDate/index.vue";
@@ -85,6 +86,11 @@ const routes = [
     path: "/url-parser",
     component: URLParser,
     name: "URL Parser",
+  },
+  {
+    path: "/string-case-converter",
+    component: StringCaseConverter,
+    name: "String Case Converter",
   },
   {
     path: "/postgresql-url-parser",
