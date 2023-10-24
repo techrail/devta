@@ -2,6 +2,7 @@
 import PageHeader from "@/Pageheader/index.vue";
 import {ref} from "vue";
 import {copyToClipboard} from "@/utils/UnixDateTime.js";
+import SingleLineCopy from '../../components/CopyContainer/SingleLineCopy.vue';
 
 const imageInput = ref("");
 const renderedImage = ref("");
@@ -175,27 +176,13 @@ const copyParsedData = (value) => {
               <input :value=HEX class="form-control" type="color" @input=refreshOutput>
             </li>
             <li class="list-group-item"><h5 class="text-muted mt-2"><strong>Values</strong></h5></li>
-            <li class="input-group p-1">
-              <span class="input-group-text">RGB</span>
-              <input :value="RGB" class="form-control" disabled readonly type="text">
-              <span class="input-group-text" @click="copyParsedData(RGB)">
-                <i class="bi bi-clipboard"></i>
-              </span>
-            </li>
-            <li class="input-group p-1">
-              <span class="input-group-text">HEX</span>
-              <input :value="HEX" class="form-control" disabled readonly type="text">
-              <span class="input-group-text" @click="copyParsedData(HEX)">
-                <i class="bi bi-clipboard"></i>
-              </span>
-            </li>
-            <li class="input-group p-1">
-              <span class="input-group-text">HSL</span>
-              <input :value="HSL" class="form-control" disabled readonly type="text">
-              <span class="input-group-text" @click="copyParsedData(HSL)">
-                <i class="bi bi-clipboard"></i>
-              </span>
-            </li>
+            <div class="d-flex flex-column gap-2 mt-2">
+            <SingleLineCopy title="RGB" :value="RGB"/>
+            <SingleLineCopy title="HEX" :value="HEX" />
+            <SingleLineCopy title="HSL" :value="HSL" />
+            </div>
+            
+            
           </ul>
         </div>
       </div>
