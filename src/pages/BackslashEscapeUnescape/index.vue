@@ -22,7 +22,6 @@ const unescape = () => {
     }
     else {
       formattedVal.value = unescapeSpecialCharacters(input.value)
-      console.log(formattedVal.value)
     }
   } catch (error) {
     console.log(error);
@@ -58,7 +57,6 @@ const convert = () => {
 };
 
 const handleChange = () => {
-  console.log(input)
   if (!input.value) {
     error.value = false;
     return;
