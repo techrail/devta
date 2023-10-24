@@ -79,6 +79,12 @@ export const sideBarList = [
     tags: "database,Syntax,Parsing,SQL,db",
   },
   {
+    name: "String Case Converter",
+    iconClass: "bi-arrow-repeat",
+    route: "/string-case-converter",
+    tags: "Case Converter, Pascal Case, Snake Case, Train Case, Camel Case, Macro Case, Kebab Case, String",
+  },
+  {
     name: "URL Parser",
     iconClass: "bi bi-link-45deg",
     route: "/url-parser",
