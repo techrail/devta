@@ -85,6 +85,12 @@ export const sideBarList = [
     tags: "Case Converter, Pascal Case, Snake Case, Train Case, Camel Case, Macro Case, Kebab Case, String",
   },
   {
+    name: "Backslash Escape Unescape",
+    iconClass: "bi bi-slash-square",
+    route: "/backslash-escape-unescape",
+    tags: "Backslash Escape, Character Unescape, String, Json",
+  },
+  {
     name: "URL Parser",
     iconClass: "bi bi-link-45deg",
     route: "/url-parser",

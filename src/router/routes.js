@@ -5,6 +5,7 @@ import Base36 from "../pages/Base36/index.vue";
 import Base64Text from "../pages/Base64Text/index.vue";
 import CRONParser from "../pages/CRONParser/index.vue";
 import ColorPickerConverter from "../pages/ColorPickerConverter/index.vue";
+import BackslashEscapeUnescape from "../pages/BackslashEscapeUnescape/index.vue"
 import DateToUnix from "../pages/DateToUnix/index.vue";
 import HashGenerator from "../pages/HashGenerator/index.vue";
 import ImagetoBase64 from "../pages/ImageToBase64/index.vue";
@@ -91,6 +92,11 @@ const routes = [
     path: "/string-case-converter",
     component: StringCaseConverter,
     name: "String Case Converter",
+  },
+  {
+    path: "/backslash-escape-unescape",
+    component: BackslashEscapeUnescape,
+    name: "Backslash Escape Unescape",
   },
   {
     path: "/postgresql-url-parser",
