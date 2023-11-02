@@ -1,14 +1,14 @@
 <script setup>
 import { ref, onMounted, watchEffect } from "vue";
 import PageHeader from "../../components/Pageheader/index.vue";
-import { toCamelCase, toSnakeCase, toKebabCase, toPascalCase, toMacroCase, toTrainCase, sampleInput, ifNull } from "../../components/utils/stringCaseConverter.js";
+import { toCamelCase, toSnakeCase, toKebabCase, toPascalCase, toMacroCase, toTrainCase, toLowerCase, toUpperCase, sampleInput, ifNull } from "../../components/utils/stringCaseConverter.js";
 import { copyToClipboard } from "../../components/utils/UnixDateTime";
 
 onMounted(() => {
   document.querySelector("[autofocus]")?.focus();
 });
 
-const converterOptions = ["Camel", "Snake", "Kebab", "Pascal", "Macro", "Train"];
+const converterOptions = ["Camel", "Snake", "Kebab", "Pascal", "Macro", "Train", "Upper", "Lower"];
 const selectedvalue = ref(converterOptions[0]);
 const input = ref(sampleInput);
 const formattedVal = ref();
@@ -93,6 +93,32 @@ const convertToTrainCase = () => {
   }
 };
 
+const convertToUpperCase = () => {
+  try {
+    if (ifNull(input.value)) {
+      formattedVal.value = ' '
+    }
+    else {
+      formattedVal.value = toUpperCase(input.value)
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const convertToLowerCase = () => {
+  try {
+    if (ifNull(input.value)) {
+      formattedVal.value = ' '
+    }
+    else {
+      formattedVal.value = toLowerCase(input.value)
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const convert = () => {
   switch (selectedvalue.value) {
     case "Camel":
@@ -117,6 +143,14 @@ const convert = () => {
 
       case "Train":
     convertToTrainCase();
+      break;
+     
+      case "Upper":
+    convertToUpperCase();
+      break;
+    
+      case "Lower":
+    convertToLowerCase();
       break;
 
     default:
@@ -196,7 +230,7 @@ watchEffect(() => {
               <div class="alert alert-danger" role="alert">Invalid Ascii</div>
             </div>
             <div v-if="formattedVal">
-              <p>{{formattedVal}}</p>
+              <div v-html="formattedVal" style="white-space: pre;"></div>
             </div>
           </div>
           <div class="d-flex gap-2 p-2">
