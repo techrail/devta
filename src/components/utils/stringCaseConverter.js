@@ -31,6 +31,14 @@ export const toTrainCase = (userInput) => {
     return String(userInput).replace(/(?<!\b|[A-Z])([A-Z])/g, '-$1').replace(/[^A-Za-z0-9]+/g, '-').split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join('-');
 }
 
+export const toUpperCase = (userInput) => {
+    return String(userInput).toUpperCase();
+}
+
+export const toLowerCase = (userInput) => {
+    return String(userInput).toLowerCase();
+}
+
 export const ifNull = (userInput) => {
     if (userInput == null) {
         return true;
